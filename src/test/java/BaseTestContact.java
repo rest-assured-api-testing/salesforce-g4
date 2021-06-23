@@ -2,8 +2,6 @@ import api.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
-import entities.account.Account;
-import entities.account.AccountResponse;
 import entities.contact.Contact;
 import entities.contact.ContactResponse;
 import generalsetting.ParameterEndPoints;
@@ -16,7 +14,7 @@ public class BaseTestContact {
 
     protected ContactResponse contactEndToEndResponse= new ContactResponse();
 
-    public IBuilderApiResponse baseRequest() {
+    public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
         return new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)

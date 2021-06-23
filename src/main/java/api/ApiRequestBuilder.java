@@ -1,6 +1,6 @@
 package api;
 
-public class ApiRequestBuilder implements IBuilderApiResponse {
+public class ApiRequestBuilder implements IBuilderApiRequest {
     private ApiRequest apiRequest;
 
     public ApiRequestBuilder() {

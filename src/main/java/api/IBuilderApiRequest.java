@@ -1,6 +1,6 @@
 package api;
 
-public interface IBuilderApiResponse {
+public interface IBuilderApiRequest {
     ApiRequest build();
 
     ApiRequestBuilder body(String body);
