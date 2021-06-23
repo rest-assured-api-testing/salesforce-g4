@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TokenTest {
-    Token token;
+    private Token token;
 
     @Test
     public void statusToken_Successful_200(){

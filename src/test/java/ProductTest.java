@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import generalsetting.ParameterEndPoints;
 public class ProductTest {
     private String tokenUser;
-    private Product project=new Product();
     private ProductCreate productCreate;
 
     @BeforeClass
@@ -19,6 +18,7 @@ public class ProductTest {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser=apiResponse.getBody(Token.class).getAccess_token();
     }
+
     @BeforeMethod(onlyForGroups= "getProduct")
     public void createProduct() throws JsonProcessingException {
         Product product=new Product();
