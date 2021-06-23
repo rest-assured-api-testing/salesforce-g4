@@ -25,7 +25,4 @@ public class TokenTest {
         token=apiResponse.getBody(Token.class);
         apiResponse.validateBodySchema("schemas/token.json");
     }
-
-
 }
-

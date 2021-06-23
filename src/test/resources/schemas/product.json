@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "url"
+      ]
+    },
+    "Id": {
+      "type": "string"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "ProductCode": {
+      "type": "null"
+    },
+    "Description": {
+      "type": "null"
+    },
+    "IsActive": {
+      "type": "boolean"
+    },
+    "CreatedDate": {
+      "type": "string"
+    },
+    "CreatedById": {
+      "type": "string"
+    },
+    "LastModifiedDate": {
+      "type": "string"
+    },
+    "LastModifiedById": {
+      "type": "string"
+    },
+    "SystemModstamp": {
+      "type": "string"
+    },
+    "Family": {
+      "type": "null"
+    },
+    "ExternalDataSourceId": {
+      "type": "null"
+    },
+    "ExternalId": {
+      "type": "null"
+    },
+    "DisplayUrl": {
+      "type": "null"
+    },
+    "QuantityUnitOfMeasure": {
+      "type": "null"
+    },
+    "IsDeleted": {
+      "type": "boolean"
+    },
+    "IsArchived": {
+      "type": "boolean"
+    },
+    "LastViewedDate": {
+      "type": "null"
+    },
+    "LastReferencedDate": {
+      "type": "null"
+    },
+    "StockKeepingUnit": {
+      "type": "null"
+    }
+  },
+  "required": [
+    "attributes",
+    "Id",
+    "Name",
+    "ProductCode",
+    "Description",
+    "IsActive",
+    "CreatedDate",
+    "CreatedById",
+    "LastModifiedDate",
+    "LastModifiedById",
+    "SystemModstamp",
+    "Family",
+    "ExternalDataSourceId",
+    "ExternalId",
+    "DisplayUrl",
+    "QuantityUnitOfMeasure",
+    "IsDeleted",
+    "IsArchived",
+    "LastViewedDate",
+    "LastReferencedDate",
+    "StockKeepingUnit"
+  ]
+}

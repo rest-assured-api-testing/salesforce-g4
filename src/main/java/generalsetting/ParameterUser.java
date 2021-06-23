@@ -8,8 +8,8 @@ public class ParameterUser {
     public static final String CLIENT_SECRET_KEY="client_secret";
     public static final String CLIENT_SECRET_VALUE="A5F85270B193B5E7C6BBBD7E4240B5C19E2C1250DD76D89A09B023A024235308";
     public static final String USERNAME_KEY="username";
-    public static final String USERNAME_VALUE="COUNT SALESFORCE";
+    public static final String USERNAME_VALUE="gzhuanca@freeorg01.com";
     public static final String PASSWORD_KEY="password";
-    public static final String PASSWORD_VALUE="PASSWORD SALESFORCE";
+    public static final String PASSWORD_VALUE="4219508Salesforce";
     public static final String TOKEN_SECURITY="lq73zO0TLHsIo31qx0oz7ich";
 }
