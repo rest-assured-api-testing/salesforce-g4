@@ -13,7 +13,7 @@ public class ProductTest {
     private String tokenUser;
     private ProductCreate productCreate;
 
-    public IBuilderApiResponse baseRequestProduct() {
+    public IBuilderApiRequest baseRequestProduct() {
         return new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization","Bearer " + tokenUser);

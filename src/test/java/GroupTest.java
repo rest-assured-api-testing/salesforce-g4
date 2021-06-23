@@ -3,19 +3,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
 import entities.group.Group;
-import entities.project.Product;
 import generalsetting.ParameterEndPoints;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class GroupTest {
     private String tokenUser;
     private String idGroup;
 
-    public IBuilderApiResponse baseRequestGroup() {
+    public IBuilderApiRequest baseRequestGroup() {
         return new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization","Bearer " + tokenUser);
@@ -50,5 +47,4 @@ public class GroupTest {
         idGroup=apiResponse.getBody(Group.class).getId();
         apiResponse.validateBodySchema("schemas/groupResponseCreate.json");
     }
-
 }
