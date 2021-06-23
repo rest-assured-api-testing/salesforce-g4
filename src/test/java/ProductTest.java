@@ -13,6 +13,12 @@ public class ProductTest {
     private String tokenUser;
     private ProductCreate productCreate;
 
+    public IBuilderApiResponse baseRequestProduct() {
+        return new ApiRequestBuilder()
+                .baseUri(ParameterEndPoints.URL_BASE)
+                .headers("Authorization","Bearer " + tokenUser);
+    }
+
     @BeforeClass
     public void getToken_Successful_200(){
         ApiResponse apiResponse = ApiManager.executeToken();
@@ -23,10 +29,8 @@ public class ProductTest {
     public void createProduct() throws JsonProcessingException {
         Product product=new Product();
         product.setName("Project-test");
-        ApiRequest apiRequest =  new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+        ApiRequest apiRequest =  baseRequestProduct()
                 .endpoint(ParameterEndPoints.PRODUCT)
-                .headers("Authorization","Bearer " + tokenUser)
                 .body(new ObjectMapper().writeValueAsString(product))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
@@ -38,21 +42,17 @@ public class ProductTest {
     public void cleanRepository() {
         Product product=new Product();
         product.setName("Project-test");
-        ApiRequest apiRequest =  new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+        ApiRequest apiRequest =  baseRequestProduct()
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .headers("Authorization","Bearer " + tokenUser)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 
     @Test(groups = "getProduct")
-    public void verifyProductSchema_Successful_200() throws JsonProcessingException {
-        ApiRequest apiRequest =  new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+    public void verifyProductSchema_Successful_200() {
+        ApiRequest apiRequest =  baseRequestProduct()
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .headers("Authorization","Bearer " + tokenUser)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
                 .method(ApiMethod.GET).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);

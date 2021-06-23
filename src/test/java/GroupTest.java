@@ -15,6 +15,12 @@ public class GroupTest {
     private String tokenUser;
     private String idGroup;
 
+    public IBuilderApiResponse baseRequestGroup() {
+        return new ApiRequestBuilder()
+                .baseUri(ParameterEndPoints.URL_BASE)
+                .headers("Authorization","Bearer " + tokenUser);
+    }
+
     @BeforeClass
     public void getToken_Successful_200(){
         ApiResponse apiResponse = ApiManager.executeToken();
@@ -24,10 +30,8 @@ public class GroupTest {
     @AfterMethod(onlyForGroups= "getGroup")
     public void deleteGroup()
     {
-        ApiRequest apiRequest =  new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+        ApiRequest apiRequest = baseRequestGroup()
                 .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
-                .headers("Authorization","Bearer " + tokenUser)
                 .pathParams(ParameterEndPoints.GROUP_ID,idGroup)
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
@@ -38,10 +42,8 @@ public class GroupTest {
         Group group=new Group();
         group.setName("Group-test");
         group.setVisibility("PublicAccess");
-        ApiRequest apiRequest =  new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+        ApiRequest apiRequest =  baseRequestGroup()
                 .endpoint(ParameterEndPoints.GROUP)
-                .headers("Authorization","Bearer " + tokenUser)
                 .body(new ObjectMapper().writeValueAsString(group))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
