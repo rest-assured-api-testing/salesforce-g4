@@ -1,127 +1,277 @@
 package entities.contact;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Contact{
+    public Attributes attributes;
+    @JsonProperty("Id")
+    public String id;
+    @JsonProperty("IsDeleted")
+    public Boolean isDeleted;
+    @JsonProperty("MasterRecordId")
+    public Object masterRecordId;
+    @JsonProperty("AccountId")
+    public Object accountId;
+    @JsonProperty("LastName")
+    public String lastName;
+    @JsonProperty("FirstName")
+    public Object firstName;
+    @JsonProperty("Salutation")
+    public Object salutation;
+    @JsonProperty("Name")
+    public String name;
+    @JsonProperty("OtherStreet")
+    public Object otherStreet;
+    @JsonProperty("OtherCity")
+    public Object otherCity;
+    @JsonProperty("OtherState")
+    public Object otherState;
+    @JsonProperty("OtherPostalCode")
+    public Object otherPostalCode;
+    @JsonProperty("OtherCountry")
+    public Object otherCountry;
+    @JsonProperty("OtherLatitude")
+    public Object otherLatitude;
+    @JsonProperty("OtherLongitude")
+    public Object otherLongitude;
+    @JsonProperty("OtherGeocodeAccuracy")
+    public Object otherGeocodeAccuracy;
+    @JsonProperty("OtherAddress")
+    public Object otherAddress;
+    @JsonProperty("MailingStreet")
+    public Object mailingStreet;
+    @JsonProperty("MailingCity")
+    public Object mailingCity;
+    @JsonProperty("MailingState")
+    public Object mailingState;
+    @JsonProperty("MailingPostalCode")
+    public Object mailingPostalCode;
+    @JsonProperty("MailingCountry")
+    public Object mailingCountry;
+    @JsonProperty("MailingLatitude")
+    public Object mailingLatitude;
+    @JsonProperty("MailingLongitude")
+    public Object mailingLongitude;
+    @JsonProperty("MailingGeocodeAccuracy")
+    public Object mailingGeocodeAccuracy;
+    @JsonProperty("MailingAddress")
+    public Object mailingAddress;
+    @JsonProperty("Phone")
+    public Object phone;
+    @JsonProperty("Fax")
+    public Object fax;
+    @JsonProperty("MobilePhone")
+    public Object mobilePhone;
+    @JsonProperty("HomePhone")
+    public Object homePhone;
+    @JsonProperty("OtherPhone")
+    public Object otherPhone;
+    @JsonProperty("AssistantPhone")
+    public Object assistantPhone;
+    @JsonProperty("ReportsToId")
+    public Object reportsToId;
+    @JsonProperty("Email")
+    public Object email;
+    @JsonProperty("Title")
+    public Object title;
+    @JsonProperty("Department")
+    public Object department;
+    @JsonProperty("AssistantName")
+    public Object assistantName;
+    @JsonProperty("LeadSource")
+    public Object leadSource;
+    @JsonProperty("Birthdate")
+    public Object birthdate;
+    @JsonProperty("Description")
+    public Object description;
+    @JsonProperty("OwnerId")
+    public String ownerId;
+    @JsonProperty("CreatedDate")
+    public Date createdDate;
+    @JsonProperty("CreatedById")
+    public String createdById;
+    @JsonProperty("LastModifiedDate")
+    public Date lastModifiedDate;
+    @JsonProperty("LastModifiedById")
+    public String lastModifiedById;
+    @JsonProperty("SystemModstamp")
+    public Date systemModstamp;
+    @JsonProperty("LastActivityDate")
+    public Object lastActivityDate;
+    @JsonProperty("LastCURequestDate")
+    public Object lastCURequestDate;
+    @JsonProperty("LastCUUpdateDate")
+    public Object lastCUUpdateDate;
+    @JsonProperty("LastViewedDate")
+    public Date lastViewedDate;
+    @JsonProperty("LastReferencedDate")
+    public Date lastReferencedDate;
+    @JsonProperty("EmailBouncedReason")
+    public Object emailBouncedReason;
+    @JsonProperty("EmailBouncedDate")
+    public Object emailBouncedDate;
+    @JsonProperty("IsEmailBounced")
+    public Boolean isEmailBounced;
+    @JsonProperty("PhotoUrl")
+    public String photoUrl;
+    @JsonProperty("Jigsaw")
+    public Object jigsaw;
+    @JsonProperty("JigsawContactId")
+    public Object jigsawContactId;
+    @JsonProperty("CleanStatus")
+    public String cleanStatus;
+    @JsonProperty("IndividualId")
+    public Object individualId;
+    @JsonProperty("Level__c")
+    public Object level__c;
+    @JsonProperty("Languages__c")
+    public Object languages__c;
 
-	@JsonProperty("weakEtag")
-	private long weakEtag;
+    public Attributes getAttributes() {
+        return attributes;
+    }
 
-	@JsonProperty("apiName")
-	private String apiName;
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
+    }
 
-	@JsonProperty("childRelationships")
-	private ChildRelationships childRelationships;
+    public String getId() {
+        return id;
+    }
 
-	@JsonProperty("recordTypeId")
-	private String recordTypeId;
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	@JsonProperty("lastModifiedDate")
-	private String lastModifiedDate;
+    public Boolean isDeleted() {
+        return isDeleted;
+    }
 
-	@JsonProperty("lastModifiedById")
-	private String lastModifiedById;
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
 
-	@JsonProperty("systemModstamp")
-	private String systemModstamp;
+    public Object getMasterRecordId() {
+        return masterRecordId;
+    }
 
-	@JsonProperty("eTag")
-	private String eTag;
+    public void setMasterRecordId(Object masterRecordId) {
+        this.masterRecordId = masterRecordId;
+    }
 
-	@JsonProperty("id")
-	private String id;
+    public Object getAccountId() {
+        return accountId;
+    }
 
-	@JsonProperty("fields")
-	private Fields fields;
+    public void setAccountId(Object accountId) {
+        this.accountId = accountId;
+    }
 
-	@JsonProperty("recordTypeInfo")
-	private Object recordTypeInfo;
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setWeakEtag(long weakEtag){
-		this.weakEtag = weakEtag;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public long getWeakEtag(){
-		return weakEtag;
-	}
+    public Object getFirstName() {
+        return firstName;
+    }
 
-	public void setApiName(String apiName){
-		this.apiName = apiName;
-	}
+    public void setFirstName(Object firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getApiName(){
-		return apiName;
-	}
+    public Object getSalutation() {
+        return salutation;
+    }
 
-	public void setChildRelationships(ChildRelationships childRelationships){
-		this.childRelationships = childRelationships;
-	}
+    public void setSalutation(Object salutation) {
+        this.salutation = salutation;
+    }
 
-	public ChildRelationships getChildRelationships(){
-		return childRelationships;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setRecordTypeId(String recordTypeId){
-		this.recordTypeId = recordTypeId;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getRecordTypeId(){
-		return recordTypeId;
-	}
+    public Object getOtherStreet() {
+        return otherStreet;
+    }
 
-	public void setLastModifiedDate(String lastModifiedDate){
-		this.lastModifiedDate = lastModifiedDate;
-	}
+    public void setOtherStreet(Object otherStreet) {
+        this.otherStreet = otherStreet;
+    }
 
-	public String getLastModifiedDate(){
-		return lastModifiedDate;
-	}
+    public Object getOtherCity() {
+        return otherCity;
+    }
 
-	public void setLastModifiedById(String lastModifiedById){
-		this.lastModifiedById = lastModifiedById;
-	}
+    public void setOtherCity(Object otherCity) {
+        this.otherCity = otherCity;
+    }
 
-	public String getLastModifiedById(){
-		return lastModifiedById;
-	}
+    public Object getOtherState() {
+        return otherState;
+    }
 
-	public void setSystemModstamp(String systemModstamp){
-		this.systemModstamp = systemModstamp;
-	}
+    public void setOtherState(Object otherState) {
+        this.otherState = otherState;
+    }
 
-	public String getSystemModstamp(){
-		return systemModstamp;
-	}
+    public Object getOtherPostalCode() {
+        return otherPostalCode;
+    }
 
-	public void setETag(String eTag){
-		this.eTag = eTag;
-	}
+    public void setOtherPostalCode(Object otherPostalCode) {
+        this.otherPostalCode = otherPostalCode;
+    }
 
-	public String getETag(){
-		return eTag;
-	}
+    public Object getOtherCountry() {
+        return otherCountry;
+    }
 
-	public void setId(String id){
-		this.id = id;
-	}
+    public void setOtherCountry(Object otherCountry) {
+        this.otherCountry = otherCountry;
+    }
 
-	public String getId(){
-		return id;
-	}
+    public Object getOtherLatitude() {
+        return otherLatitude;
+    }
 
-	public void setFields(Fields fields){
-		this.fields = fields;
-	}
+    public void setOtherLatitude(Object otherLatitude) {
+        this.otherLatitude = otherLatitude;
+    }
 
-	public Fields getFields(){
-		return fields;
-	}
+    public Object getOtherLongitude() {
+        return otherLongitude;
+    }
 
-	public void setRecordTypeInfo(Object recordTypeInfo){
-		this.recordTypeInfo = recordTypeInfo;
-	}
+    public void setOtherLongitude(Object otherLongitude) {
+        this.otherLongitude = otherLongitude;
+    }
 
-	public Object getRecordTypeInfo(){
-		return recordTypeInfo;
-	}
+    public Object getOtherGeocodeAccuracy() {
+        return otherGeocodeAccuracy;
+    }
+
+    public void setOtherGeocodeAccuracy(Object otherGeocodeAccuracy) {
+        this.otherGeocodeAccuracy = otherGeocodeAccuracy;
+    }
+
+    public Object getOtherAddress() {
+        return otherAddress;
+    }
+
+    public void setOtherAddress(Object otherAddress) {
+        this.otherAddress = otherAddress;
+    }
 }

@@ -81,4 +81,12 @@ public class ApiRequest<T> {
     public Map<String, String> getPathParams() {
         return pathParams;
     }
+
+    public void clearPathParams(){
+        this.pathParams.clear();
+    }
+
+    public void clearQueryParams(){
+        this.queryParams.clear();
+    }
 }
