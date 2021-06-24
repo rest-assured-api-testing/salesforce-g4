@@ -12,4 +12,5 @@ public class ParameterEndPoints {
    public static final String URL_BASEO="https://jpcorp-dev-ed.my.salesforce.com/services/data/v52.0/sobjects";
    public static final String ACCOUNT="/Account";
    public static final String CONTACT="/Contact";
+   public static final String OPPORTUNITY="/Opportunity";
 }

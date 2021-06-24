@@ -38,3 +38,4 @@ public class TokenTest {
         apiResponse.validateBodySchema("schemas/token.json");
     }
 }
+

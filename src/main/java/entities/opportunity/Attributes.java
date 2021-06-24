@@ -9,7 +9,7 @@
  * @author Juan Pablo Gonzales Alvarado
  */
 
-package entities.contact;
+package entities.opportunity;
 
 public class Attributes {
     private String type;
@@ -31,4 +31,3 @@ public class Attributes {
         this.url = url;
     }
 }
-
