@@ -11,6 +11,7 @@ import entities.contact.ContactResponse;
 import entities.opportunity.Opportunity;
 import entities.opportunity.OpportunityResponse;
 import generalsetting.ParameterEndPoints;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -23,14 +24,11 @@ public class GetAObjectlSteps {
     private ApiResponse apiResponse;
     protected ApiRequest apiRequest = new ApiRequest();
     protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
-    protected AccountResponse accountEndToEndResponse= new AccountResponse();
-
     protected AccountResponse account = new AccountResponse();
-    protected ContactResponse contact = new ContactResponse();
-    protected OpportunityResponse opportunity = new OpportunityResponse();
+
 
     @Before
-    public void setup() throws JsonProcessingException {
+    public void createAccount() throws JsonProcessingException {
         apiResponse = ApiManager.executeToken();
         apiRequest = apiRequestBuilder
                 .baseUri(ParameterEndPoints.URL_BASE)
@@ -41,42 +39,33 @@ public class GetAObjectlSteps {
         apiRequest.setMethod(ApiMethod.POST);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(accountTemp));
         account = ApiManager.execute(apiRequest).getBody(AccountResponse.class);
-
-        Contact contactTemp = new Contact("contact10");
-        apiRequest.setEndpoint(ParameterEndPoints.CONTACT);
-        apiRequest.setMethod(ApiMethod.POST);
-        apiRequest.setBody(new ObjectMapper().writeValueAsString(contactTemp));
-        contact = ApiManager.execute(apiRequest).getBody(ContactResponse.class);
-
-        Opportunity opportunityTemp = new Opportunity("opportunity10","2021-06-21","CloseDate");
-        apiRequest.setEndpoint(ParameterEndPoints.OPPORTUNITY);
-        apiRequest.setMethod(ApiMethod.POST);
-        apiRequest.setBody(new ObjectMapper().writeValueAsString(opportunityTemp));
-        opportunity = ApiManager.execute(apiRequest).getBody(OpportunityResponse.class);
-
-
     }
+
 
     @Given("^I need \"([^\"]*)\" request$")
     public void i_need_something_request(String method) throws Throwable {
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("^I find (.+)/{objectId} request$")
-    public void i_find_objectid_request(String sobject) throws Throwable {
-        throw new PendingException();
+    @When("^I find \"([^\"]*)\" request$")
+    public void i_find_something_request(String endpoint) throws Throwable {
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.addPathParams("accountId", account.getId());
+        apiResponse = ApiManager.execute(apiRequest);
     }
 
     @Then("^the response status coded is \"([^\"]*)\"$")
     public void the_response_status_coded_is_something(String strArg1) throws Throwable {
-        throw new PendingException();
+        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_OK);
     }
 
-    @When("I find <SObject>\\/\\{objectId} request")
-    public void iFindSObjectObjectIdRequest(String valor) {
-    }
-
-    @When("I find <SObject>\\/\\{objectId} request")
-    public void iFindSObjectObjectIdRequest() {
+    @After
+    public void deleteAccount() {
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .endpoint("/Account/{accountId}")
+                .pathParams("projectId", account.getId())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }
 }
