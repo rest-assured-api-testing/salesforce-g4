@@ -35,7 +35,7 @@ public class groupSteps {
     private Group group = new Group();
     private String tokenUser;
 
-    @Before
+    @Before(value = " @CreateGroup")
     public void generateToken() {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
@@ -65,7 +65,7 @@ public class groupSteps {
         apiResponse.getResponse().then().log().body();
     }
 
-    @After
+    @After(value = " @CreateGroup")
     public void cleanRepository() {
         ApiRequest apiRequest =  new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)

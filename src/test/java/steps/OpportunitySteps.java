@@ -23,7 +23,7 @@ public class OpportunitySteps {
     private OpportunityResponse opportunity = new OpportunityResponse();
     private String tokenUser;
 
-    @Before
+    @Before(value = " @CreateOpportunity")
     public void generateToken() {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
@@ -54,8 +54,8 @@ public class OpportunitySteps {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_CREATED);
     }
 
-    @After
-    public void cleanRepository() {
+    @After(value = " @CreateOpportunity")
+    public void deleteOpportunity() {
         ApiRequest apiRequest =  new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization","Bearer " + tokenUser)

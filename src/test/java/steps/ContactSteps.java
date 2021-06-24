@@ -21,14 +21,14 @@ public class ContactSteps {
     private ContactResponse contact = new ContactResponse();
     private String tokenUser;
 
-    @Before
+    @Before(value = " @CreateContact")
     public void generateToken() {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
     }
 
     @Given("I create a contact with method {string} with name {string}")
-    public void iBuildRequestWithIDOfProjectWithName(String method, String name) throws JsonProcessingException {
+    public void iCreateContactWithMethodWithName(String method, String name) throws JsonProcessingException {
         Contact contact = new Contact();
         contact.setName(name);
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
@@ -38,19 +38,19 @@ public class ContactSteps {
     }
 
     @When("^I execute \"([^\"]*)\" request to be create in a Contact$")
-    public void iExecuteRequest(String endpoint) {
+    public void iExecuteRequestToBeCreateInContact(String endpoint) {
         apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
         contact = apiResponse.getBody(ContactResponse.class);
     }
 
     @Then("^The response status code should be successful \"([^\"]*)\" with contact created$")
-    public void theResponseStatusCodeShouldBe(String statusCode) {
+    public void theResponseStatusCodeShouldBeWithContactCreated(String statusCode) {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_CREATED);
     }
 
-    @After
-    public void cleanRepository() {
+    @After(value = " @CreateContact")
+    public void deleteContact() {
         ApiRequest apiRequest =  new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization","Bearer " + tokenUser)

@@ -22,7 +22,7 @@ public class AccountSteps {
     private AccountResponse account = new AccountResponse();
     private String tokenUser;
 
-    @Before
+    @Before(value = " @CreateAccount")
     public void generateToken() {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
@@ -49,7 +49,7 @@ public class AccountSteps {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_CREATED);
     }
 
-    @After
+    @After(value = " @CreateAccount")
     public void deleteAccount() {
         ApiRequest apiRequest =  new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)

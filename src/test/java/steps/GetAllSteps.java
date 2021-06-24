@@ -34,7 +34,7 @@ public class GetAllSteps {
     protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
     protected AccountResponse accountEndToEndResponse= new AccountResponse();
 
-    @Before
+    @Before(value = "@GetAllObjects")
     public void setup(){
         apiResponse = ApiManager.executeToken();
         apiRequest = apiRequestBuilder
