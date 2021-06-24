@@ -25,6 +25,7 @@ public class AccountTest extends BaseTestAccount {
 
     @Test
     public void get_all_account_successful_200() {
+        apiRequest.clearPathParams();
         apiRequest = apiRequestBuilder.method(ApiMethod.GET).endpoint(ParameterEndPoints.ACCOUNT).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_OK);
@@ -61,7 +62,7 @@ public class AccountTest extends BaseTestAccount {
     }
 
     @Test(groups = {"createAccount"})
-    public void deleteProjectWithStatusCode200() throws JsonProcessingException{
+    public void deleteProjectWithStatusCode200() {
         apiRequest = apiRequestBuilder.method(ApiMethod.DELETE).endpoint("/Account/{accountId}")
                 .pathParams("accountId", accountEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);

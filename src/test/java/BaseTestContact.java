@@ -33,7 +33,7 @@ public class BaseTestContact {
     public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
         return new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(ParameterEndPoints.URL_BASEO)
                 .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
@@ -49,7 +49,7 @@ public class BaseTestContact {
     }
 
     @AfterMethod(onlyForGroups = "deleteContact")
-    public void deleteContactAfter() { ;
+    public void deleteContactAfter() {
         ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Contact/{contactId}")
                 .pathParams("contactId", contactEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
