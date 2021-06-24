@@ -1,12 +1,25 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
+
 package steps;
 
-import api.*;
+import api.ApiResponse;
+import api.ApiManager;
+import api.ApiRequestBuilder;
+import api.ApiRequest;
+import api.ApiMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
 import entities.group.Group;
-import entities.product.Product;
-import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

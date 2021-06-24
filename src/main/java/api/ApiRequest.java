@@ -2,7 +2,6 @@ package api;
 
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
