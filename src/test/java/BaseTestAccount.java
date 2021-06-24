@@ -9,11 +9,7 @@
  * @author Juan Pablo Gonzales Alvarado
  */
 
-import api.ApiResponse;
-import api.ApiRequestBuilder;
-import api.ApiManager;
-import api.ApiRequest;
-import api.ApiMethod;
+import api.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import entities.Token;
 import entities.account.Account;
@@ -23,31 +19,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
 public class BaseTestAccount {
-    protected ApiRequest apiRequest = new ApiRequest();
-    protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
+
     protected AccountResponse accountEndToEndResponse= new AccountResponse();
 
-
-    @BeforeClass
-    public void setup(){
+    public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
-        apiRequest = apiRequestBuilder
+        return new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASEO)
-                .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token())
-                .build();
+                .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
 
     @BeforeMethod(onlyForGroups = "createAccount")
     public void createdAccountBefore() throws JsonProcessingException {
-        apiRequest.clearPathParams();
         Account accountTemp = new Account();
         accountTemp.setName("Account30");
-        apiRequest = apiRequestBuilder.method(ApiMethod.POST).endpoint(ParameterEndPoints.ACCOUNT)
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.ACCOUNT)
                 .body(new ObjectMapper().writeValueAsString(accountTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
         System.out.println(response.getResponse().then().log().all());
@@ -56,8 +46,7 @@ public class BaseTestAccount {
 
     @AfterMethod(onlyForGroups = "deleteAccount")
     public void deleteAccountAfter() {
-        apiRequest.clearPathParams();
-        apiRequest = apiRequestBuilder.method(ApiMethod.DELETE).endpoint("/Account/{accountId}")
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Account/{accountId}")
                 .pathParams("accountId", accountEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
