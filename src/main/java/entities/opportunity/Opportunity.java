@@ -97,6 +97,15 @@ public class Opportunity {
     @JsonProperty("MainCompetitors__c")
     public Object mainCompetitors__c;
 
+    public Opportunity() {
+    }
+
+    public Opportunity(String name, String closeDate, String stageName) {
+        this.name = name;
+        this.stageName = stageName;
+        this.closeDate = closeDate;
+    }
+
     public Attributes getAttributes() {
         return attributes;
     }

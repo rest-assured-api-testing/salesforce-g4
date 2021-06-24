@@ -206,6 +206,13 @@ public class Account {
 	@JsonProperty("ShippingLongitude")
 	private Object shippingLongitude;
 
+	public Account() {
+	}
+
+	public Account(String name) {
+		this.name = name;
+	}
+
 	public void setShippingLatitude(Object shippingLatitude){
 		this.shippingLatitude = shippingLatitude;
 	}

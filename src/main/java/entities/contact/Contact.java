@@ -131,6 +131,14 @@ public class Contact{
     @JsonProperty("Languages__c")
     public Object languages__c;
 
+
+    public Contact() {
+    }
+
+    public Contact(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Attributes getAttributes() {
         return attributes;
     }
