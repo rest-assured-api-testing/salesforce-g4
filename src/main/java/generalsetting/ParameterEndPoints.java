@@ -1,22 +1,29 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
+
 package generalsetting;
 
+import static generalsetting.GetEnv.dotenv;
+
 public class ParameterEndPoints {
-    public static final String URL_TOKEN = "https://login.salesforce.com/services/oauth2/token";
-    public static final String URL_BASE = "https://jpcorp-dev-ed.my.salesforce.com/services/data/v52.0/";
-    public static final String PRODUCT_ID = "productId";
-    public static final String GROUP_ID = "groupId";
-    public static final String PRODUCT = "sobjects/Product2/";
-    public static final String PRODUCT_TO_INTERACT = "sobjects/Product2/{productId}";
-    public static final String GROUP = "chatter/groups";
-    public static final String GROUP_TO_INTERACT = "chatter/groups/{groupId}";
-    public static final String ACCOUNT = "sobjects/Account";
-    public static final String ACCOUNT_TO_INTERACT = "sobjects/Account/{accountId}";
-    public static final String ACCOUNT_ID = "accountId";
-    public static final String CONTACT = "sobjects/Contact";
-    public static final String CONTACT_TO_INTERACT = "sobjects/Contact/{contactId}";
-    public static final String CONTACT_ID = "contactId";
-    public static final String OPPORTUNITY = "sobjects/Opportunity";
-    public static final String OPPORTUNITY_TO_INTERACT = "sobjects/Opportunity/{opportunityId}";
-    public static final String OPPORTUNITY_ID = "opportunityId";
-    public static final String SOBJECTS = "sobjects";
+    public static final String URL_TOKEN = dotenv.get("URL_TOKEN");
+    public static final String URL_BASE =  dotenv.get("URL_BASE");
+    public static final String PRODUCT_ID =  dotenv.get("PRODUCT_ID");
+    public static final String GROUP_ID =  dotenv.get("GROUP_ID");
+    public static final String PRODUCT =  dotenv.get("PRODUCT");
+    public static final String PRODUCT_TO_INTERACT =  dotenv.get("PRODUCT_TO_INTERACT");
+    public static final String GROUP =  dotenv.get("GROUP");
+    public static final String GROUP_TO_INTERACT =  dotenv.get("GROUP_TO_INTERACT");
+    public static final String URL_BASEO =  dotenv.get("URL_BASEO");
+    public static final String ACCOUNT =  dotenv.get("ACCOUNT");
+    public static final String CONTACT =  dotenv.get("CONTACT");
+    public static final String OPPORTUNITY =  dotenv.get("OPPORTUNITY");
 }
