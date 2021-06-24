@@ -18,17 +18,17 @@ import api.ApiMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
-import entities.contact.Contact;
-import entities.contact.ContactResponse;
+import entities.opportunity.Opportunity;
+import entities.opportunity.OpportunityResponse;
 import generalsetting.ParameterEndPoints;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class BaseTestContact {
+public class BaseTestOpportunity {
 
-    protected ContactResponse contactEndToEndResponse= new ContactResponse();
+    protected OpportunityResponse opportunityEndToEndResponse= new OpportunityResponse();
 
     public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
@@ -38,21 +38,25 @@ public class BaseTestContact {
     }
 
 
-    @BeforeMethod(onlyForGroups = "createContact")
+    @BeforeMethod(onlyForGroups = "createOpportunity")
     public void createdContactBefore() throws JsonProcessingException {
-        Contact contactTemp = new Contact();
-        contactTemp.setLastName("Contact30");
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.CONTACT)
-                .body(new ObjectMapper().writeValueAsString(contactTemp)).build();
+        Opportunity opportunityTemp = new Opportunity();
+        opportunityTemp.setName("Opportunity30");
+        opportunityTemp.setCloseDate("2021-06-21");
+        opportunityTemp.setStageName("CloseDate");
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.OPPORTUNITY)
+                .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
-        contactEndToEndResponse = response.getBody(ContactResponse.class);
+        opportunityEndToEndResponse = response.getBody(OpportunityResponse.class);
     }
 
-    @AfterMethod(onlyForGroups = "deleteContact")
+    @AfterMethod(onlyForGroups = "deleteOpportunity")
     public void deleteContactAfter() { ;
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Opportunity/{opportunityId}")
+                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }
 }
+
+

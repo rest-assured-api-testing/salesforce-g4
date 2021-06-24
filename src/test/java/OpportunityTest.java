@@ -15,55 +15,57 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.contact.Contact;
-import entities.contact.ContactResponse;
+import entities.opportunity.Opportunity;
+import entities.opportunity.OpportunityResponse;
 import generalsetting.ParameterEndPoints;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class ContactTest extends BaseTestContact{
+public class OpportunityTest extends BaseTestOpportunity{
     @Test
     public void get_all_contact_successful_200() {
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint(ParameterEndPoints.CONTACT).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint(ParameterEndPoints.OPPORTUNITY).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_OK);
     }
 
-    @Test(groups = {"createContact","deleteContact"})
+    @Test(groups = {"createOpportunity","deleteOpportunity"})
     public void get_contact_successful_200(){
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint("/Opportunity/{opportunityId}")
+                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(),HttpStatus.SC_OK);
     }
 
-    @Test(groups = {"deleteContact"})
+    @Test(groups = {"deleteOpportunity"})
     public void create_contact_successful_200() throws JsonProcessingException {
-        Contact contactTemp = new Contact();
-        contactTemp.setLastName("Contact41");
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.CONTACT)
-                .body(new ObjectMapper().writeValueAsString(contactTemp)).build();
+        Opportunity opportunityTemp = new Opportunity();
+        opportunityTemp.setName("Opportunity40");
+        opportunityTemp.setCloseDate("2021-06-21");
+        opportunityTemp.setStageName("CloseDate");
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.OPPORTUNITY)
+                .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
         Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_CREATED);
-        contactEndToEndResponse = response.getBody(ContactResponse.class);
+        opportunityEndToEndResponse = response.getBody(OpportunityResponse.class);
     }
 
-    @Test(groups = {"createContact","deleteContact"})
+    @Test(groups = {"createOpportunity","deleteOpportunity"})
     public void update_contact_successful_201() throws JsonProcessingException {
-        Contact contactTemp = new Contact();
-        contactTemp.setLastName("Account new Update");
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId())
-                .body(new ObjectMapper().writeValueAsString(contactTemp)).build();
+        Opportunity opportunityTemp = new Opportunity();
+        opportunityTemp.setName("Opportunity Update");
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint("/Opportunity/{opportunityId}")
+                .pathParams("opportunityId", opportunityEndToEndResponse.getId())
+                .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
         Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_NO_CONTENT);
     }
 
-    @Test(groups = {"createContact"})
+    @Test(groups = {"createOpportunity"})
     public void delete_contact_successful_204() throws JsonProcessingException{
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Opportunity/{opportunityId}")
+                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }
