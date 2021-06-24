@@ -1,6 +1,5 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -13,25 +12,25 @@ package entities.group;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class MySubscription{
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String id;
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String url;
+public class MySubscription {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String url;
 
-	public void setId(String id){
-		this.id = id;
-	}
+    public void setId(final String id) {
+        this.id = id;
+    }
 
-	public String getId(){
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setUrl(String url){
-		this.url = url;
-	}
+    public void setUrl(final String url) {
+        this.url = url;
+    }
 
-	public String getUrl(){
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 }
