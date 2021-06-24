@@ -1,4 +1,4 @@
-package entities.project;
+package entities.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

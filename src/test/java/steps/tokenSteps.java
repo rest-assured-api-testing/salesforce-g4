@@ -1,9 +1,8 @@
-package rest.salesforce.org.steps;
+package steps;
 
 import api.ApiManager;
 import api.ApiResponse;
 import entities.Token;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
