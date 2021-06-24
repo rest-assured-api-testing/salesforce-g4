@@ -1,4 +1,5 @@
-import api.*;
+import api.ApiResponse;
+import api.ApiManager;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

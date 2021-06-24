@@ -1,15 +1,16 @@
 package steps;
 
-import api.*;
+import api.ApiResponse;
+import api.ApiRequestBuilder;
+import api.ApiManager;
+import api.IBuilderApiRequest;
+import api.ApiRequest;
+import api.ApiMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
 import entities.account.Account;
 import entities.account.AccountResponse;
-import entities.contact.Contact;
-import entities.contact.ContactResponse;
-import entities.opportunity.Opportunity;
-import entities.opportunity.OpportunityResponse;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -26,7 +27,6 @@ public class GetAObjectlSteps {
     protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
     protected AccountResponse account = new AccountResponse();
 
-
     @Before
     public void createAccount() throws JsonProcessingException {
         apiResponse = ApiManager.executeToken();
@@ -40,7 +40,6 @@ public class GetAObjectlSteps {
         apiRequest.setBody(new ObjectMapper().writeValueAsString(accountTemp));
         account = ApiManager.execute(apiRequest).getBody(AccountResponse.class);
     }
-
 
     @Given("^I need \"([^\"]*)\" request$")
     public void i_need_something_request(String method) throws Throwable {
