@@ -13,25 +13,25 @@ package entities.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class Attributes{
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String type;
-	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String url;
+public class Attributes {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String type;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String url;
 
-	public void setType(String type){
-		this.type = type;
-	}
+    public void setType(final String type) {
+        this.type = type;
+    }
 
-	public String getType(){
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setUrl(String url){
-		this.url = url;
-	}
+    public void setUrl(final String url) {
+        this.url = url;
+    }
 
-	public String getUrl(){
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 }

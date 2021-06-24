@@ -27,7 +27,7 @@ public class ProductCreate {
         return errors;
     }
 
-    public void setErrors(List<String> errors) {
+    public void setErrors(final List<String> errors) {
         this.errors = errors;
     }
 
@@ -43,7 +43,7 @@ public class ProductCreate {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 }

@@ -19,51 +19,51 @@ public class ApiRequestBuilder implements IBuilderApiRequest {
     }
 
     /**
-     * Set the base Uri to request
+     * Sets the base Uri to request.
      *
      * @param baseUri is path to base Uri to request
      * @return ApiRequest in order to build request
      */
-    public ApiRequestBuilder baseUri(String baseUri) {
+    public ApiRequestBuilder baseUri(final String baseUri) {
         this.apiRequest.setBaseUri(baseUri);
         return this;
     }
 
     /**
-     * Set endpoint to request
+     * Sets endpoint to request.
      *
      * @param endpoint is the path to endpoint
      * @return ApiRequest in order to build request
      */
-    public ApiRequestBuilder endpoint(String endpoint) {
+    public ApiRequestBuilder endpoint(final String endpoint) {
         this.apiRequest.setEndpoint(endpoint);
         return this;
     }
 
     /**
-     * Sets body to response
+     * Sets body to response.
      *
      * @param body is body to request
      * @return ApiRequest in order to build request
      */
-    public ApiRequestBuilder body(String body) {
+    public ApiRequestBuilder body(final String body) {
         this.apiRequest.setBody(body);
         return this;
     }
 
     /**
-     * Sets method to response
+     * Sets method to response.
      *
      * @param method is method to response
      * @return ApiRequest in order to build request
      */
-    public ApiRequestBuilder method(Enum<ApiMethod> method) {
+    public ApiRequestBuilder method(final Enum<ApiMethod> method) {
         this.apiRequest.setMethod(method);
         return this;
     }
 
     /**
-     * Sets headers to request
+     * Sets headers to request.
      *
      * @param header is the key of header
      * @param value  is a value of header
@@ -75,7 +75,7 @@ public class ApiRequestBuilder implements IBuilderApiRequest {
     }
 
     /**
-     * Sets params to request
+     * Sets params to request.
      *
      * @param param is the key of param
      * @param value is a value of param
@@ -87,7 +87,7 @@ public class ApiRequestBuilder implements IBuilderApiRequest {
     }
 
     /**
-     * Finishes the build to object
+     * Finishes the build to object.
      *
      * @return ApiRequest in order to build request
      */
