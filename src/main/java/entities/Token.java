@@ -31,7 +31,7 @@ public class Token {
         return access_token;
     }
 
-    public void setAccess_token(String access_token) {
+    public void setAccess_token(final String access_token) {
         this.access_token = access_token;
     }
 
@@ -39,7 +39,7 @@ public class Token {
         return instance_url;
     }
 
-    public void setInstance_url(String instance_url) {
+    public void setInstance_url(final String instance_url) {
         this.instance_url = instance_url;
     }
 
@@ -47,7 +47,7 @@ public class Token {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -55,7 +55,7 @@ public class Token {
         return token_type;
     }
 
-    public void setToken_type(String token_type) {
+    public void setToken_type(final String token_type) {
         this.token_type = token_type;
     }
 
@@ -63,7 +63,7 @@ public class Token {
         return issued_at;
     }
 
-    public void setIssued_at(String issued_at) {
+    public void setIssued_at(final String issued_at) {
         this.issued_at = issued_at;
     }
 
@@ -71,7 +71,7 @@ public class Token {
         return signature;
     }
 
-    public void setSignature(String signature) {
+    public void setSignature(final String signature) {
         this.signature = signature;
     }
 }

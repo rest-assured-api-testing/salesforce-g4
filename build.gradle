@@ -13,11 +13,11 @@ dependencies {
     implementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
     implementation group: 'io.rest-assured', name: 'json-path', version: '4.4.0'
     implementation group: 'io.rest-assured', name: 'json-schema-validator', version: '4.4.0'
-    implementation 'org.springframework:spring-web:5.3.7'
-    implementation 'org.testng:testng:7.1.0'
-
+    implementation group: 'org.springframework', name: 'spring-web', version:'5.3.7'
+    implementation group: 'org.testng',  name: 'testng', version: '7.1.0'
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '6.10.4'
     implementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.10.4'
+    compile group:'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
 }
 
 test {

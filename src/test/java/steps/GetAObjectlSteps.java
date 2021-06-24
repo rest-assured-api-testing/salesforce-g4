@@ -30,7 +30,7 @@ import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 
-public class GetAObjectSteps {
+public class GetAObjectlSteps {
 
     private ApiResponse apiResponse;
     protected ApiRequest apiRequest = new ApiRequest();
@@ -52,19 +52,19 @@ public class GetAObjectSteps {
     }
 
     @Given("^I need \"([^\"]*)\" request$")
-    public void i_need_something_request(String method) {
+    public void i_need_something_request(String method) throws Throwable {
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
     @When("^I find \"([^\"]*)\" request$")
-    public void i_find_something_request(String endpoint) {
+    public void i_find_something_request(String endpoint) throws Throwable {
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams("accountId", account.getId());
         apiResponse = ApiManager.execute(apiRequest);
     }
 
     @Then("^the response status coded is \"([^\"]*)\"$")
-    public void the_response_status_coded_is_something(String strArg1) {
+    public void the_response_status_coded_is_something(String strArg1) throws Throwable {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_OK);
     }
 

@@ -17,10 +17,7 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 public class ApiResponse {
     private Response response;
 
-    /**
-     * Sets the response.
-     */
-    public ApiResponse(Response response) {
+    public ApiResponse(final Response response) {
         this.response = response;
     }
 
@@ -45,11 +42,11 @@ public class ApiResponse {
     /**
      * Gets the response in a object.
      *
-     * @param cls
-     * @param <T>
+     * @param cls is type of class.
+     * @param <T> is type of class.
      * @return the response in a object.
      */
-    public <T> T getBody(Class<T> cls) {
+    public <T> T getBody(final Class<T> cls) {
         return response.getBody().as(cls);
     }
 
@@ -58,11 +55,11 @@ public class ApiResponse {
 //    }
 
     /**
-     * Verifies schema with Path setting in String schema
+     * Verifies schema with Path setting in String schema.
      *
      * @param schema is path to schema type json
      */
-    public void validateBodySchema(String schema) {
+    public void validateBodySchema(final String schema) {
         response.then().log().body().assertThat().body(matchesJsonSchemaInClasspath(schema));
     }
 }
