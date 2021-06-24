@@ -1,106 +1,116 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ * <p>
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales Alvarado
+ */
+
 package entities.opportunity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Opportunity {
-    public Attributes attributes;
+    private Attributes attributes;
     @JsonProperty("Id")
-    public String id;
+    private String id;
     @JsonProperty("IsDeleted")
-    public Boolean isDeleted;
+    private Boolean isDeleted;
     @JsonProperty("AccountId")
-    public Object accountId;
+    private Object accountId;
     @JsonProperty("IsPrivate")
-    public Boolean isPrivate;
+    private Boolean isPrivate;
     @JsonProperty("Name")
-    public String name;
+    private String name;
     @JsonProperty("Description")
-    public Object description;
+    private Object description;
     @JsonProperty("StageName")
-    public String stageName;
+    private String stageName;
     @JsonProperty("Amount")
-    public Object amount;
+    private Object amount;
     @JsonProperty("Probability")
-    public double probability;
+    private double probability;
     @JsonProperty("ExpectedRevenue")
-    public Object expectedRevenue;
+    private Object expectedRevenue;
     @JsonProperty("TotalOpportunityQuantity")
-    public Object totalOpportunityQuantity;
+    private Object totalOpportunityQuantity;
     @JsonProperty("CloseDate")
-    public String closeDate;
+    private String closeDate;
     @JsonProperty("Type")
-    public Object type;
+    private Object type;
     @JsonProperty("NextStep")
-    public Object nextStep;
+    private Object nextStep;
     @JsonProperty("LeadSource")
-    public Object leadSource;
+    private Object leadSource;
     @JsonProperty("IsClosed")
-    public Boolean isClosed;
+    private Boolean isClosed;
     @JsonProperty("IsWon")
-    public Boolean isWon;
+    private Boolean isWon;
     @JsonProperty("ForecastCategory")
-    public String forecastCategory;
+    private String forecastCategory;
     @JsonProperty("ForecastCategoryName")
-    public String forecastCategoryName;
+    private String forecastCategoryName;
     @JsonProperty("CampaignId")
-    public Object campaignId;
+    private Object campaignId;
     @JsonProperty("HasOpportunityLineItem")
-    public Boolean hasOpportunityLineItem;
+    private Boolean hasOpportunityLineItem;
     @JsonProperty("Pricebook2Id")
-    public Object pricebook2Id;
+    private Object pricebook2Id;
     @JsonProperty("OwnerId")
-    public String ownerId;
+    private String ownerId;
     @JsonProperty("CreatedDate")
-    public Date createdDate;
+    private Date createdDate;
     @JsonProperty("CreatedById")
-    public String createdById;
+    private String createdById;
     @JsonProperty("LastModifiedDate")
-    public Date lastModifiedDate;
+    private Date lastModifiedDate;
     @JsonProperty("LastModifiedById")
-    public String lastModifiedById;
+    private String lastModifiedById;
     @JsonProperty("SystemModstamp")
-    public Date systemModstamp;
+    private Date systemModstamp;
     @JsonProperty("LastActivityDate")
-    public Object lastActivityDate;
+    private Object lastActivityDate;
     @JsonProperty("FiscalQuarter")
-    public int fiscalQuarter;
+    private int fiscalQuarter;
     @JsonProperty("FiscalYear")
-    public int fiscalYear;
+    private int fiscalYear;
     @JsonProperty("Fiscal")
-    public String fiscal;
+    private String fiscal;
     @JsonProperty("ContactId")
-    public Object contactId;
+    private Object contactId;
     @JsonProperty("LastViewedDate")
-    public Date lastViewedDate;
+    private Date lastViewedDate;
     @JsonProperty("LastReferencedDate")
-    public Date lastReferencedDate;
+    private Date lastReferencedDate;
     @JsonProperty("HasOpenActivity")
-    public Boolean hasOpenActivity;
+    private Boolean hasOpenActivity;
     @JsonProperty("HasOverdueTask")
-    public Boolean hasOverdueTask;
+    private Boolean hasOverdueTask;
     @JsonProperty("LastAmountChangedHistoryId")
-    public Object lastAmountChangedHistoryId;
+    private Object lastAmountChangedHistoryId;
     @JsonProperty("LastCloseDateChangedHistoryId")
-    public Object lastCloseDateChangedHistoryId;
+    private Object lastCloseDateChangedHistoryId;
     @JsonProperty("DeliveryInstallationStatus__c")
-    public Object deliveryInstallationStatus__c;
+    private Object deliveryInstallationStatus__c;
     @JsonProperty("TrackingNumber__c")
-    public Object trackingNumber__c;
+    private Object trackingNumber__c;
     @JsonProperty("OrderNumber__c")
-    public Object orderNumber__c;
+    private Object orderNumber__c;
     @JsonProperty("CurrentGenerators__c")
-    public Object currentGenerators__c;
+    private Object currentGenerators__c;
     @JsonProperty("MainCompetitors__c")
-    public Object mainCompetitors__c;
+    private Object mainCompetitors__c;
 
     public Opportunity() {
     }
 
-    public Opportunity(String name, String closeDate, String stageName) {
+    public Opportunity(final String name, final String closeDate, final String stageName) {
         this.name = name;
         this.stageName = stageName;
         this.closeDate = closeDate;
@@ -110,7 +120,7 @@ public class Opportunity {
         return attributes;
     }
 
-    public void setAttributes(Attributes attributes) {
+    public void setAttributes(final Attributes attributes) {
         this.attributes = attributes;
     }
 
@@ -118,7 +128,7 @@ public class Opportunity {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -126,7 +136,7 @@ public class Opportunity {
         return isDeleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(final Boolean deleted) {
         isDeleted = deleted;
     }
 
@@ -134,7 +144,7 @@ public class Opportunity {
         return accountId;
     }
 
-    public void setAccountId(Object accountId) {
+    public void setAccountId(final Object accountId) {
         this.accountId = accountId;
     }
 
@@ -142,7 +152,7 @@ public class Opportunity {
         return isPrivate;
     }
 
-    public void setPrivate(Boolean aPrivate) {
+    public void setPrivate(final Boolean aPrivate) {
         isPrivate = aPrivate;
     }
 
@@ -150,7 +160,7 @@ public class Opportunity {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -158,7 +168,7 @@ public class Opportunity {
         return description;
     }
 
-    public void setDescription(Object description) {
+    public void setDescription(final Object description) {
         this.description = description;
     }
 
@@ -166,7 +176,7 @@ public class Opportunity {
         return stageName;
     }
 
-    public void setStageName(String stageName) {
+    public void setStageName(final String stageName) {
         this.stageName = stageName;
     }
 
@@ -174,7 +184,7 @@ public class Opportunity {
         return amount;
     }
 
-    public void setAmount(Object amount) {
+    public void setAmount(final Object amount) {
         this.amount = amount;
     }
 
@@ -190,7 +200,7 @@ public class Opportunity {
         return expectedRevenue;
     }
 
-    public void setExpectedRevenue(Object expectedRevenue) {
+    public void setExpectedRevenue(final Object expectedRevenue) {
         this.expectedRevenue = expectedRevenue;
     }
 
@@ -198,7 +208,7 @@ public class Opportunity {
         return totalOpportunityQuantity;
     }
 
-    public void setTotalOpportunityQuantity(Object totalOpportunityQuantity) {
+    public void setTotalOpportunityQuantity(final Object totalOpportunityQuantity) {
         this.totalOpportunityQuantity = totalOpportunityQuantity;
     }
 
@@ -206,7 +216,7 @@ public class Opportunity {
         return closeDate;
     }
 
-    public void setCloseDate(String closeDate) {
+    public void setCloseDate(final String closeDate) {
         this.closeDate = closeDate;
     }
 
@@ -214,7 +224,7 @@ public class Opportunity {
         return type;
     }
 
-    public void setType(Object type) {
+    public void setType(final Object type) {
         this.type = type;
     }
 
@@ -222,7 +232,7 @@ public class Opportunity {
         return nextStep;
     }
 
-    public void setNextStep(Object nextStep) {
+    public void setNextStep(final Object nextStep) {
         this.nextStep = nextStep;
     }
 
@@ -230,7 +240,7 @@ public class Opportunity {
         return leadSource;
     }
 
-    public void setLeadSource(Object leadSource) {
+    public void setLeadSource(final Object leadSource) {
         this.leadSource = leadSource;
     }
 
@@ -238,7 +248,7 @@ public class Opportunity {
         return isClosed;
     }
 
-    public void setClosed(Boolean closed) {
+    public void setClosed(final Boolean closed) {
         isClosed = closed;
     }
 
@@ -246,7 +256,7 @@ public class Opportunity {
         return isWon;
     }
 
-    public void setWon(Boolean won) {
+    public void setWon(final Boolean won) {
         isWon = won;
     }
 
@@ -254,7 +264,7 @@ public class Opportunity {
         return forecastCategory;
     }
 
-    public void setForecastCategory(String forecastCategory) {
+    public void setForecastCategory(final String forecastCategory) {
         this.forecastCategory = forecastCategory;
     }
 
@@ -262,7 +272,7 @@ public class Opportunity {
         return forecastCategoryName;
     }
 
-    public void setForecastCategoryName(String forecastCategoryName) {
+    public void setForecastCategoryName(final String forecastCategoryName) {
         this.forecastCategoryName = forecastCategoryName;
     }
 
@@ -270,7 +280,7 @@ public class Opportunity {
         return campaignId;
     }
 
-    public void setCampaignId(Object campaignId) {
+    public void setCampaignId(final Object campaignId) {
         this.campaignId = campaignId;
     }
 
@@ -278,7 +288,7 @@ public class Opportunity {
         return hasOpportunityLineItem;
     }
 
-    public void setHasOpportunityLineItem(Boolean hasOpportunityLineItem) {
+    public void setHasOpportunityLineItem(final Boolean hasOpportunityLineItem) {
         this.hasOpportunityLineItem = hasOpportunityLineItem;
     }
 
@@ -286,7 +296,7 @@ public class Opportunity {
         return pricebook2Id;
     }
 
-    public void setPricebook2Id(Object pricebook2Id) {
+    public void setPricebook2Id(final Object pricebook2Id) {
         this.pricebook2Id = pricebook2Id;
     }
 
@@ -294,7 +304,7 @@ public class Opportunity {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(final String ownerId) {
         this.ownerId = ownerId;
     }
 
@@ -302,7 +312,7 @@ public class Opportunity {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(final Date createdDate) {
         this.createdDate = createdDate;
     }
 
@@ -310,7 +320,7 @@ public class Opportunity {
         return createdById;
     }
 
-    public void setCreatedById(String createdById) {
+    public void setCreatedById(final String createdById) {
         this.createdById = createdById;
     }
 
@@ -318,7 +328,7 @@ public class Opportunity {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Date lastModifiedDate) {
+    public void setLastModifiedDate(final Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
     }
 
@@ -326,7 +336,7 @@ public class Opportunity {
         return lastModifiedById;
     }
 
-    public void setLastModifiedById(String lastModifiedById) {
+    public void setLastModifiedById(final String lastModifiedById) {
         this.lastModifiedById = lastModifiedById;
     }
 
@@ -334,7 +344,7 @@ public class Opportunity {
         return systemModstamp;
     }
 
-    public void setSystemModstamp(Date systemModstamp) {
+    public void setSystemModstamp(final Date systemModstamp) {
         this.systemModstamp = systemModstamp;
     }
 
@@ -342,7 +352,7 @@ public class Opportunity {
         return lastActivityDate;
     }
 
-    public void setLastActivityDate(Object lastActivityDate) {
+    public void setLastActivityDate(final Object lastActivityDate) {
         this.lastActivityDate = lastActivityDate;
     }
 
@@ -366,7 +376,7 @@ public class Opportunity {
         return fiscal;
     }
 
-    public void setFiscal(String fiscal) {
+    public void setFiscal(final String fiscal) {
         this.fiscal = fiscal;
     }
 
@@ -374,7 +384,7 @@ public class Opportunity {
         return contactId;
     }
 
-    public void setContactId(Object contactId) {
+    public void setContactId(final Object contactId) {
         this.contactId = contactId;
     }
 
@@ -382,7 +392,7 @@ public class Opportunity {
         return lastViewedDate;
     }
 
-    public void setLastViewedDate(Date lastViewedDate) {
+    public void setLastViewedDate(final Date lastViewedDate) {
         this.lastViewedDate = lastViewedDate;
     }
 
@@ -390,7 +400,7 @@ public class Opportunity {
         return lastReferencedDate;
     }
 
-    public void setLastReferencedDate(Date lastReferencedDate) {
+    public void setLastReferencedDate(final Date lastReferencedDate) {
         this.lastReferencedDate = lastReferencedDate;
     }
 
@@ -398,7 +408,7 @@ public class Opportunity {
         return hasOpenActivity;
     }
 
-    public void setHasOpenActivity(Boolean hasOpenActivity) {
+    public void setHasOpenActivity(final Boolean hasOpenActivity) {
         this.hasOpenActivity = hasOpenActivity;
     }
 
@@ -406,7 +416,7 @@ public class Opportunity {
         return hasOverdueTask;
     }
 
-    public void setHasOverdueTask(Boolean hasOverdueTask) {
+    public void setHasOverdueTask(final Boolean hasOverdueTask) {
         this.hasOverdueTask = hasOverdueTask;
     }
 
@@ -414,7 +424,7 @@ public class Opportunity {
         return lastAmountChangedHistoryId;
     }
 
-    public void setLastAmountChangedHistoryId(Object lastAmountChangedHistoryId) {
+    public void setLastAmountChangedHistoryId(final Object lastAmountChangedHistoryId) {
         this.lastAmountChangedHistoryId = lastAmountChangedHistoryId;
     }
 
@@ -422,7 +432,7 @@ public class Opportunity {
         return lastCloseDateChangedHistoryId;
     }
 
-    public void setLastCloseDateChangedHistoryId(Object lastCloseDateChangedHistoryId) {
+    public void setLastCloseDateChangedHistoryId(final Object lastCloseDateChangedHistoryId) {
         this.lastCloseDateChangedHistoryId = lastCloseDateChangedHistoryId;
     }
 
@@ -430,7 +440,7 @@ public class Opportunity {
         return deliveryInstallationStatus__c;
     }
 
-    public void setDeliveryInstallationStatus__c(Object deliveryInstallationStatus__c) {
+    public void setDeliveryInstallationStatus__c(final Object deliveryInstallationStatus__c) {
         this.deliveryInstallationStatus__c = deliveryInstallationStatus__c;
     }
 
@@ -438,7 +448,7 @@ public class Opportunity {
         return trackingNumber__c;
     }
 
-    public void setTrackingNumber__c(Object trackingNumber__c) {
+    public void setTrackingNumber__c(final Object trackingNumber__c) {
         this.trackingNumber__c = trackingNumber__c;
     }
 
@@ -446,7 +456,7 @@ public class Opportunity {
         return orderNumber__c;
     }
 
-    public void setOrderNumber__c(Object orderNumber__c) {
+    public void setOrderNumber__c(final Object orderNumber__c) {
         this.orderNumber__c = orderNumber__c;
     }
 
@@ -454,7 +464,7 @@ public class Opportunity {
         return currentGenerators__c;
     }
 
-    public void setCurrentGenerators__c(Object currentGenerators__c) {
+    public void setCurrentGenerators__c(final Object currentGenerators__c) {
         this.currentGenerators__c = currentGenerators__c;
     }
 
@@ -462,7 +472,7 @@ public class Opportunity {
         return mainCompetitors__c;
     }
 
-    public void setMainCompetitors__c(Object mainCompetitors__c) {
+    public void setMainCompetitors__c(final Object mainCompetitors__c) {
         this.mainCompetitors__c = mainCompetitors__c;
     }
 }

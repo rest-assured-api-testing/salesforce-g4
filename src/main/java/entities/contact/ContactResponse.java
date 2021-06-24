@@ -1,17 +1,28 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ * <p>
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales Alvarado
+ */
+
 package entities.contact;
 
 import java.util.List;
 
 public class ContactResponse {
-        public String id;
-        public boolean success;
-        public List<Object> errors;
+    private String id;
+    private boolean success;
+    private List<Object> errors;
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -27,7 +38,7 @@ public class ContactResponse {
         return errors;
     }
 
-    public void setErrors(List<Object> errors) {
+    public void setErrors(final List<Object> errors) {
         this.errors = errors;
     }
 }

@@ -1,141 +1,151 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ * <p>
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales Alvarado
+ */
+
 package entities.contact;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Contact{
-    public Attributes attributes;
+public class Contact {
+    private Attributes attributes;
     @JsonProperty("Id")
-    public String id;
+    private String id;
     @JsonProperty("IsDeleted")
-    public Boolean isDeleted;
+    private Boolean isDeleted;
     @JsonProperty("MasterRecordId")
-    public Object masterRecordId;
+    private Object masterRecordId;
     @JsonProperty("AccountId")
-    public Object accountId;
+    private Object accountId;
     @JsonProperty("LastName")
-    public String lastName;
+    private String lastName;
     @JsonProperty("FirstName")
-    public Object firstName;
+    private Object firstName;
     @JsonProperty("Salutation")
-    public Object salutation;
+    private Object salutation;
     @JsonProperty("Name")
-    public String name;
+    private String name;
     @JsonProperty("OtherStreet")
-    public Object otherStreet;
+    private Object otherStreet;
     @JsonProperty("OtherCity")
-    public Object otherCity;
+    private Object otherCity;
     @JsonProperty("OtherState")
-    public Object otherState;
+    private Object otherState;
     @JsonProperty("OtherPostalCode")
-    public Object otherPostalCode;
+    private Object otherPostalCode;
     @JsonProperty("OtherCountry")
-    public Object otherCountry;
+    private Object otherCountry;
     @JsonProperty("OtherLatitude")
-    public Object otherLatitude;
+    private Object otherLatitude;
     @JsonProperty("OtherLongitude")
-    public Object otherLongitude;
+    private Object otherLongitude;
     @JsonProperty("OtherGeocodeAccuracy")
-    public Object otherGeocodeAccuracy;
+    private Object otherGeocodeAccuracy;
     @JsonProperty("OtherAddress")
-    public Object otherAddress;
+    private Object otherAddress;
     @JsonProperty("MailingStreet")
-    public Object mailingStreet;
+    private Object mailingStreet;
     @JsonProperty("MailingCity")
-    public Object mailingCity;
+    private Object mailingCity;
     @JsonProperty("MailingState")
-    public Object mailingState;
+    private Object mailingState;
     @JsonProperty("MailingPostalCode")
-    public Object mailingPostalCode;
+    private Object mailingPostalCode;
     @JsonProperty("MailingCountry")
-    public Object mailingCountry;
+    private Object mailingCountry;
     @JsonProperty("MailingLatitude")
-    public Object mailingLatitude;
+    private Object mailingLatitude;
     @JsonProperty("MailingLongitude")
-    public Object mailingLongitude;
+    private Object mailingLongitude;
     @JsonProperty("MailingGeocodeAccuracy")
-    public Object mailingGeocodeAccuracy;
+    private Object mailingGeocodeAccuracy;
     @JsonProperty("MailingAddress")
-    public Object mailingAddress;
+    private Object mailingAddress;
     @JsonProperty("Phone")
-    public Object phone;
+    private Object phone;
     @JsonProperty("Fax")
-    public Object fax;
+    private Object fax;
     @JsonProperty("MobilePhone")
-    public Object mobilePhone;
+    private Object mobilePhone;
     @JsonProperty("HomePhone")
-    public Object homePhone;
+    private Object homePhone;
     @JsonProperty("OtherPhone")
-    public Object otherPhone;
+    private Object otherPhone;
     @JsonProperty("AssistantPhone")
-    public Object assistantPhone;
+    private Object assistantPhone;
     @JsonProperty("ReportsToId")
-    public Object reportsToId;
+    private Object reportsToId;
     @JsonProperty("Email")
-    public Object email;
+    private Object email;
     @JsonProperty("Title")
-    public Object title;
+    private Object title;
     @JsonProperty("Department")
-    public Object department;
+    private Object department;
     @JsonProperty("AssistantName")
-    public Object assistantName;
+    private Object assistantName;
     @JsonProperty("LeadSource")
-    public Object leadSource;
+    private Object leadSource;
     @JsonProperty("Birthdate")
-    public Object birthdate;
+    private Object birthdate;
     @JsonProperty("Description")
-    public Object description;
+    private Object description;
     @JsonProperty("OwnerId")
-    public String ownerId;
+    private String ownerId;
     @JsonProperty("CreatedDate")
-    public Date createdDate;
+    private Date createdDate;
     @JsonProperty("CreatedById")
-    public String createdById;
+    private String createdById;
     @JsonProperty("LastModifiedDate")
-    public Date lastModifiedDate;
+    private Date lastModifiedDate;
     @JsonProperty("LastModifiedById")
-    public String lastModifiedById;
+    private String lastModifiedById;
     @JsonProperty("SystemModstamp")
-    public Date systemModstamp;
+    private Date systemModstamp;
     @JsonProperty("LastActivityDate")
-    public Object lastActivityDate;
+    private Object lastActivityDate;
     @JsonProperty("LastCURequestDate")
-    public Object lastCURequestDate;
+    private Object lastCURequestDate;
     @JsonProperty("LastCUUpdateDate")
-    public Object lastCUUpdateDate;
+    private Object lastCUUpdateDate;
     @JsonProperty("LastViewedDate")
-    public Date lastViewedDate;
+    private Date lastViewedDate;
     @JsonProperty("LastReferencedDate")
-    public Date lastReferencedDate;
+    private Date lastReferencedDate;
     @JsonProperty("EmailBouncedReason")
-    public Object emailBouncedReason;
+    private Object emailBouncedReason;
     @JsonProperty("EmailBouncedDate")
-    public Object emailBouncedDate;
+    private Object emailBouncedDate;
     @JsonProperty("IsEmailBounced")
-    public Boolean isEmailBounced;
+    private Boolean isEmailBounced;
     @JsonProperty("PhotoUrl")
-    public String photoUrl;
+    private String photoUrl;
     @JsonProperty("Jigsaw")
-    public Object jigsaw;
+    private Object jigsaw;
     @JsonProperty("JigsawContactId")
-    public Object jigsawContactId;
+    private Object jigsawContactId;
     @JsonProperty("CleanStatus")
-    public String cleanStatus;
+    private String cleanStatus;
     @JsonProperty("IndividualId")
-    public Object individualId;
+    private Object individualId;
     @JsonProperty("Level__c")
-    public Object level__c;
+    private Object level__c;
     @JsonProperty("Languages__c")
-    public Object languages__c;
+    private Object languages__c;
 
 
     public Contact() {
     }
 
-    public Contact(String lastName) {
+    public Contact(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -143,7 +153,7 @@ public class Contact{
         return attributes;
     }
 
-    public void setAttributes(Attributes attributes) {
+    public void setAttributes(final Attributes attributes) {
         this.attributes = attributes;
     }
 
@@ -151,7 +161,7 @@ public class Contact{
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
@@ -159,7 +169,7 @@ public class Contact{
         return isDeleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(final Boolean deleted) {
         isDeleted = deleted;
     }
 
@@ -167,7 +177,7 @@ public class Contact{
         return masterRecordId;
     }
 
-    public void setMasterRecordId(Object masterRecordId) {
+    public void setMasterRecordId(final Object masterRecordId) {
         this.masterRecordId = masterRecordId;
     }
 
@@ -175,7 +185,7 @@ public class Contact{
         return accountId;
     }
 
-    public void setAccountId(Object accountId) {
+    public void setAccountId(final Object accountId) {
         this.accountId = accountId;
     }
 
@@ -183,7 +193,7 @@ public class Contact{
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(final String lastName) {
         this.lastName = lastName;
     }
 
@@ -191,7 +201,7 @@ public class Contact{
         return firstName;
     }
 
-    public void setFirstName(Object firstName) {
+    public void setFirstName(final Object firstName) {
         this.firstName = firstName;
     }
 
@@ -199,7 +209,7 @@ public class Contact{
         return salutation;
     }
 
-    public void setSalutation(Object salutation) {
+    public void setSalutation(final Object salutation) {
         this.salutation = salutation;
     }
 
@@ -207,7 +217,7 @@ public class Contact{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -215,7 +225,7 @@ public class Contact{
         return otherStreet;
     }
 
-    public void setOtherStreet(Object otherStreet) {
+    public void setOtherStreet(final Object otherStreet) {
         this.otherStreet = otherStreet;
     }
 
@@ -223,7 +233,7 @@ public class Contact{
         return otherCity;
     }
 
-    public void setOtherCity(Object otherCity) {
+    public void setOtherCity(final Object otherCity) {
         this.otherCity = otherCity;
     }
 
@@ -231,7 +241,7 @@ public class Contact{
         return otherState;
     }
 
-    public void setOtherState(Object otherState) {
+    public void setOtherState(final Object otherState) {
         this.otherState = otherState;
     }
 
@@ -239,7 +249,7 @@ public class Contact{
         return otherPostalCode;
     }
 
-    public void setOtherPostalCode(Object otherPostalCode) {
+    public void setOtherPostalCode(final Object otherPostalCode) {
         this.otherPostalCode = otherPostalCode;
     }
 
@@ -247,7 +257,7 @@ public class Contact{
         return otherCountry;
     }
 
-    public void setOtherCountry(Object otherCountry) {
+    public void setOtherCountry(final Object otherCountry) {
         this.otherCountry = otherCountry;
     }
 
@@ -255,7 +265,7 @@ public class Contact{
         return otherLatitude;
     }
 
-    public void setOtherLatitude(Object otherLatitude) {
+    public void setOtherLatitude(final Object otherLatitude) {
         this.otherLatitude = otherLatitude;
     }
 
@@ -263,7 +273,7 @@ public class Contact{
         return otherLongitude;
     }
 
-    public void setOtherLongitude(Object otherLongitude) {
+    public void setOtherLongitude(final Object otherLongitude) {
         this.otherLongitude = otherLongitude;
     }
 
@@ -271,7 +281,7 @@ public class Contact{
         return otherGeocodeAccuracy;
     }
 
-    public void setOtherGeocodeAccuracy(Object otherGeocodeAccuracy) {
+    public void setOtherGeocodeAccuracy(final Object otherGeocodeAccuracy) {
         this.otherGeocodeAccuracy = otherGeocodeAccuracy;
     }
 
@@ -279,7 +289,7 @@ public class Contact{
         return otherAddress;
     }
 
-    public void setOtherAddress(Object otherAddress) {
+    public void setOtherAddress(final Object otherAddress) {
         this.otherAddress = otherAddress;
     }
 }
