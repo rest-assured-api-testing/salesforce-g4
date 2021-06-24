@@ -32,8 +32,8 @@ public class OpportunityTest extends BaseTestOpportunity{
 
     @Test(groups = {"createOpportunity","deleteOpportunity"})
     public void get_contact_successful_200(){
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint("/Opportunity/{opportunityId}")
-                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint(ParameterEndPoints.OPPORTUNITY_TO_INTERACT)
+                .pathParams(ParameterEndPoints.OPPORTUNITY_ID, opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(),HttpStatus.SC_OK);
     }
@@ -55,8 +55,8 @@ public class OpportunityTest extends BaseTestOpportunity{
     public void update_contact_successful_201() throws JsonProcessingException {
         Opportunity opportunityTemp = new Opportunity();
         opportunityTemp.setName("Opportunity Update");
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint("/Opportunity/{opportunityId}")
-                .pathParams("opportunityId", opportunityEndToEndResponse.getId())
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint(ParameterEndPoints.OPPORTUNITY_TO_INTERACT)
+                .pathParams(ParameterEndPoints.OPPORTUNITY_ID, opportunityEndToEndResponse.getId())
                 .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
         Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_NO_CONTENT);
@@ -64,8 +64,8 @@ public class OpportunityTest extends BaseTestOpportunity{
 
     @Test(groups = {"createOpportunity"})
     public void delete_contact_successful_204() throws JsonProcessingException{
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Opportunity/{opportunityId}")
-                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint(ParameterEndPoints.OPPORTUNITY_TO_INTERACT)
+                .pathParams(ParameterEndPoints.OPPORTUNITY_ID, opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }

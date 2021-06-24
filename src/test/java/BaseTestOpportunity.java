@@ -33,7 +33,7 @@ public class BaseTestOpportunity {
     public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
         return new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASEO)
+                .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
@@ -52,8 +52,8 @@ public class BaseTestOpportunity {
 
     @AfterMethod(onlyForGroups = "deleteOpportunity")
     public void deleteContactAfter() {
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Opportunity/{opportunityId}")
-                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint(ParameterEndPoints.OPPORTUNITY_TO_INTERACT)
+                .pathParams(ParameterEndPoints.OPPORTUNITY_ID, opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }

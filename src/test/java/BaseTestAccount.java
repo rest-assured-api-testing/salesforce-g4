@@ -33,7 +33,7 @@ public class BaseTestAccount {
     public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
         return new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASEO)
+                .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
@@ -51,8 +51,8 @@ public class BaseTestAccount {
 
     @AfterMethod(onlyForGroups = "deleteAccount")
     public void deleteAccountAfter() {
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Account/{accountId}")
-                .pathParams("accountId", accountEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.ACCOUNT_ID, accountEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }

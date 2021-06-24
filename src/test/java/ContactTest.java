@@ -32,8 +32,8 @@ public class ContactTest extends BaseTestContact{
 
     @Test(groups = {"createContact","deleteContact"})
     public void get_contact_successful_200(){
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.GET).endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CONTACT_ID, contactEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(),HttpStatus.SC_OK);
     }
@@ -53,8 +53,8 @@ public class ContactTest extends BaseTestContact{
     public void update_contact_successful_201() throws JsonProcessingException {
         Contact contactTemp = new Contact();
         contactTemp.setLastName("Account new Update");
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId())
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CONTACT_ID, contactEndToEndResponse.getId())
                 .body(new ObjectMapper().writeValueAsString(contactTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
         Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_NO_CONTENT);
@@ -62,8 +62,8 @@ public class ContactTest extends BaseTestContact{
 
     @Test(groups = {"createContact"})
     public void delete_contact_successful_204() throws JsonProcessingException{
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Contact/{contactId}")
-                .pathParams("contactId", contactEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CONTACT_ID, contactEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }

@@ -7,9 +7,10 @@ Feature: Objects
     Then the response status code should be "OK"
 
     Examples:
-      | SObject      |
+      | SObject     |
       | Account     |
       | Contact     |
       | Opportunity |
+      | Product2    |
 
 
