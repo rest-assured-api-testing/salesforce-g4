@@ -1,9 +1,14 @@
-import api.*;
+import api.ApiResponse;
+import api.ApiManager;
+import api.IBuilderApiRequest;
+import api.ApiRequestBuilder;
+import api.ApiRequest;
+import api.ApiMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.project.Product;
+import entities.product.Product;
 import entities.Token;
-import entities.project.ProductCreate;
+import entities.product.ProductCreate;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +18,7 @@ public class ProductTest {
     private String tokenUser;
     private ProductCreate productCreate;
 
-    public IBuilderApiResponse baseRequestProduct() {
+    public IBuilderApiRequest baseRequestProduct() {
         return new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization","Bearer " + tokenUser);
@@ -28,7 +33,7 @@ public class ProductTest {
     @BeforeMethod(onlyForGroups= "getProduct")
     public void createProduct() throws JsonProcessingException {
         Product product=new Product();
-        product.setName("Project-test");
+        product.setName("Product-test");
         ApiRequest apiRequest =  baseRequestProduct()
                 .endpoint(ParameterEndPoints.PRODUCT)
                 .body(new ObjectMapper().writeValueAsString(product))
@@ -40,8 +45,6 @@ public class ProductTest {
 
     @AfterMethod(onlyForGroups= "getProduct")
     public void cleanRepository() {
-        Product product=new Product();
-        product.setName("Project-test");
         ApiRequest apiRequest =  baseRequestProduct()
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
