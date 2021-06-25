@@ -37,7 +37,6 @@ public class BaseTestAccount {
                 .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
-
     @BeforeMethod(onlyForGroups = "createAccount")
     public void createdAccountBefore() throws JsonProcessingException {
         Account accountTemp = new Account("Account30");
