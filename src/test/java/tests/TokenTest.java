@@ -8,6 +8,7 @@
  *
  * @author Gustavo Zacarias Huanca Alconz
  */
+package tests;
 
 import api.ApiResponse;
 import api.ApiManager;

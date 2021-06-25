@@ -8,6 +8,7 @@
  *
  * @author Juan Pablo Gonzales Alvarado
  */
+package tests;
 
 import api.ApiResponse;
 import api.ApiRequestBuilder;
