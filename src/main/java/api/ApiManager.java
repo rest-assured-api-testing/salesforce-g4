@@ -3,6 +3,9 @@ package api;
 
 import generalsetting.ParameterEndPoints;
 import generalsetting.ParameterUser;
+import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -12,6 +15,7 @@ public class ApiManager {
     private static int status;
 
     public static ApiResponse execute(ApiRequest apiRequest) {
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         Response response = buildRequest(apiRequest)
                 .request(apiRequest.getMethod().name(),
                         apiRequest.getEndpoint());
@@ -29,6 +33,7 @@ public class ApiManager {
     }
 
     public static ApiResponse executeToken() {
+        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         Response response = given().urlEncodingEnabled(true)
                 .param(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
                 .param(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)

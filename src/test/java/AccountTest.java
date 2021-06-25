@@ -46,6 +46,7 @@ public class AccountTest extends BaseTestAccount {
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.ACCOUNT)
                 .body(new ObjectMapper().writeValueAsString(accountTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
+        response.getResponse().then().log().all();
         Assert.assertEquals(response.getStatusCode(),HttpStatus.SC_CREATED);
         accountEndToEndResponse = response.getBody(AccountResponse.class);
     }
