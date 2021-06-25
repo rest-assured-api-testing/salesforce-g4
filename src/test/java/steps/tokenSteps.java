@@ -22,7 +22,7 @@ public class tokenSteps {
     private ApiResponse apiResponse;
     private Token token;
 
-    @When("I execute toke request")
+    @When("I execute token request to get token bearer")
     public void iExecuteRequest(){
         apiResponse = ApiManager.executeToken();
         token=apiResponse.getBody(Token.class);
