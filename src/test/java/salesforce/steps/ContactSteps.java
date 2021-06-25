@@ -6,20 +6,21 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Gustavo Zacarias Huanca Alconz
+ * @author Juan Pablo Gonzales Alvarado
  */
 
-package steps;
+package salesforce.steps;
 
 import api.ApiResponse;
-import api.ApiManager;
 import api.ApiRequestBuilder;
+import api.ApiManager;
 import api.ApiRequest;
 import api.ApiMethod;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
-import entities.group.Group;
+import entities.contact.Contact;
+import entities.contact.ContactResponse;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -29,50 +30,48 @@ import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
 import org.testng.Assert;
 
-public class groupSteps {
+public class ContactSteps {
     private ApiRequest apiRequest = new ApiRequest();
     private ApiResponse apiResponse;
-    private Group group = new Group();
+    private ContactResponse contact = new ContactResponse();
     private String tokenUser;
 
-    @Before(value = " @CreateGroup")
+    @Before(value = " @CreateContact")
     public void generateToken() {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
     }
 
-    @Given("I build {string} request to create group with name {string} and visibility {string}")
-    public void iBuildRequestWithIDOfProjectWithName(String method, String name, String visibility) throws JsonProcessingException {
-        Group group=new Group();
-        group.setName(name);
-        group.setVisibility(visibility);
+    @Given("I create a contact with method {string} with name {string}")
+    public void iCreateContactWithMethodWithName(String method, String name) throws JsonProcessingException {
+        Contact contact = new Contact(name);
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + tokenUser);
-        apiRequest.setBody(new ObjectMapper().writeValueAsString(group));
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(contact));
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I execute {string} request to create a group")
-    public void iExecuteRequest(String endpoint) {
+    @When("^I execute \"([^\"]*)\" request to be create in a Contact$")
+    public void iExecuteRequestToBeCreateInContact(String endpoint) {
         apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
-        group = apiResponse.getBody(Group.class);
+        contact = apiResponse.getBody(ContactResponse.class);
     }
 
-    @Then("the response status code should be successful in order to be {string}")
-    public void theResponseStatusCodeShouldBe(String statusCode) {
+    @Then("^The response status code should be successful \"([^\"]*)\" with contact created$")
+    public void theResponseStatusCodeShouldBeWithContactCreated(String statusCode) {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_CREATED);
-        apiResponse.getResponse().then().log().body();
     }
 
-    @After(value = " @CreateGroup")
-    public void cleanRepository() {
+    @After(value = " @CreateContact")
+    public void deleteContact() {
         ApiRequest apiRequest =  new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization","Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
-                .pathParams(ParameterEndPoints.GROUP_ID,group.getId())
+                .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CONTACT_ID, contact.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }
 }

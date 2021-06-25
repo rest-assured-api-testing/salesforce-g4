@@ -8,7 +8,7 @@
  *
  * @author Juan Pablo Gonzales Alvarado
  */
-package steps;
+package salesforce.steps;
 
 import api.ApiResponse;
 import api.ApiRequestBuilder;

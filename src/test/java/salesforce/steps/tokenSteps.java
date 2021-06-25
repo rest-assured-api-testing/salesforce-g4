@@ -9,7 +9,7 @@
  * @author Gustavo Zacarias Huanca Alconz
  */
 
-package steps;
+package salesforce.steps;
 
 import api.ApiManager;
 import api.ApiResponse;
