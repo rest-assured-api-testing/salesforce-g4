@@ -33,5 +33,5 @@ Feature: SalesForces
 
   @GetToken
   Scenario: Get a token
-    When I execute toke request
+    When I execute token request to get token bearer
     Then The new token should be type "Bearer"

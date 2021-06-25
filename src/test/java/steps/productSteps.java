@@ -36,7 +36,7 @@ public class productSteps {
     private ProductCreate productCreate = new ProductCreate();
     private String tokenUser;
 
-    @Before(value = " @CreateProdcut")
+    @Before(value = "@CreateProduct")
     public void generateToken() {
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
@@ -65,7 +65,7 @@ public class productSteps {
         apiResponse.getResponse().then().log().body();
     }
 
-    @After(value = " @CreateProduct")
+    @After(value = "@CreateProduct")
     public void cleanRepository() {
         ApiRequest apiRequest =  new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
