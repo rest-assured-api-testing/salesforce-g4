@@ -8,6 +8,7 @@
  *
  * @author Juan Pablo Gonzales Alvarado
  */
+package tests;
 
 import api.ApiManager;
 import api.ApiMethod;
