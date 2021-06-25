@@ -33,15 +33,13 @@ public class BaseTestAccount {
     public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
         return new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASEO)
+                .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
-
     @BeforeMethod(onlyForGroups = "createAccount")
     public void createdAccountBefore() throws JsonProcessingException {
-        Account accountTemp = new Account();
-        accountTemp.setName("Account30");
+        Account accountTemp = new Account("Account30");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.ACCOUNT)
                 .body(new ObjectMapper().writeValueAsString(accountTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
@@ -51,8 +49,8 @@ public class BaseTestAccount {
 
     @AfterMethod(onlyForGroups = "deleteAccount")
     public void deleteAccountAfter() {
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Account/{accountId}")
-                .pathParams("accountId", accountEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.ACCOUNT_ID, accountEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }

@@ -34,11 +34,11 @@ public class GetAllSteps {
     protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
     protected AccountResponse accountEndToEndResponse= new AccountResponse();
 
-    @Before
+    @Before(value = "@GetAllObjects")
     public void setup(){
         apiResponse = ApiManager.executeToken();
         apiRequest = apiRequestBuilder
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(ParameterEndPoints.URL_BASE+ParameterEndPoints.SOBJECTS)
                 .headers("Authorization", "Bearer " + apiResponse.getBody(Token.class).getAccess_token())
                 .build();
     }

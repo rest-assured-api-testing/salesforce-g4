@@ -33,17 +33,14 @@ public class BaseTestOpportunity {
     public IBuilderApiRequest baseRequest() {
         ApiResponse response = ApiManager.executeToken();
         return new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASEO)
+                .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + response.getBody(Token.class).getAccess_token());
     }
 
 
     @BeforeMethod(onlyForGroups = "createOpportunity")
     public void createdContactBefore() throws JsonProcessingException {
-        Opportunity opportunityTemp = new Opportunity();
-        opportunityTemp.setName("Opportunity30");
-        opportunityTemp.setCloseDate("2021-06-21");
-        opportunityTemp.setStageName("CloseDate");
+        Opportunity opportunityTemp = new Opportunity("Opportunity30","2021-06-21","CloseDate");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.OPPORTUNITY)
                 .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
@@ -52,8 +49,8 @@ public class BaseTestOpportunity {
 
     @AfterMethod(onlyForGroups = "deleteOpportunity")
     public void deleteContactAfter() {
-        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint("/Opportunity/{opportunityId}")
-                .pathParams("opportunityId", opportunityEndToEndResponse.getId()).build();
+        ApiRequest apiRequest = baseRequest().method(ApiMethod.DELETE).endpoint(ParameterEndPoints.OPPORTUNITY_TO_INTERACT)
+                .pathParams(ParameterEndPoints.OPPORTUNITY_ID, opportunityEndToEndResponse.getId()).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }
