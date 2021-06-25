@@ -9,25 +9,20 @@
  * @author Juan Pablo Gonzales Alvarado
  */
 
-package steps;
+package salesforce.steps;
 
-import api.ApiResponse;
-import api.ApiRequestBuilder;
-import api.ApiManager;
-import api.ApiRequest;
-import api.ApiMethod;
+import api.*;
 import entities.Token;
-import entities.account.AccountResponse;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.http.HttpStatus;
-import org.apache.log4j.Logger;
 import org.testng.Assert;
+import org.testng.log4testng.Logger;
 
-public class GetAllSteps {
+public class getAllTypeObject {
     private Logger log = Logger.getLogger(getClass());
 
     private ApiResponse apiResponse;
@@ -35,31 +30,32 @@ public class GetAllSteps {
     protected ApiRequest apiRequest = new ApiRequest();
     protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
 
-    @Before(value = "@GetAllObjects")
-    public void setup(){
+    @Before(value = "@GetAll")
+    public void setup() {
         log.info("I setup the token nad base URL");
         apiResponse = ApiManager.executeToken();
         apiRequest = apiRequestBuilder
-                .baseUri(ParameterEndPoints.URL_BASE+ParameterEndPoints.SOBJECTS)
+                .baseUri(ParameterEndPoints.URL_BASE + ParameterEndPoints.SOBJECTS)
                 .headers("Authorization", "Bearer " + apiResponse.getBody(Token.class).getAccess_token())
                 .build();
     }
 
-    @Given("^I build \"([^\"]*)\" request$")
-    public void i_build_something_request(String method) {
+    @Given("I build {string} request.")
+    public void iBuildRequest(String method) {
         log.info("I build the request");
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("^I execute (.+) request$")
-    public void i_execute_request(String sobject) {
+    @When("^I execute (.+) request.$")
+    public void iExecuteSObjectRequest(String sobject) {
+        System.out.println(sobject);
         log.info("I execute the request");
         apiRequest.setEndpoint(sobject);
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @Then("^the response status code should be \"([^\"]*)\"$")
-    public void the_response_status_code_should_be_something(String strArg1) {
+    @Then("the response status code should be {string}.")
+    public void theResponseStatusCodeShouldBe(String arg0) {
         log.info("I execute the request");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_OK);
     }
