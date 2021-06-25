@@ -27,7 +27,6 @@ import org.apache.http.HttpStatus;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 
-
 public class GetAllSteps {
     private Logger log = Logger.getLogger(getClass());
 
