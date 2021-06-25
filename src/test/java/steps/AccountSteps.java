@@ -29,8 +29,7 @@ public class AccountSteps {
     }
     @Given("^I create a product with method \"([^\"]*)\"  with name \"([^\"]*)\"$")
     public void iCreateAProductWithMethodSomethingWithNameSomething(String method, String name)throws JsonProcessingException {
-        Account accountTemp =new Account();
-        accountTemp .setName(name);
+        Account accountTemp =new Account(name);
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + tokenUser);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(accountTemp ));

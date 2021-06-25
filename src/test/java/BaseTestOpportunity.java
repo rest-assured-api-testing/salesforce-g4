@@ -40,10 +40,7 @@ public class BaseTestOpportunity {
 
     @BeforeMethod(onlyForGroups = "createOpportunity")
     public void createdContactBefore() throws JsonProcessingException {
-        Opportunity opportunityTemp = new Opportunity();
-        opportunityTemp.setName("Opportunity30");
-        opportunityTemp.setCloseDate("2021-06-21");
-        opportunityTemp.setStageName("CloseDate");
+        Opportunity opportunityTemp = new Opportunity("Opportunity30","2021-06-21","CloseDate");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.OPPORTUNITY)
                 .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);

@@ -33,8 +33,7 @@ public class OpportunitySteps {
 
     @Given("I create a opportunity with method {string}  with name {string}")
     public void iCreateOpportunityWithMethodSomethingWithNameSomething(String method, String name) throws JsonProcessingException {
-        Opportunity opportunityTemp = new Opportunity();
-        opportunityTemp.setName(name);
+        Opportunity opportunityTemp = new Opportunity("Opportunity90","2021-06-21","CloseDate");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + tokenUser);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(opportunityTemp));

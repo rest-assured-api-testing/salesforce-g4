@@ -40,10 +40,7 @@ public class OpportunityTest extends BaseTestOpportunity{
 
     @Test(groups = {"deleteOpportunity"})
     public void create_contact_successful_200() throws JsonProcessingException {
-        Opportunity opportunityTemp = new Opportunity();
-        opportunityTemp.setName("Opportunity40");
-        opportunityTemp.setCloseDate("2021-06-21");
-        opportunityTemp.setStageName("CloseDate");
+        Opportunity opportunityTemp = new Opportunity("Opportunity40","2021-06-21","CloseDate");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.OPPORTUNITY)
                 .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
@@ -53,8 +50,7 @@ public class OpportunityTest extends BaseTestOpportunity{
 
     @Test(groups = {"createOpportunity","deleteOpportunity"})
     public void update_contact_successful_201() throws JsonProcessingException {
-        Opportunity opportunityTemp = new Opportunity();
-        opportunityTemp.setName("Opportunity Update");
+        Opportunity opportunityTemp = new Opportunity("Opportunity Update","2021-06-21","CloseDate");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.PATCH).endpoint(ParameterEndPoints.OPPORTUNITY_TO_INTERACT)
                 .pathParams(ParameterEndPoints.OPPORTUNITY_ID, opportunityEndToEndResponse.getId())
                 .body(new ObjectMapper().writeValueAsString(opportunityTemp)).build();

@@ -40,8 +40,7 @@ public class BaseTestContact {
 
     @BeforeMethod(onlyForGroups = "createContact")
     public void createdContactBefore() throws JsonProcessingException {
-        Contact contactTemp = new Contact();
-        contactTemp.setLastName("Contact30");
+        Contact contactTemp = new Contact("Contact30");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.CONTACT)
                 .body(new ObjectMapper().writeValueAsString(contactTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);

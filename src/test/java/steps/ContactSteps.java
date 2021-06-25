@@ -29,8 +29,7 @@ public class ContactSteps {
 
     @Given("I create a contact with method {string} with name {string}")
     public void iCreateContactWithMethodWithName(String method, String name) throws JsonProcessingException {
-        Contact contact = new Contact();
-        contact.setName(name);
+        Contact contact = new Contact(name);
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + tokenUser);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(contact));

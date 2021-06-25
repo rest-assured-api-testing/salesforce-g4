@@ -41,8 +41,7 @@ public class AccountTest extends BaseTestAccount {
 
     @Test(groups = {"deleteAccount"})
     public void createProjectWithStatusCode200() throws JsonProcessingException{
-        Account accountTemp = new Account();
-        accountTemp.setName("Account41");
+        Account accountTemp = new Account("Account41");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.ACCOUNT)
                 .body(new ObjectMapper().writeValueAsString(accountTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);

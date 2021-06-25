@@ -40,8 +40,7 @@ public class BaseTestAccount {
 
     @BeforeMethod(onlyForGroups = "createAccount")
     public void createdAccountBefore() throws JsonProcessingException {
-        Account accountTemp = new Account();
-        accountTemp.setName("Account30");
+        Account accountTemp = new Account("Account30");
         ApiRequest apiRequest = baseRequest().method(ApiMethod.POST).endpoint(ParameterEndPoints.ACCOUNT)
                 .body(new ObjectMapper().writeValueAsString(accountTemp)).build();
         ApiResponse response = ApiManager.execute(apiRequest);
