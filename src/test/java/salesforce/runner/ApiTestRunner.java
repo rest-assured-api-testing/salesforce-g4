@@ -14,11 +14,6 @@ import org.testng.annotations.BeforeTest;
  * @author Juan Pablo Gonzales Alvarado
  */
 
-//@CucumberOptions(
-//        features = "src/test/resources/features",
-//        glue = ("steps")
-//)
-//@Test
 public class ApiTestRunner extends AbstractTestNGCucumberTests {
     @BeforeTest
     public void beforeExecution(){

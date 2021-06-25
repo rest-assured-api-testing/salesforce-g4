@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales Alvarado
+ */
+
 package salesforce.steps;
 
 import api.*;
@@ -19,12 +30,12 @@ public class getAllTypeObject {
     protected ApiRequest apiRequest = new ApiRequest();
     protected ApiRequestBuilder apiRequestBuilder = new ApiRequestBuilder();
 
-    @Before(value ="@GetAll")
-    public void setup(){
+    @Before(value = "@GetAll")
+    public void setup() {
         log.info("I setup the token nad base URL");
         apiResponse = ApiManager.executeToken();
         apiRequest = apiRequestBuilder
-                .baseUri(ParameterEndPoints.URL_BASE+ParameterEndPoints.SOBJECTS)
+                .baseUri(ParameterEndPoints.URL_BASE + ParameterEndPoints.SOBJECTS)
                 .headers("Authorization", "Bearer " + apiResponse.getBody(Token.class).getAccess_token())
                 .build();
     }

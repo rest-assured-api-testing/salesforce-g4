@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
+
 package salesforce.steps;
 
 import api.ApiManager;
@@ -5,8 +16,6 @@ import api.ApiMethod;
 import api.ApiRequest;
 import api.ApiResponse;
 import entities.ObjectInformation;
-import entities.Token;
-import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -19,21 +28,12 @@ public class GetObject {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiResponse apiResponse;
-    private String tokenUser;
-    private String idObject;
-    private ProductCreate productCreate;
-    private Token token;
     private ObjectInformation objectInformation;
 
-//    public GetObject(Token token, ProductCreate productCreate) {
-//        log.info("GetObject constructor");
-//        this.token = token;
-//        this.productCreate=productCreate;
-//    }
 
     public GetObject(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
-        this.objectInformation=objectInformation;
+        this.objectInformation = objectInformation;
     }
 
 
