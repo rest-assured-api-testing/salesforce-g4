@@ -53,20 +53,20 @@ public class AccountGeneralSteps {
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I use endpoint {string} request to object with {string}")
-    public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
+    @When("I use endpoint {string} request to account with {string}")
+    public void iUseEndpointRequestToAccountWith(String endpoint, String keyPath) {
         log.info("I build account endpoint the request");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, objectInformation.getId());
     }
 
-    @And("I execute the request")
-    public void iExecuteTheRequest() {
+    @And("I execute the request account")
+    public void iExecuteTheRequestAccount() {
         log.info("I execute the Account request");
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @When("I use endpoint {string} request to with name {string}")
+    @When("I use endpoint {string} request to account with name {string}")
     public void iUseEndpointRequestToObjectWithName(String endpoint, String name) throws JsonProcessingException {
         log.info("I execute the request Account post");
         Account accountCreate = new Account(name);
@@ -77,7 +77,7 @@ public class AccountGeneralSteps {
         objectInformation.setIdDelete(accountResponse.getId());
     }
 
-    @And("I update the {string} to {string}")
+    @And("I update account {string} to {string}")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
         log.info("I update the Account");
         Account accountCreate = new Account();
@@ -86,7 +86,7 @@ public class AccountGeneralSteps {
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @Then("the response status code should be {string} to product")
+    @Then("the response status code should be {string} to account")
     public void theResponseStatusCodeShouldBeToProduct(String statusCode) {
         log.info("I verify status Account response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
