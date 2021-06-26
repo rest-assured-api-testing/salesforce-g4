@@ -7,6 +7,18 @@ Feature: Endpoint Account
     And I execute the request account
     Then the response status code should be "OK" to account
 
+  @GetAccount
+  Scenario Outline: GET to account fail
+    Given I build "GET" request to account
+    When I use endpoint "sobjects/Account/{accountId}" request to account with fail <badId>
+    And I execute the request account fail
+    Then the response status code should be <status> to account
+    Examples:
+      | badId |status|
+      | 12341415 | 404 |
+      |  | 200|
+
+
   @PostAccount
   Scenario: POST to account
     Given I build "POST" request to account

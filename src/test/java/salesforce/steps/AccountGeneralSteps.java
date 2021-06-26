@@ -90,4 +90,16 @@ public class AccountGeneralSteps {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
     }
+
+    @When("I use endpoint {string} request to account with fail <badId>")
+    public void iUseEndpointRequestToAccountWithFailBadId(String badId) {
+    }
+
+    @And("I execute the request account fail")
+    public void iExecuteTheRequestAccountFail() {
+    }
+
+    @Then("the response status code should be <status> to account")
+    public void theResponseStatusCodeShouldBeStatusToAccount() {
+    }
 }
