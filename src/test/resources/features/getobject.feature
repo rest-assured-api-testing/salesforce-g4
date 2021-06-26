@@ -10,6 +10,6 @@
    @GetAccount
    Scenario: Get a account
      Given I build "GET" request to any object
-     When I execute "sobjects/Product2/{productId}" request to object with "productId"
+     When I execute "sobjects/Account/{accountId}" request to object with "accountId"
      Then the response status code should be "OK" to object
 
