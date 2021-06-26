@@ -3,6 +3,7 @@ package entities;
 public class ObjectInformation {
     private String token;
     private String id;
+    private String idDelete;
 
     public String getToken() {
         return token;
@@ -18,5 +19,13 @@ public class ObjectInformation {
 
     public void setId(final String id) {
         this.id = id;
+    }
+
+    public String getIdDelete() {
+        return idDelete;
+    }
+
+    public void setIdDelete(final String idDelete) {
+        this.idDelete = idDelete;
     }
 }
