@@ -17,8 +17,6 @@ public class productHooks {
     private String tokenUser;
     private ProductCreate productCreate;
     private ObjectInformation objectInformation =new ObjectInformation();
-    private IBuilderApiRequest apiRequestBuild;
-
 
     public productHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
