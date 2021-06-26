@@ -4,6 +4,7 @@ Feature: Endpoint Product
   Scenario: GET to product
     Given I build "GET" request to product
     When I use endpoint "sobjects/Product2/{productId}" request to object with "productId"
+    And I execute the request
     Then the response status code should be "OK" to product
 
   @PostProduct
@@ -16,4 +17,12 @@ Feature: Endpoint Product
   Scenario: POST to product
     Given I build "DELETE" request to product
     When I use endpoint "sobjects/Product2/{productId}" request to object with "productId"
+    And I execute the request
+    Then the response status code should be "NO_CONTENT" to product
+
+  @PathProduct
+  Scenario: POST to product
+    Given I build "PATCH" request to product
+    When I use endpoint "sobjects/Product2/{productId}" request to object with "productId"
+    And I update the "description" to "change description"
     Then the response status code should be "NO_CONTENT" to product

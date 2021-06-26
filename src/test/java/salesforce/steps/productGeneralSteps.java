@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
 import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -20,6 +21,7 @@ import entities.product.Product;
 public class productGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
+    private ApiRequest apiRequestPatch = new ApiRequest();
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
     private ProductCreate productCreate;
@@ -30,7 +32,7 @@ public class productGeneralSteps {
     }
 
 
-    @Given("^I build \"(POST|GET|DELETE)\" request to product$")
+    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to product$")
     public void iBuildRequestToProduct(String method) {
         log.info("I build the request");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
@@ -40,11 +42,15 @@ public class productGeneralSteps {
 
     @When("I use endpoint {string} request to object with {string}")
     public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
-        log.info("I execute the request");
+        log.info("I build endpoint the request");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, objectInformation.getId());
+    }
+
+    @And("I execute the request")
+    public void iExecuteTheRequest() {
+        log.info("I execute the request");
         apiResponse = ApiManager.execute(apiRequest);
-        ApiManager.execute(apiRequest);
     }
 
     @When("I use endpoint {string} request to with name {string}")
@@ -58,6 +64,15 @@ public class productGeneralSteps {
         apiResponse = ApiManager.execute(apiRequest);
         productCreate=apiResponse.getBody(ProductCreate.class);
         objectInformation.setIdDelete(productCreate.getId());
+    }
+
+    @And("I update the {string} to {string}")
+    public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
+        log.info("I update the product");
+        Product projectCreate = new Product();
+        projectCreate.setDescription(updateDate);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
+        apiResponse = ApiManager.execute(apiRequest);
     }
 
     @Then("the response status code should be {string} to product")
