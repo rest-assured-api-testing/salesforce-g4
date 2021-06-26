@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Gustavo Zacarias Huanca Alconz
+ * @author Juan Pablo Gonzales Alvarado
  */
 
 package salesforce.steps;
@@ -18,7 +18,8 @@ import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
-import entities.product.ProductCreate;
+import entities.account.Account;
+import entities.account.AccountResponse;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -27,66 +28,63 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
-import entities.product.Product;
-import static utilities.JsonFormat.jsonConvert;
 
-public class productGeneralSteps {
+public class AccountGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
-    private ApiRequest apiRequestPatch = new ApiRequest();
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
-    private ProductCreate productCreate;
+    private AccountResponse accountResponse;
 
-    public productGeneralSteps(ObjectInformation objectInformation) {
-        log.info("GetObject constructor");
+    public AccountGeneralSteps(ObjectInformation objectInformation) {
+        log.info("GetObjectAccount constructor");
         this.objectInformation = objectInformation;
     }
 
-    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to product$")
-    public void iBuildRequestToProduct(String method) {
-        log.info("I build the request");
+    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to account$")
+    public void iBuildRequestToAccount(String method) {
+        log.info("I build the request for account");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I use endpoint {string} request to object with {string}")
-    public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
-        log.info("I build endpoint the request");
+    @When("I use endpoint {string} request to account with {string}")
+    public void iUseEndpointRequestToAccountWith(String endpoint, String keyPath) {
+        log.info("I build account endpoint the request");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, objectInformation.getId());
     }
 
-    @And("I execute the request")
-    public void iExecuteTheRequest() {
-        log.info("I execute the request");
+    @And("I execute the request account")
+    public void iExecuteTheRequestAccount() {
+        log.info("I execute the Account request");
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @When("I use endpoint {string} request to with name {string}")
+    @When("I use endpoint {string} request to account with name {string}")
     public void iUseEndpointRequestToObjectWithName(String endpoint, String name) throws JsonProcessingException {
-        log.info("I execute the request post");
-        Product projectCreate = new Product();
-        projectCreate.setName(name);
+        log.info("I execute the request Account post");
+        Account accountCreate = new Account(name);
         apiRequest.setEndpoint(endpoint);
-        apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(accountCreate));
         apiResponse = ApiManager.execute(apiRequest);
-        productCreate=apiResponse.getBody(ProductCreate.class);
-        objectInformation.setIdDelete(productCreate.getId());
+        accountResponse=apiResponse.getBody(AccountResponse.class);
+        objectInformation.setIdDelete(accountResponse.getId());
     }
 
-    @And("^I update the (.+) to (.+)$")
+    @And("I update account {string} to {string}")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
-        log.info("I update the product");
-
-        apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
+        log.info("I update the Account");
+        Account accountCreate = new Account();
+        accountCreate.setDescription(updateDate);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(accountCreate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @Then("the response status code should be {string} to product")
+    @Then("the response status code should be {string} to account")
     public void theResponseStatusCodeShouldBeToProduct(String statusCode) {
-        log.info("I verify status response");
+        log.info("I verify status Account response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
     }

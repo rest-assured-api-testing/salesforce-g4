@@ -1,4 +1,4 @@
-Feature: Requests for get endpoint to object
+ Feature: Requests for get endpoint to object
   description
 
   @GetObject
@@ -6,3 +6,10 @@ Feature: Requests for get endpoint to object
     Given I build "GET" request to any object
     When I execute "sobjects/Product2/{productId}" request to object with "productId"
     Then the response status code should be "OK" to object
+
+   @GetAccount
+   Scenario: Get a account
+     Given I build "GET" request to any object
+     When I execute "sobjects/Account/{accountId}" request to object with "accountId"
+     Then the response status code should be "OK" to object
+

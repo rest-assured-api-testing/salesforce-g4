@@ -35,7 +35,7 @@ task executeFeatures(type: Test) {
     options {
         useDefaultListeners = false
         jvmArgs = ['-Dcucumber.glue=salesforce']
-        jvmArgs = ['-Dcucumber.features=src/test/resources/features/getobject.feature']
+        jvmArgs = ['-Dcucumber.features=src/test/resources/features/']
         jvmArgs = ['-Dcucumber.plugin=pretty,' +
                            'html:build/cucumber/cucumber-report.html,' +
                            'json:build/cucumber/cucumber.json,' +

@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Gustavo Zacarias Huanca Alconz
+ * @author Juan Pablo Gonzales Alvarado
  */
 
 package salesforce.steps;
@@ -18,7 +18,8 @@ import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
-import entities.product.ProductCreate;
+import entities.contact.Contact;
+import entities.contact.ContactResponse;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -27,66 +28,63 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
-import entities.product.Product;
-import static utilities.JsonFormat.jsonConvert;
 
-public class productGeneralSteps {
+public class ContactGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiRequest apiRequestPatch = new ApiRequest();
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
-    private ProductCreate productCreate;
+    private ContactResponse contactResponse;
 
-    public productGeneralSteps(ObjectInformation objectInformation) {
+    public ContactGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }
 
-    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to product$")
-    public void iBuildRequestToProduct(String method) {
-        log.info("I build the request");
+    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to contact")
+    public void iBuildRequestToContact(String method) {
+        log.info("I build the request for contact");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I use endpoint {string} request to object with {string}")
-    public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
-        log.info("I build endpoint the request");
+    @When("I use endpoint {string} request to contact with {string}")
+    public void iUseEndpointRequestToContactWith(String endpoint, String keyPath) {
+        log.info("I build contact endpoint the request");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, objectInformation.getId());
     }
 
-    @And("I execute the request")
-    public void iExecuteTheRequest() {
-        log.info("I execute the request");
+    @And("I execute the request contact")
+    public void iExecuteTheRequestContact() {
+        log.info("I execute the Contact request");
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @When("I use endpoint {string} request to with name {string}")
-    public void iUseEndpointRequestToObjectWithName(String endpoint, String name) throws JsonProcessingException {
-        log.info("I execute the request post");
-        Product projectCreate = new Product();
-        projectCreate.setName(name);
+    @When("I use endpoint {string} request to contact with name {string}")
+    public void iUseEndpointRequestToContactWithName(String endpoint, String name) throws JsonProcessingException {
+        log.info("I execute the request Contact post");
+        Contact contactCreate = new Contact(name);
         apiRequest.setEndpoint(endpoint);
-        apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(contactCreate));
         apiResponse = ApiManager.execute(apiRequest);
-        productCreate=apiResponse.getBody(ProductCreate.class);
-        objectInformation.setIdDelete(productCreate.getId());
+        contactResponse=apiResponse.getBody(ContactResponse.class);
+        objectInformation.setIdDelete(contactResponse.getId());
     }
 
-    @And("^I update the (.+) to (.+)$")
-    public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
-        log.info("I update the product");
-
-        apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
+    @And("I update contact {string} to {string}")
+    public void iUpdateContactTheTo(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
+        log.info("I update the Contact");
+        Contact contactCreate = new Contact(updateLastNme);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(contactCreate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @Then("the response status code should be {string} to product")
-    public void theResponseStatusCodeShouldBeToProduct(String statusCode) {
-        log.info("I verify status response");
+    @Then("the response status code should be {string} to contact")
+    public void theResponseStatusCodeShouldBeToContact(String statusCode) {
+        log.info("I verify status Contact response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
     }

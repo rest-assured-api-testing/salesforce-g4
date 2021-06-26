@@ -11,14 +11,17 @@
 
 package salesforce.steps;
 
-import api.*;
+import api.ApiManager;
+import api.ApiMethod;
+import api.ApiRequest;
+import api.ApiResponse;
+import api.ApiRequestBuilder;
 import entities.Token;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.log4testng.Logger;
 
@@ -40,23 +43,23 @@ public class getAllTypeObject {
                 .build();
     }
 
-    @Given("I build {string} request.")
-    public void iBuildRequest(String method) {
-        log.info("I build the request");
+    @Given("I form a {string} request")
+    public void iFormARequest(String method) {
+        log.info("I form the request");
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("^I execute (.+) request.$")
-    public void iExecuteSObjectRequest(String sobject) {
-        System.out.println(sobject);
-        log.info("I execute the request");
-        apiRequest.setEndpoint(sobject);
+    @When("^I execute request to (.+)$")
+    public void iExecuteRequestObject(String object) {
+        System.out.println(object);
+        log.info("I execute request object");
+        apiRequest.setEndpoint(object);
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @Then("the response status code should be {string}.")
-    public void theResponseStatusCodeShouldBe(String arg0) {
-        log.info("I execute the request");
-        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_OK);
+    @Then("^the status response should be (.+)$")
+    public void theStatusResponseShouldBeResult(String result) {
+        log.info("The status code is "+result);
+        Assert.assertEquals(apiResponse.getStatusCode(), Integer.parseInt(result));
     }
 }
