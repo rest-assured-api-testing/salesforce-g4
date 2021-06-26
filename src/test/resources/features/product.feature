@@ -20,7 +20,7 @@ Feature: Endpoint Product
     And I execute the request
     Then the response status code should be "NO_CONTENT" to product
 
-  @PathProduct
+  @PatchProduct
   Scenario: POST to product
     Given I build "PATCH" request to product
     When I use endpoint "sobjects/Product2/{productId}" request to object with "productId"

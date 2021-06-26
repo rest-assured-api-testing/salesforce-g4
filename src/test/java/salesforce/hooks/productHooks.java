@@ -38,7 +38,7 @@ public class productHooks {
         this.objectInformation = objectInformation;
     }
 
-    @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PathProduct", order = 1)
+    @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
     public void generateToken() {
         log.info("Generate Token");
         ApiResponse apiResponse = ApiManager.executeToken();
@@ -46,7 +46,7 @@ public class productHooks {
         objectInformation.setToken(tokenUser);
     }
 
-    @Before(value = "@GetProduct or @DeleteProduct or @PathProduct", order = 2)
+    @Before(value = "@GetProduct or @DeleteProduct or @PatchProduct", order = 2)
     public void createProduct() throws JsonProcessingException {
         log.info("Create Product");
         Product product = new Product();
@@ -62,7 +62,7 @@ public class productHooks {
         objectInformation.setId(productCreate.getId());
     }
 
-    @After(value = "@GetProduct or @PathProduct")
+    @After(value = "@GetProduct or @PatchProduct")
     public void cleanRepository() {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
