@@ -11,14 +11,17 @@
 
 package salesforce.steps;
 
-import api.*;
+import api.ApiManager;
+import api.ApiMethod;
+import api.ApiRequest;
+import api.ApiResponse;
+import api.ApiRequestBuilder;
 import entities.Token;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.http.HttpStatus;
 import org.testng.Assert;
 import org.testng.log4testng.Logger;
 

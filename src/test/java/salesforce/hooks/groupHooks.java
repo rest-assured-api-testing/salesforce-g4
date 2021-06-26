@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Juan Pablo Gonzales Alvarado
+ * @author Gustavo Zacarias Huanca Alconz
  */
 
 package salesforce.hooks;
@@ -20,68 +20,68 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
 import entities.Token;
-import entities.contact.Contact;
-import entities.contact.ContactResponse;
+import entities.group.Group;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
 
-public class ContactHooks {
-
+public class groupHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
-    private ContactResponse contactResponse;
-    private ObjectInformation objectInformation =new ObjectInformation();
+    private Group groupCreate;
+    private ObjectInformation objectInformation = new ObjectInformation();
 
-    public ContactHooks(ObjectInformation objectInformation) {
-        log.info("ContactHooks constructor");
-        this.objectInformation=objectInformation;
+    public groupHooks(ObjectInformation objectInformation) {
+        log.info("ScenariosHooks constructor");
+        this.objectInformation = objectInformation;
     }
 
-    @Before(value = "@GetContact or @PostContact or @DeleteContact or @PatchContact ", order = 1)
+    @Before(value = "@GetGroup or @PostGroup or @DeleteGroup or @PatchGroup", order = 1)
     public void generateToken() {
-        log.info("Generate Token Contact");
+        log.info("Generate Token");
         ApiResponse apiResponse = ApiManager.executeToken();
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
         objectInformation.setToken(tokenUser);
     }
 
-    @Before(value = "@GetContact or @DeleteContact or @PatchContact", order = 2)
-    public void createAccountHooks() throws JsonProcessingException {
-        log.info("Create Contact");
-        Contact contact = new Contact("contact test");
+    @Before(value = "@GetGroup or @DeleteGroup or @PatchGroup", order = 2)
+    public void createProduct() throws JsonProcessingException {
+        log.info("Create Group");
+        Group group=new Group();
+        group.setName("group-test-created");
+        group.setVisibility("PublicAccess");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.CONTACT)
-                .body(new ObjectMapper().writeValueAsString(contact))
+                .endpoint(ParameterEndPoints.GROUP)
+                .body(new ObjectMapper().writeValueAsString(group))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
-        contactResponse = apiResponse.getBody(ContactResponse.class);
-        objectInformation.setId(contactResponse.getId());
+        groupCreate = apiResponse.getBody(Group.class);
+        objectInformation.setId(groupCreate.getId());
     }
 
-    @After(value = "@GetContact or @PatchContact")
-    public void deleteContactHooks() {
-        log.info("Delete Contact Post");
+    @After(value = "@GetGroup or @PatchGroup")
+    public void cleanRepository() {
+        log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.CONTACT_ID, contactResponse.getId())
+                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
+                .pathParams(ParameterEndPoints.GROUP_ID, groupCreate.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @After(value = "@PostContact")
+    @After(value = "@PostGroup")
     public void cleanRepositoryPost() {
-        log.info("Delete Contact Post");
+        log.info("Delete Product Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.CONTACT_ID, objectInformation.getIdDelete())
+                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
+                .pathParams(ParameterEndPoints.GROUP_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

@@ -39,7 +39,6 @@ public class OpportunityHooks {
         this.objectInformation=objectInformation;
     }
 
-
     @Before(value = "@GetOpportunity or @PostOpportunity or @DeleteOpportunity or @PatchOpportunity ", order = 1)
     public void generateToken() {
         log.info("Generate Token Opportunity");

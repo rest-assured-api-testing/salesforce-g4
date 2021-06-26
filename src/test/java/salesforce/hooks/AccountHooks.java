@@ -18,7 +18,6 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import entities.ObjectInformation;
 import entities.Token;
 import entities.account.Account;
@@ -39,7 +38,6 @@ public class AccountHooks {
         log.info("AccountHooks constructor");
         this.objectInformation=objectInformation;
     }
-
 
     @Before(value = "@GetAccount or @PostAccount or @DeleteAccount or @PatchAccount ", order = 1)
     public void generateToken() {

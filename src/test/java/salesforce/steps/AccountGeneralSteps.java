@@ -29,7 +29,6 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 
-
 public class AccountGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
@@ -41,7 +40,6 @@ public class AccountGeneralSteps {
         log.info("GetObjectAccount constructor");
         this.objectInformation = objectInformation;
     }
-
 
     @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to account$")
     public void iBuildRequestToAccount(String method) {

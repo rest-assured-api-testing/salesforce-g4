@@ -29,7 +29,6 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 
-
 public class ContactGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
@@ -42,7 +41,6 @@ public class ContactGeneralSteps {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }
-
 
     @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to contact")
     public void iBuildRequestToContact(String method) {
@@ -90,6 +88,4 @@ public class ContactGeneralSteps {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
     }
-
-
 }
