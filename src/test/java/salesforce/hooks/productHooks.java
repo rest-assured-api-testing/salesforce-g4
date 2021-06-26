@@ -1,6 +1,21 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
+
 package salesforce.hooks;
 
-import api.*;
+import api.ApiManager;
+import api.ApiMethod;
+import api.ApiRequest;
+import api.ApiResponse;
+import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
@@ -16,11 +31,11 @@ public class productHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
     private ProductCreate productCreate;
-    private ObjectInformation objectInformation =new ObjectInformation();
+    private ObjectInformation objectInformation = new ObjectInformation();
 
     public productHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
-        this.objectInformation=objectInformation;
+        this.objectInformation = objectInformation;
     }
 
     @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PathProduct", order = 1)

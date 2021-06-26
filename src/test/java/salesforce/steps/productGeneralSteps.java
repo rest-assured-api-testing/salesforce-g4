@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
+
 package salesforce.steps;
 
 import api.ApiManager;
@@ -67,7 +78,7 @@ public class productGeneralSteps {
         objectInformation.setIdDelete(productCreate.getId());
     }
 
-    @And("I update the {string} to {string}")
+    @And("^I update the (.+) to (.+)$")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
         log.info("I update the product");
 
