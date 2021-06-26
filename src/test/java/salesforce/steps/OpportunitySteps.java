@@ -42,8 +42,6 @@ public class OpportunitySteps {
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
     }
 
-
-
     @Given("I create a opportunity with method {string}  with name {string}")
     public void iCreateOpportunityWithMethodSomethingWithNameSomething(String method, String name) throws JsonProcessingException {
         Opportunity opportunityTemp = new Opportunity("Opportunity90","2021-06-21","CloseDate");
@@ -77,6 +75,4 @@ public class OpportunitySteps {
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.SC_NO_CONTENT);
     }
-
-
 }

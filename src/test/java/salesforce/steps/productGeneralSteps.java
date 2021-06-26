@@ -28,7 +28,6 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import entities.product.Product;
-
 import static utilities.JsonFormat.jsonConvert;
 
 public class productGeneralSteps {
@@ -43,7 +42,6 @@ public class productGeneralSteps {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }
-
 
     @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to product$")
     public void iBuildRequestToProduct(String method) {
