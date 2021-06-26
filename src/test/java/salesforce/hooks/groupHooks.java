@@ -20,25 +20,24 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
 import entities.Token;
-import entities.product.Product;
-import entities.product.ProductCreate;
+import entities.group.Group;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
 
-public class productHooks {
+public class groupHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
-    private ProductCreate productCreate;
+    private Group groupCreate;
     private ObjectInformation objectInformation = new ObjectInformation();
 
-    public productHooks(ObjectInformation objectInformation) {
+    public groupHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
         this.objectInformation = objectInformation;
     }
 
-    @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
+    @Before(value = "@GetGroup or @PostGroup or @DeleteGroup or @PatchGroup", order = 1)
     public void generateToken() {
         log.info("Generate Token");
         ApiResponse apiResponse = ApiManager.executeToken();
@@ -46,42 +45,43 @@ public class productHooks {
         objectInformation.setToken(tokenUser);
     }
 
-    @Before(value = "@GetProduct or @DeleteProduct or @PatchProduct", order = 2)
+    @Before(value = "@GetGroup or @DeleteGroup or @PatchGroup", order = 2)
     public void createProduct() throws JsonProcessingException {
-        log.info("Create Product");
-        Product product = new Product();
-        product.setName("Product-test");
+        log.info("Create Group");
+        Group group=new Group();
+        group.setName("group-test-created");
+        group.setVisibility("PublicAccess");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT)
-                .body(new ObjectMapper().writeValueAsString(product))
+                .endpoint(ParameterEndPoints.GROUP)
+                .body(new ObjectMapper().writeValueAsString(group))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
-        productCreate = apiResponse.getBody(ProductCreate.class);
-        objectInformation.setId(productCreate.getId());
+        groupCreate = apiResponse.getBody(Group.class);
+        objectInformation.setId(groupCreate.getId());
     }
 
-    @After(value = "@GetProduct or @PatchProduct")
+    @After(value = "@GetGroup or @PatchGroup")
     public void cleanRepository() {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
+                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
+                .pathParams(ParameterEndPoints.GROUP_ID, groupCreate.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @After(value = "@PostProduct")
+    @After(value = "@PostGroup")
     public void cleanRepositoryPost() {
         log.info("Delete Product Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, objectInformation.getIdDelete())
+                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
+                .pathParams(ParameterEndPoints.GROUP_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

@@ -20,19 +20,21 @@ Feature: Endpoint Product
     And I execute the request
     Then the response status code should be "NO_CONTENT" to product
 
-  @PathProduct
-  Scenario: POST to product
+  @PatchProduct
+  Scenario Outline: POST to product
     Given I build "PATCH" request to product
     When I use endpoint "sobjects/Product2/{productId}" request to object with "productId"
     And I update the <parameterToUpdate> to <updateDate>
     Then the response status code should be "NO_CONTENT" to product
 
     Examples:
-      | parameterToUpdate |updateDate|
-      | description | change description |
-      | name | change name |
-      | name | 1010352 |
-      | IsActive | true    |
-      | IsActive | false    |
-      | ProductCode | 54as984re |
-      | ProductCode | 984038 |
+      | parameterToUpdate | updateDate         |
+      | description       | change description |
+      | name              | change name        |
+      | name              | 1010352            |
+      | IsActive          | true               |
+      | IsActive          | false              |
+      | ProductCode       | 54as984re          |
+      | ProductCode       | 984038             |
+
+
