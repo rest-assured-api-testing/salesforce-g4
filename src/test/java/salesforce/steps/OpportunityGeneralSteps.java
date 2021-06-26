@@ -76,7 +76,7 @@ public class OpportunityGeneralSteps {
         objectInformation.setIdDelete(opportunityResponse.getId());
     }
 
-    @And("I update the opportunity {string} to {string}")
+    @And("I update opportunity {string} to {string}")
     public void iUpdateOpportunityTheTo(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
         log.info("I update the Opportunity");
         Opportunity opportunityCreate = new Opportunity("New Opportunity30","2021-06-21","CloseDate");

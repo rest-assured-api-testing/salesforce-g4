@@ -24,5 +24,5 @@ Feature: Endpoint Contact
   Scenario: POST to contact
     Given I build "PATCH" request to contact
     When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId"
-    And I update the contact "lastName" to "change lastname"
+    And I update contact "lastName" to "change lastname"
     Then the response status code should be "NO_CONTENT" to contact

@@ -76,7 +76,7 @@ public class ContactGeneralSteps {
         objectInformation.setIdDelete(contactResponse.getId());
     }
 
-    @And("I update the contact {string} to {string}")
+    @And("I update contact {string} to {string}")
     public void iUpdateContactTheTo(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
         log.info("I update the Contact");
         Contact contactCreate = new Contact(updateLastNme);
