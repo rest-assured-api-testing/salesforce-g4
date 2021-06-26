@@ -3,13 +3,17 @@ Feature: Objects
 
   @GetAll
   Scenario Outline: Get all Objects
-    Given I build "GET" request.
-    When I execute <SObject> request.
-    Then the response status code should be "OK".
+    Given I form a "GET" request
+    When I execute request to <Object>
+    Then the status response should be <Result>
 
     Examples:
-      | SObject     |
-      | Account     |
-      | Contact     |
-      | Opportunity |
-      | Product2    |
+      | Object     | Result |
+      | Account     | 200    |
+      | Accoun     | 404    |
+      | Contact     | 200    |
+      | Contac     | 404    |
+      | Opportunity | 200    |
+      | Opportunit | 404    |
+      | Product2    | 200    |
+      | Product    | 404    |
