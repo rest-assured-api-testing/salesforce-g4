@@ -39,7 +39,6 @@ public class ContactHooks {
         this.objectInformation=objectInformation;
     }
 
-
     @Before(value = "@GetContact or @PostContact or @DeleteContact or @PatchContact ", order = 1)
     public void generateToken() {
         log.info("Generate Token Contact");

@@ -36,7 +36,6 @@ public class ScenariosHooks {
         this.objectInformation=objectInformation;
     }
 
-
     @Before(value = "@GetObject", order = 1)
     public void generateToken() {
         log.info("Generate Token");
