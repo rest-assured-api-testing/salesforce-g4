@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import entities.product.Product;
 
+import static utilities.JsonFormat.jsonConvert;
+
 public class productGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
@@ -58,7 +60,6 @@ public class productGeneralSteps {
         log.info("I execute the request post");
         Product projectCreate = new Product();
         projectCreate.setName(name);
-
         apiRequest.setEndpoint(endpoint);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
         apiResponse = ApiManager.execute(apiRequest);
@@ -69,9 +70,8 @@ public class productGeneralSteps {
     @And("I update the {string} to {string}")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
         log.info("I update the product");
-        Product projectCreate = new Product();
-        projectCreate.setDescription(updateDate);
-        apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
+
+        apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
