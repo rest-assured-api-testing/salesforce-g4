@@ -51,7 +51,7 @@ public class AccountHooks {
 
     @Before(value = "@GetAccount or @DeleteAccount or @PatchAccount", order = 2)
     public void createAccountHooks() throws JsonProcessingException {
-        log.info("Create Account");
+        log.info("Create Account hooks");
         Account account = new Account("account test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
@@ -66,7 +66,7 @@ public class AccountHooks {
 
     @After(value = "@GetAccount or @PatchAccount")
     public void deleteAccountHooks() {
-        log.info("Delete Account Post");
+        log.info("Delete Account hooks");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers("Authorization", "Bearer " + tokenUser)

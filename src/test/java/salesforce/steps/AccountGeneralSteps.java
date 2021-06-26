@@ -20,7 +20,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.ObjectInformation;
 import entities.account.Account;
 import entities.account.AccountResponse;
-import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -34,18 +33,17 @@ import org.testng.Assert;
 public class AccountGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
-    private ApiRequest apiRequestPatch = new ApiRequest();
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
     private AccountResponse accountResponse;
 
     public AccountGeneralSteps(ObjectInformation objectInformation) {
-        log.info("GetObject constructor");
+        log.info("GetObjectAccount constructor");
         this.objectInformation = objectInformation;
     }
 
 
-    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to account")
+    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to account$")
     public void iBuildRequestToAccount(String method) {
         log.info("I build the request for account");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);

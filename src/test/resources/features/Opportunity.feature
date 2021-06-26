@@ -24,5 +24,5 @@ Feature: Endpoint Opportunity
   Scenario: POST to opportunity
     Given I build "PATCH" request to opportunity
     When I use endpoint "sobjects/Opportunity/{opportunityId}" request to opportunity with "opportunityId"
-    And I update the opportunity "lastName" to "change lastname"
+    And I update the opportunity "NewOpportunity" to "change Opportunity"
     Then the response status code should be "NO_CONTENT" to opportunity

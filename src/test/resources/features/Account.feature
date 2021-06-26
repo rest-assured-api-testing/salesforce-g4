@@ -17,7 +17,7 @@ Feature: Endpoint Account
   Scenario: DELETE to account
     Given I build "DELETE" request to account
     When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
-    And I execute the request
+    And I execute the request account
     Then the response status code should be "NO_CONTENT" to account
 
   @PatchAccount
