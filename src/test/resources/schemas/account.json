@@ -2,71 +2,287 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "apiName": {
-      "type": "string"
-    },
-    "childRelationships": {
-      "type": "object"
-    },
-    "eTag": {
-      "type": "string"
-    },
-    "fields": {
+    "attributes": {
       "type": "object",
       "properties": {
-        "Name": {
-          "type": "object",
-          "properties": {
-            "displayValue": {
-              "type": "null"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "displayValue",
-            "value"
-          ]
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
         }
       },
       "required": [
-        "Name"
+        "type",
+        "url"
       ]
     },
-    "id": {
+    "Id": {
       "type": "string"
     },
-    "lastModifiedById": {
-      "type": "string"
+    "IsDeleted": {
+      "type": "boolean"
     },
-    "lastModifiedDate": {
-      "type": "string"
-    },
-    "recordTypeId": {
-      "type": "string"
-    },
-    "recordTypeInfo": {
+    "MasterRecordId": {
       "type": "null"
     },
-    "systemModstamp": {
+    "Name": {
       "type": "string"
     },
-    "weakEtag": {
-      "type": "integer"
+    "Type": {
+      "type": "null"
+    },
+    "ParentId": {
+      "type": "null"
+    },
+    "BillingStreet": {
+      "type": "null"
+    },
+    "BillingCity": {
+      "type": "null"
+    },
+    "BillingState": {
+      "type": "null"
+    },
+    "BillingPostalCode": {
+      "type": "null"
+    },
+    "BillingCountry": {
+      "type": "null"
+    },
+    "BillingLatitude": {
+      "type": "null"
+    },
+    "BillingLongitude": {
+      "type": "null"
+    },
+    "BillingGeocodeAccuracy": {
+      "type": "null"
+    },
+    "BillingAddress": {
+      "type": "null"
+    },
+    "ShippingStreet": {
+      "type": "null"
+    },
+    "ShippingCity": {
+      "type": "null"
+    },
+    "ShippingState": {
+      "type": "null"
+    },
+    "ShippingPostalCode": {
+      "type": "null"
+    },
+    "ShippingCountry": {
+      "type": "null"
+    },
+    "ShippingLatitude": {
+      "type": "null"
+    },
+    "ShippingLongitude": {
+      "type": "null"
+    },
+    "ShippingGeocodeAccuracy": {
+      "type": "null"
+    },
+    "ShippingAddress": {
+      "type": "null"
+    },
+    "Phone": {
+      "type": "null"
+    },
+    "Fax": {
+      "type": "null"
+    },
+    "AccountNumber": {
+      "type": "null"
+    },
+    "Website": {
+      "type": "null"
+    },
+    "PhotoUrl": {
+      "type": "string"
+    },
+    "Sic": {
+      "type": "null"
+    },
+    "Industry": {
+      "type": "null"
+    },
+    "AnnualRevenue": {
+      "type": "null"
+    },
+    "NumberOfEmployees": {
+      "type": "null"
+    },
+    "Ownership": {
+      "type": "null"
+    },
+    "TickerSymbol": {
+      "type": "null"
+    },
+    "Description": {
+      "type": "null"
+    },
+    "Rating": {
+      "type": "null"
+    },
+    "Site": {
+      "type": "null"
+    },
+    "OwnerId": {
+      "type": "string"
+    },
+    "CreatedDate": {
+      "type": "string"
+    },
+    "CreatedById": {
+      "type": "string"
+    },
+    "LastModifiedDate": {
+      "type": "string"
+    },
+    "LastModifiedById": {
+      "type": "string"
+    },
+    "SystemModstamp": {
+      "type": "string"
+    },
+    "LastActivityDate": {
+      "type": "null"
+    },
+    "LastViewedDate": {
+      "type": "string"
+    },
+    "LastReferencedDate": {
+      "type": "string"
+    },
+    "Jigsaw": {
+      "type": "null"
+    },
+    "JigsawCompanyId": {
+      "type": "null"
+    },
+    "CleanStatus": {
+      "type": "string"
+    },
+    "AccountSource": {
+      "type": "null"
+    },
+    "DunsNumber": {
+      "type": "null"
+    },
+    "Tradestyle": {
+      "type": "null"
+    },
+    "NaicsCode": {
+      "type": "null"
+    },
+    "NaicsDesc": {
+      "type": "null"
+    },
+    "YearStarted": {
+      "type": "null"
+    },
+    "SicDesc": {
+      "type": "null"
+    },
+    "DandbCompanyId": {
+      "type": "null"
+    },
+    "OperatingHoursId": {
+      "type": "null"
+    },
+    "CustomerPriority__c": {
+      "type": "null"
+    },
+    "SLA__c": {
+      "type": "null"
+    },
+    "Active__c": {
+      "type": "null"
+    },
+    "NumberofLocations__c": {
+      "type": "null"
+    },
+    "UpsellOpportunity__c": {
+      "type": "null"
+    },
+    "SLASerialNumber__c": {
+      "type": "null"
+    },
+    "SLAExpirationDate__c": {
+      "type": "null"
     }
   },
   "required": [
-    "apiName",
-    "childRelationships",
-    "eTag",
-    "fields",
-    "id",
-    "lastModifiedById",
-    "lastModifiedDate",
-    "recordTypeId",
-    "recordTypeInfo",
-    "systemModstamp",
-    "weakEtag"
+    "attributes",
+    "Id",
+    "IsDeleted",
+    "MasterRecordId",
+    "Name",
+    "Type",
+    "ParentId",
+    "BillingStreet",
+    "BillingCity",
+    "BillingState",
+    "BillingPostalCode",
+    "BillingCountry",
+    "BillingLatitude",
+    "BillingLongitude",
+    "BillingGeocodeAccuracy",
+    "BillingAddress",
+    "ShippingStreet",
+    "ShippingCity",
+    "ShippingState",
+    "ShippingPostalCode",
+    "ShippingCountry",
+    "ShippingLatitude",
+    "ShippingLongitude",
+    "ShippingGeocodeAccuracy",
+    "ShippingAddress",
+    "Phone",
+    "Fax",
+    "AccountNumber",
+    "Website",
+    "PhotoUrl",
+    "Sic",
+    "Industry",
+    "AnnualRevenue",
+    "NumberOfEmployees",
+    "Ownership",
+    "TickerSymbol",
+    "Description",
+    "Rating",
+    "Site",
+    "OwnerId",
+    "CreatedDate",
+    "CreatedById",
+    "LastModifiedDate",
+    "LastModifiedById",
+    "SystemModstamp",
+    "LastActivityDate",
+    "LastViewedDate",
+    "LastReferencedDate",
+    "Jigsaw",
+    "JigsawCompanyId",
+    "CleanStatus",
+    "AccountSource",
+    "DunsNumber",
+    "Tradestyle",
+    "NaicsCode",
+    "NaicsDesc",
+    "YearStarted",
+    "SicDesc",
+    "DandbCompanyId",
+    "OperatingHoursId",
+    "CustomerPriority__c",
+    "SLA__c",
+    "Active__c",
+    "NumberofLocations__c",
+    "UpsellOpportunity__c",
+    "SLASerialNumber__c",
+    "SLAExpirationDate__c"
   ]
 }
