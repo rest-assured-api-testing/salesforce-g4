@@ -11,6 +11,8 @@
 
 package utilities;
 
+import java.util.HashMap;
+
 public class JsonFormat {
 
     /**
@@ -23,5 +25,25 @@ public class JsonFormat {
      */
     public static String jsonConvert(final String parameter, final String value) {
         return "{\"" + parameter + "\": \"" + value + "\"}";
+    }
+
+    /**
+     * Converts strings to format a json.
+     * This method only work to request type patch in OpportunityGeneralSteps.
+     *
+     * @param k1 String with name of first key.
+     * @param value1 String with value of first key.
+     * @param k2 String with name of second key.
+     * @param value2 String with value of second key.
+     * @param k3 String with name of third key.
+     * @param value3 String with value of third key.
+     * @return string in format json.
+     */
+    public static String mapFormat(final String k1, final String value1, final String k2, final String value2,
+                                   final String k3, final String value3) {
+        return "{\"" + k1 + "\": \"" + value1 + "\",\n"
+                + " \"" + k2 + "\": \"" + value2 + "\",\n"
+                + " \"" + k3 + "\": \"" + value3 + "\",\n"
+                + "}";
     }
 }

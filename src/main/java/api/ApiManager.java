@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
 
 package api;
 
@@ -11,14 +21,27 @@ import static io.restassured.RestAssured.given;
 public class ApiManager {
     private static int status;
 
-    public static ApiResponse execute(ApiRequest apiRequest) {
+
+    /**
+     * Executes the Api request and assignment to response.
+     *
+     * @param apiRequest contains all the parameters for the execution to request.
+     * @return a new instance to response.
+     */
+    public static ApiResponse execute(final ApiRequest apiRequest) {
         Response response = buildRequest(apiRequest)
                 .request(apiRequest.getMethod().name(),
                         apiRequest.getEndpoint());
         return new ApiResponse(response);
     }
 
-    private static RequestSpecification buildRequest(ApiRequest apiRequest) {
+    /**
+     * Sets all the params from Api request .
+     *
+     * @param apiRequest contains all the parameters for the request.
+     * @return a request with oll the params to use.
+     */
+    private static RequestSpecification buildRequest(final ApiRequest apiRequest) {
         return given().headers(apiRequest.getHeaders())
                 .queryParams(apiRequest.getQueryParams())
                 .pathParams(apiRequest.getPathParams())
@@ -28,6 +51,11 @@ public class ApiManager {
                 .log().all();
     }
 
+    /**
+     * Executes the request to get a token.
+     *
+     * @return the token for our account.
+     */
     public static ApiResponse executeToken() {
         Response response = given().urlEncodingEnabled(true)
                 .param(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
