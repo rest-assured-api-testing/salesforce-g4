@@ -28,6 +28,7 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
+import static utilities.JsonFormat.jsonConvert;
 
 public class ContactGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
@@ -87,5 +88,46 @@ public class ContactGeneralSteps {
         log.info("I verify status Contact response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
+    }
+
+    @Then("^The schema to contact should be equals to \"([^\"]*)\"$")
+    public void theSchemaToContactShouldBeEqualsTo(String schema) {
+        log.info("I verify schema Contact");
+        apiResponse.validateBodySchema(schema);
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to contact with \"([^\"]*)\" fail (.+)$")
+    public void iUseEndpointRequestToContactWithFailBadId(String endpoint,String keyPath,String badId) {
+        log.info("I build contact fail endpoint with bad id");
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.addPathParams(keyPath, badId);
+    }
+
+    @And("I execute the request contact fail")
+    public void iExecuteTheRequestContactFail() {
+        log.info("I execute the Contact request Fail");
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Then("^the response status code fail should be (.+) to contact$")
+    public void theResponseStatusCodeFailShouldBeStatusToContact(String status) {
+        log.info("I verify status Contact fail response");
+        Assert.assertEquals(apiResponse.getStatusCode(), Integer.parseInt(status));
+        apiResponse.getResponse().then().log().body();
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to contact with (.+) and (.+)$")
+    public void iUseEndpointRequestToContactWithApiNameAndValue(String endpoint,String apiName, String value) {
+        log.info("I create fail contact");
+        apiRequest.setBody(jsonConvert(apiName,value));
+        apiRequest.setEndpoint(endpoint);
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @And("^I update contact the (.+) to (.+)$")
+    public void iUpdateContactTheApiNameToValue(String apiname, String value) {
+        log.info("I update the account fail");
+        apiRequest.setBody(jsonConvert(apiname,value));
+        apiResponse = ApiManager.execute(apiRequest);
     }
 }
