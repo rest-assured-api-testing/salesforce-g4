@@ -79,13 +79,37 @@ public class productGeneralSteps {
     @And("^I update the (.+) to (.+)$")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
         log.info("I update the product");
-
         apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
     @Then("the response status code should be {string} to product")
     public void theResponseStatusCodeShouldBeToProduct(String statusCode) {
+        log.info("I verify status response");
+        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
+        apiResponse.getResponse().then().log().body();
+    }
+
+    @Then("The schema to product should be equals to {string}")
+    public void theSchemaToProductShouldBeEqualsTo(String schema) {
+        log.info("I verify schema");
+        apiResponse.validateBodySchema(schema);
+    }
+
+//    @When("^I use endpoint \"([^\"]*)\" request to with name (.+) fail$")
+//    public void iUseEndpointRequestToObjectWithNameFail(String endpoint, String name) throws JsonProcessingException {
+//        log.info("I execute the request post");
+//        Product projectCreate = new Product();
+//        projectCreate.setName(name);
+//        apiRequest.setEndpoint(endpoint);
+//        apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
+//        apiResponse = ApiManager.execute(apiRequest);
+//        productCreate=apiResponse.getBody(ProductCreate.class);
+//        objectInformation.setIdDelete(productCreate.getId());
+//    }
+
+    @Then("^The response status code should be (.+) to product$")
+    public void theResponseStatusCodeShouldBeToProductFail(String statusCode) {
         log.info("I verify status response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
