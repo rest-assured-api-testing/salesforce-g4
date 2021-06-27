@@ -1,5 +1,10 @@
+import net.masterthought.cucumber.Configuration;
+import net.masterthought.cucumber.ReportBuilder
+import net.masterthought.cucumber.Reportable;
+
 plugins {
     id 'java'
+    id "com.github.spacialcircumstances.gradle-cucumber-reporting" version "0.1.22"
 }
 
 group 'org.example'
@@ -17,9 +22,12 @@ dependencies {
     implementation group: 'org.testng',  name: 'testng', version: '7.1.0'
     implementation group: 'io.cucumber', name: 'cucumber-java', version: '6.10.4'
     implementation group: 'io.cucumber', name: 'cucumber-testng', version: '6.10.4'
+    implementation 'org.testng:testng:7.1.0'
     compile group:'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
     implementation group: 'log4j', name: 'log4j', version: '1.2.17'
     implementation 'io.cucumber:cucumber-picocontainer:6.10.4'
+    implementation group: 'net.masterthought', name: 'cucumber-reporting', version: '5.5.3'
+
 }
 
 test {
@@ -45,4 +53,26 @@ task executeFeatures(type: Test) {
     ignoreFailures = true
     scanForTestClasses = false
     testLogging.showStandardStreams = true
+    doLast {
+        println("generate report")
+        generateReport("build/cucumber/cucumber.json","build/cucumber")
+    }
+}
+
+def generateReport(String pathCucumber, String pathReport){
+    File jsonFile = new File(pathCucumber)
+
+    if(jsonFile.exists()){
+        println("the json file exists")
+        File reportOutputDirectory = new File(pathReport);
+        List<String> jsonFiles = new ArrayList<>();
+        jsonFiles.add(pathCucumber);
+        String buildNumber = "1";
+        String projectName = "Salesforce";
+        Configuration configuration = new Configuration(reportOutputDirectory, projectName);
+        ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
+        reportBuilder.generateReports();
+    } else {
+        println("the json file does not exists")
+    }
 }
