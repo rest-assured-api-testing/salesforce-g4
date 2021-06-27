@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -45,7 +45,7 @@ public class groupGeneralSteps {
     @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to group$")
     public void iBuildRequestToGroup(String method) {
         log.info("I build the request");
-        log.info("ParameterEndPoints.URL_BASE"+ParameterEndPoints.URL_BASE);
+        log.info("ParameterEndPoints.URL_BASE" + ParameterEndPoints.URL_BASE);
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
@@ -68,7 +68,7 @@ public class groupGeneralSteps {
     public void iUseEndpointRequestToObjectWithName(String endpoint, String name, String visibility)
             throws JsonProcessingException {
         log.info("I execute the request post");
-        Group group=new Group();
+        Group group = new Group();
         group.setName(name);
         group.setVisibility(visibility);
         apiRequest.setEndpoint(endpoint);
@@ -80,7 +80,7 @@ public class groupGeneralSteps {
     @And("^I update group the (.+) to (.+)$")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) {
         log.info("I update the group");
-        apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
+        apiRequest.setBody(jsonConvert(parameterToUpdate, updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
@@ -90,6 +90,7 @@ public class groupGeneralSteps {
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
     }
+
     @Then("The schema to group should be equals to {string}")
     public void theSchemaToGroupShouldBeEqualsTo(String schema) {
         log.info("I verify schema of group");
@@ -97,7 +98,7 @@ public class groupGeneralSteps {
     }
 
     @When("^I use endpoint \"([^\"]*)\" request to group with \"([^\"]*)\" and (.+)$")
-    public void iUseEndpointRequestToGroupWithFailWrongId(String endpoint,String keyPath,String idCustomer) {
+    public void iUseEndpointRequestToGroupWithFailWrongId(String endpoint, String keyPath, String idCustomer) {
         log.info("I build group fail endpoint with bad id");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, idCustomer);

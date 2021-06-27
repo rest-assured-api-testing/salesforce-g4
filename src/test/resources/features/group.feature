@@ -96,3 +96,4 @@ Feature: Endpoint group
       | isAutoArchiveDisabled |                   |
       | isBroadcast           |                   |
       | canHaveChatterGuests  | true              |
+    
