@@ -86,7 +86,6 @@ Feature: Endpoint group
     When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
     And I update group the "<parameterToUpdate>" to "<updateDate>"
     Then the response status code should be "BAD_REQUEST" to group
-
     Examples:
       | parameterToUpdate     | updateDate        |
       |                       | change name group |
