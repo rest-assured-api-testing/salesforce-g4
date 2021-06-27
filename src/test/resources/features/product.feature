@@ -60,7 +60,6 @@ Feature: Endpoint Product
     When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
     And I update the <parameterToUpdate> to <updateDate>
     Then the response status code should be "NO_CONTENT" to product
-
     Examples:
       | parameterToUpdate | updateDate         |
       | description       | change description |
@@ -77,7 +76,6 @@ Feature: Endpoint Product
     When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
     And I update the <parameterToUpdate> to "<updateDate>"
     Then the response status code should be "BAD_REQUEST" to product
-
     Examples:
       | parameterToUpdate | updateDate    |
       | names             | Pedro, Teresa |
