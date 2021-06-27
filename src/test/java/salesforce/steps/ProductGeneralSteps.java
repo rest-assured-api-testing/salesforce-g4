@@ -17,7 +17,7 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.ObjectInformation;
+import utilities.ObjectInformation;
 import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.And;
@@ -30,7 +30,7 @@ import org.testng.Assert;
 import entities.product.Product;
 import static utilities.JsonFormat.jsonConvert;
 
-public class productGeneralSteps {
+public class ProductGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiRequest apiRequestPatch = new ApiRequest();
@@ -38,7 +38,7 @@ public class productGeneralSteps {
     private ObjectInformation objectInformation;
     private ProductCreate productCreate;
 
-    public productGeneralSteps(ObjectInformation objectInformation) {
+    public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }

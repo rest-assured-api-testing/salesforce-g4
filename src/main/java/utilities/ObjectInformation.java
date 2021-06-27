@@ -9,7 +9,7 @@
  * @author Gustavo Zacarias Huanca Alconz
  */
 
-package entities;
+package utilities;
 
 public class ObjectInformation {
     private String token;

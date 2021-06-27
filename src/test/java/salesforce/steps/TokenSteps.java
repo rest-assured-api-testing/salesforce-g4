@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 
-public class tokenSteps {
+public class TokenSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiResponse apiResponse;
     private Token token;

@@ -62,6 +62,6 @@ public class GroupTest {
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
         idGroup=apiResponse.getBody(Group.class).getId();
-        apiResponse.validateBodySchema("schemas/groupResponseCreate.json");
+        apiResponse.validateBodySchema("schemas/groupresponsecreate.json");
     }
 }

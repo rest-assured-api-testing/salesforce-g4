@@ -18,7 +18,7 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.ObjectInformation;
+import utilities.ObjectInformation;
 import entities.Token;
 import entities.group.Group;
 import generalsetting.ParameterEndPoints;
@@ -26,13 +26,13 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
 
-public class groupHooks {
+public class GroupHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
     private Group groupCreate;
     private ObjectInformation objectInformation = new ObjectInformation();
 
-    public groupHooks(ObjectInformation objectInformation) {
+    public GroupHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
         this.objectInformation = objectInformation;
     }
