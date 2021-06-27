@@ -59,9 +59,9 @@ Feature: Endpoint Contact
     And I execute the request contact
     Then the response status code fail should be <status> to contact
     Examples:
-      | badId |status|
-      | 12341415 | 404 |
-      | null     | 404|
+      | badId    | status |
+      | 12341415 | 404    |
+      | null     | 404    |
 
   @PatchContact
   Scenario: POST to contact
@@ -77,9 +77,9 @@ Feature: Endpoint Contact
     And I update contact "name" to "change name"
     Then the response status code fail should be <status> to contact
     Examples:
-      | badId |status|
-      | 12341415 | 404 |
-      | null     | 404|
+      | badId    | status |
+      | 12341415 | 404    |
+      | null     | 404    |
 
   @PatchContact
   Scenario Outline: PATCH to contact fail body
@@ -88,8 +88,8 @@ Feature: Endpoint Contact
     And I update contact the <apiName> to <value>
     Then the response status code fail should be <status> to contact
     Examples:
-      | apiName      | value    | status|
-      | Nameeee      | Account1 | 400 |
-      | IsDeleted    | Account2 | 400 |
-      | null         | Account3 | 400 |
-      | Nmme         | null     | 400 |
+      | apiName   | value    | status |
+      | Nameeee   | Account1 | 400    |
+      | IsDeleted | Account2 | 400    |
+      | null      | Account3 | 400    |
+      | Nmme      | null     | 400    |
