@@ -11,6 +11,8 @@
 
 package utilities;
 
+import java.util.HashMap;
+
 public class JsonFormat {
 
     /**
@@ -18,10 +20,18 @@ public class JsonFormat {
      * This method only work to request type patch.
      *
      * @param parameter to change.
-     * @param value which parameter will have.
+     * @param value     which parameter will have.
      * @return string in format json.
      */
     public static String jsonConvert(final String parameter, final String value) {
         return "{\"" + parameter + "\": \"" + value + "\"}";
+    }
+
+    public static String mapFormat(final String k1, final String value1, final String k2, final String value2,
+                                   final String k3, final String value3) {
+        return "{\"" + k1 + "\": \"" + value1 + "\",\n"
+                + " \"" + k2 + "\": \"" + value2 + "\",\n"
+                + " \"" + k3 + "\": \"" + value3 + "\",\n"
+                + "}";
     }
 }

@@ -28,6 +28,8 @@ import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
+import static utilities.JsonFormat.jsonConvert;
+import static utilities.JsonFormat.mapFormat;
 
 public class OpportunityGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
@@ -87,5 +89,46 @@ public class OpportunityGeneralSteps {
         log.info("I verify status Opportunity response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
+    }
+
+    @Then("^The schema to opportunity should be equals to \"([^\"]*)\"$")
+    public void theSchemaToOpportunityShouldBeEqualsTo(String schema) {
+        log.info("I verify schema Opportunity");
+        apiResponse.validateBodySchema(schema);
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to opportunity with \"([^\"]*)\" fail (.+)$")
+    public void iUseEndpointRequestToOpportunityWithFailBadId(String endpoint,String keyPath,String badId) {
+        log.info("I build opportunity fail endpoint with bad id");
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.addPathParams(keyPath, badId);
+    }
+
+    @And("I execute the request opportunity fail")
+    public void iExecuteTheRequestOpportunityFail() {
+        log.info("I execute the Opportunity request Fail");
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Then("^the response status code fail should be (.+) to opportunity$")
+    public void theResponseStatusCodeFailShouldBeStatusToOpportunity(String status) {
+        log.info("I verify status Opportunity fail response");
+        Assert.assertEquals(apiResponse.getStatusCode(), Integer.parseInt(status));
+        apiResponse.getResponse().then().log().body();
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to opportunity with (.+) (.+) (.+) and (.+) (.+) (.+)$")
+    public void iUseEndpointRequestToOpportunityWithApiNameApiNameApiNameAndValueValueValue(String endpoint, String apiName1, String apiName2, String apiName3, String value1, String value2, String value3) {
+        log.info("I create fail opportunity");
+        apiRequest.setBody(mapFormat(apiName1,value1,apiName2,value2,apiName3,value3));
+        apiRequest.setEndpoint(endpoint);
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @And("^I update opportunity the (.+) to (.+)$")
+    public void iUpdateOpportunityTheApiNameToValue(String apiname, String value) {
+        log.info("I update the opportunity fail");
+        apiRequest.setBody(jsonConvert(apiname,value));
+        apiResponse = ApiManager.execute(apiRequest);
     }
 }

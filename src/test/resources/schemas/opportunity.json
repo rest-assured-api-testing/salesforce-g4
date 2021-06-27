@@ -2,71 +2,199 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "apiName": {
-      "type": "string"
-    },
-    "childRelationships": {
-      "type": "object"
-    },
-    "eTag": {
-      "type": "string"
-    },
-    "fields": {
+    "attributes": {
       "type": "object",
       "properties": {
-        "CloseDate": {
-          "type": "object",
-          "properties": {
-            "displayValue": {
-              "type": "string"
-            },
-            "value": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "displayValue",
-            "value"
-          ]
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
         }
       },
       "required": [
-        "CloseDate"
+        "type",
+        "url"
       ]
     },
-    "id": {
+    "Id": {
       "type": "string"
     },
-    "lastModifiedById": {
-      "type": "string"
+    "IsDeleted": {
+      "type": "boolean"
     },
-    "lastModifiedDate": {
-      "type": "string"
-    },
-    "recordTypeId": {
-      "type": "string"
-    },
-    "recordTypeInfo": {
+    "AccountId": {
       "type": "null"
     },
-    "systemModstamp": {
+    "IsPrivate": {
+      "type": "boolean"
+    },
+    "Name": {
       "type": "string"
     },
-    "weakEtag": {
+    "Description": {
+      "type": "null"
+    },
+    "StageName": {
+      "type": "string"
+    },
+    "Amount": {
+      "type": "null"
+    },
+    "Probability": {
+      "type": "number"
+    },
+    "ExpectedRevenue": {
+      "type": "null"
+    },
+    "TotalOpportunityQuantity": {
+      "type": "null"
+    },
+    "CloseDate": {
+      "type": "string"
+    },
+    "Type": {
+      "type": "null"
+    },
+    "NextStep": {
+      "type": "null"
+    },
+    "LeadSource": {
+      "type": "null"
+    },
+    "IsClosed": {
+      "type": "boolean"
+    },
+    "IsWon": {
+      "type": "boolean"
+    },
+    "ForecastCategory": {
+      "type": "string"
+    },
+    "ForecastCategoryName": {
+      "type": "string"
+    },
+    "CampaignId": {
+      "type": "null"
+    },
+    "HasOpportunityLineItem": {
+      "type": "boolean"
+    },
+    "Pricebook2Id": {
+      "type": "null"
+    },
+    "OwnerId": {
+      "type": "string"
+    },
+    "CreatedDate": {
+      "type": "string"
+    },
+    "CreatedById": {
+      "type": "string"
+    },
+    "LastModifiedDate": {
+      "type": "string"
+    },
+    "LastModifiedById": {
+      "type": "string"
+    },
+    "SystemModstamp": {
+      "type": "string"
+    },
+    "LastActivityDate": {
+      "type": "null"
+    },
+    "FiscalQuarter": {
       "type": "integer"
+    },
+    "FiscalYear": {
+      "type": "integer"
+    },
+    "Fiscal": {
+      "type": "string"
+    },
+    "ContactId": {
+      "type": "null"
+    },
+    "LastViewedDate": {
+      "type": "string"
+    },
+    "LastReferencedDate": {
+      "type": "string"
+    },
+    "HasOpenActivity": {
+      "type": "boolean"
+    },
+    "HasOverdueTask": {
+      "type": "boolean"
+    },
+    "LastAmountChangedHistoryId": {
+      "type": "null"
+    },
+    "LastCloseDateChangedHistoryId": {
+      "type": "null"
+    },
+    "DeliveryInstallationStatus__c": {
+      "type": "null"
+    },
+    "TrackingNumber__c": {
+      "type": "null"
+    },
+    "OrderNumber__c": {
+      "type": "null"
+    },
+    "CurrentGenerators__c": {
+      "type": "null"
+    },
+    "MainCompetitors__c": {
+      "type": "null"
     }
   },
   "required": [
-    "apiName",
-    "childRelationships",
-    "eTag",
-    "fields",
-    "id",
-    "lastModifiedById",
-    "lastModifiedDate",
-    "recordTypeId",
-    "recordTypeInfo",
-    "systemModstamp",
-    "weakEtag"
+    "attributes",
+    "Id",
+    "IsDeleted",
+    "AccountId",
+    "IsPrivate",
+    "Name",
+    "Description",
+    "StageName",
+    "Amount",
+    "Probability",
+    "ExpectedRevenue",
+    "TotalOpportunityQuantity",
+    "CloseDate",
+    "Type",
+    "NextStep",
+    "LeadSource",
+    "IsClosed",
+    "IsWon",
+    "ForecastCategory",
+    "ForecastCategoryName",
+    "CampaignId",
+    "HasOpportunityLineItem",
+    "Pricebook2Id",
+    "OwnerId",
+    "CreatedDate",
+    "CreatedById",
+    "LastModifiedDate",
+    "LastModifiedById",
+    "SystemModstamp",
+    "LastActivityDate",
+    "FiscalQuarter",
+    "FiscalYear",
+    "Fiscal",
+    "ContactId",
+    "LastViewedDate",
+    "LastReferencedDate",
+    "HasOpenActivity",
+    "HasOverdueTask",
+    "LastAmountChangedHistoryId",
+    "LastCloseDateChangedHistoryId",
+    "DeliveryInstallationStatus__c",
+    "TrackingNumber__c",
+    "OrderNumber__c",
+    "CurrentGenerators__c",
+    "MainCompetitors__c"
   ]
 }
