@@ -17,7 +17,7 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.ObjectInformation;
+import utilities.ObjectInformation;
 import entities.account.Account;
 import entities.account.AccountResponse;
 import generalsetting.ParameterEndPoints;
