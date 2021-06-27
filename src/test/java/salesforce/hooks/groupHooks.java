@@ -62,7 +62,7 @@ public class groupHooks {
         objectInformation.setId(groupCreate.getId());
     }
 
-    @After(value = "@GetGroup or @PatchGroup")
+    @After(value = "@GetGroup or @PatchGroup or @DeleteGroup")
     public void cleanRepository() {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
