@@ -124,4 +124,10 @@ public class AccountGeneralSteps {
         apiRequest.setBody(jsonConvert(apiname,value));
         apiResponse = ApiManager.execute(apiRequest);
     }
+
+    @Then("^The schema to account should be equals to \"([^\"]*)\"$")
+    public void theSchemaToAccountShouldBeEqualsTo(String schema) {
+        log.info("I verify schema Account");
+        apiResponse.validateBodySchema(schema);
+    }
 }

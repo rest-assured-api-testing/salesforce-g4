@@ -8,6 +8,13 @@ Feature: Endpoint Account
     Then the response status code should be "OK" to account
 
   @GetAccount
+  Scenario: GET to account with schema
+    Given I build "GET" request to account
+    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
+    And I execute the request account
+    Then The schema to account should be equals to "schemas/account.json"
+
+  @GetAccount
   Scenario Outline: GET to account fail
     Given I build "GET" request to account
     When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId" fail <badId>
