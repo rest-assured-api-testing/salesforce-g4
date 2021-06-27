@@ -18,7 +18,6 @@ Feature: Endpoint Account
       | 12341415 | 404 |
       | null     | 404 |
 
-
   @PostAccount
   Scenario: POST to account
     Given I build "POST" request to account
