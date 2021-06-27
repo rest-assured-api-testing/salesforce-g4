@@ -62,7 +62,7 @@ public class productHooks {
         objectInformation.setId(productCreate.getId());
     }
 
-    @After(value = "@GetProduct or @PatchProduct")
+    @After(value = "@GetProduct or @PatchProduct or @DeleteProduct")
     public void cleanRepository() {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()

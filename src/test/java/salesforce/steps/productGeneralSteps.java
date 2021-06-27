@@ -51,7 +51,7 @@ public class productGeneralSteps {
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I use endpoint {string} request to object with {string}")
+    @When("I use endpoint {string} request to product with {string}")
     public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
         log.info("I build endpoint the request");
         apiRequest.setEndpoint(endpoint);
@@ -96,22 +96,17 @@ public class productGeneralSteps {
         apiResponse.validateBodySchema(schema);
     }
 
-//    @When("^I use endpoint \"([^\"]*)\" request to with name (.+) fail$")
-//    public void iUseEndpointRequestToObjectWithNameFail(String endpoint, String name) throws JsonProcessingException {
-//        log.info("I execute the request post");
-//        Product projectCreate = new Product();
-//        projectCreate.setName(name);
-//        apiRequest.setEndpoint(endpoint);
-//        apiRequest.setBody(new ObjectMapper().writeValueAsString(projectCreate));
-//        apiResponse = ApiManager.execute(apiRequest);
-//        productCreate=apiResponse.getBody(ProductCreate.class);
-//        objectInformation.setIdDelete(productCreate.getId());
-//    }
-
     @Then("^The response status code should be (.+) to product$")
     public void theResponseStatusCodeShouldBeToProductFail(String statusCode) {
         log.info("I verify status response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to product with \"([^\"]*)\" and (.+)$")
+    public void iUseEndpointRequestToProductWithFailWrongId(String endpoint,String keyPath,String idCustomer) {
+        log.info("I build account fail endpoint with bad id");
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.addPathParams(keyPath, idCustomer);
     }
 }
