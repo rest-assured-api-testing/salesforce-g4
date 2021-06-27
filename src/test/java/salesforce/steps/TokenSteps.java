@@ -16,20 +16,38 @@ import api.ApiResponse;
 import entities.Token;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 
 public class TokenSteps {
+    private Logger log = Logger.getLogger(getClass());
     private ApiResponse apiResponse;
     private Token token;
 
-    @When("I execute token request to get token bearer")
+    @When("I execute token request")
     public void iExecuteRequest(){
+        log.info("I execute token request");
         apiResponse = ApiManager.executeToken();
         token=apiResponse.getBody(Token.class);
     }
 
     @Then("The new token should be type {string}")
     public void theResponseTypeShouldBe(String typeToken){
+        log.info("I verify type token");
         Assert.assertEquals(token.getToken_type(), typeToken);
+    }
+
+    @Then("The response status code should be {string} to token")
+    public void theResponseStatusCodeShouldBeToToken(String statusCode) {
+        log.info("I verify status response to token");
+        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
+        apiResponse.getResponse().then().log().body();
+    }
+
+    @Then("The response token should be schema {string}")
+    public void theResponseStatusCodeShouldBeToProduct(String schema) {
+        log.info("I verify schema to token");
+        apiResponse.validateBodySchema(schema);
     }
 }
