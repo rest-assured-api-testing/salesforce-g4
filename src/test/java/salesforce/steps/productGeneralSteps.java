@@ -51,7 +51,7 @@ public class productGeneralSteps {
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I use endpoint {string} request to object with {string}")
+    @When("I use endpoint {string} request to product with {string}")
     public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
         log.info("I build endpoint the request");
         apiRequest.setEndpoint(endpoint);
@@ -79,7 +79,6 @@ public class productGeneralSteps {
     @And("^I update the (.+) to (.+)$")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
         log.info("I update the product");
-
         apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
@@ -89,5 +88,25 @@ public class productGeneralSteps {
         log.info("I verify status response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
+    }
+
+    @Then("The schema to product should be equals to {string}")
+    public void theSchemaToProductShouldBeEqualsTo(String schema) {
+        log.info("I verify schema");
+        apiResponse.validateBodySchema(schema);
+    }
+
+    @Then("^The response status code should be (.+) to product$")
+    public void theResponseStatusCodeShouldBeToProductFail(String statusCode) {
+        log.info("I verify status response");
+        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
+        apiResponse.getResponse().then().log().body();
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to product with \"([^\"]*)\" and (.+)$")
+    public void iUseEndpointRequestToProductWithFailWrongId(String endpoint,String keyPath,String idCustomer) {
+        log.info("I build account fail endpoint with bad id");
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.addPathParams(keyPath, idCustomer);
     }
 }
