@@ -30,7 +30,7 @@ import org.testng.Assert;
 import entities.product.Product;
 import static utilities.JsonFormat.jsonConvert;
 
-public class productGeneralSteps {
+public class ProductGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiRequest apiRequestPatch = new ApiRequest();
@@ -38,7 +38,7 @@ public class productGeneralSteps {
     private ObjectInformation objectInformation;
     private ProductCreate productCreate;
 
-    public productGeneralSteps(ObjectInformation objectInformation) {
+    public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }

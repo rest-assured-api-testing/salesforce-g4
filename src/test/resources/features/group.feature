@@ -11,7 +11,7 @@ Feature: Endpoint group
   Scenario: GET to group schema when is created
     Given I build "POST" request to group
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
-    Then The schema to group should be equals to "schemas/groupResponseCreate.json"
+    Then The schema to group should be equals to "schemas/groupresponsecreate.json"
 
   @GetGroup
   Scenario Outline: GET to group fail

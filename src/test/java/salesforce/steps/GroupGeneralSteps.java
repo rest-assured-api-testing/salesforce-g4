@@ -30,14 +30,14 @@ import org.testng.Assert;
 
 import static utilities.JsonFormat.jsonConvert;
 
-public class groupGeneralSteps {
+public class GroupGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiRequest apiRequestPatch = new ApiRequest();
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
 
-    public groupGeneralSteps(ObjectInformation objectInformation) {
+    public GroupGeneralSteps(ObjectInformation objectInformation) {
         log.info("GroupGeneralSteps constructor");
         this.objectInformation = objectInformation;
     }
