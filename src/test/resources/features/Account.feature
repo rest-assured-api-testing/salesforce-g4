@@ -16,7 +16,7 @@ Feature: Endpoint Account
     Examples:
       | badId |status|
       | 12341415 | 404 |
-      | null | 404|
+      | null     | 404 |
 
 
   @PostAccount
@@ -36,8 +36,6 @@ Feature: Endpoint Account
       | Description  | Account2 | 400 |
       | null         | Account3 | 400 |
 
-
-
   @DeleteAccount
   Scenario: DELETE to account
     Given I build "DELETE" request to account
@@ -54,7 +52,7 @@ Feature: Endpoint Account
     Examples:
       | badId |status|
       | 12341415 | 404 |
-      | null | 404|
+      | null     | 404|
 
   @PatchAccount
   Scenario: PATCH to account
@@ -72,7 +70,7 @@ Feature: Endpoint Account
     Examples:
       | badId |status|
       | 12341415 | 404 |
-      | null | 404|
+      | null     | 404|
 
   @PatchAccount
   Scenario Outline: PATCH to account fail body
@@ -81,9 +79,8 @@ Feature: Endpoint Account
     And I update account the <apiName> to <value>
     Then the response status code fail should be <status> to account
     Examples:
-    Examples:
       | apiName      | value    | status|
       | Nameeee      | Account1 | 400 |
       | IsDeleted    | Account2 | 400 |
       | null         | Account3 | 400 |
-      | Nmme         | null | 400 |
+      | Nmme         | null     | 400 |
