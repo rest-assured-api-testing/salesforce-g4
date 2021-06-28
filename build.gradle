@@ -20,6 +20,7 @@ dependencies {
     compile group:'io.github.cdimascio', name: 'java-dotenv', version: '5.2.2'
     implementation group: 'log4j', name: 'log4j', version: '1.2.17'
     implementation 'io.cucumber:cucumber-picocontainer:6.10.4'
+    implementation group: 'net.masterthought', name: 'cucumber-reporting', version: '5.5.3'
 }
 
 test {
