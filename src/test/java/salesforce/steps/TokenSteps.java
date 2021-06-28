@@ -14,6 +14,7 @@ package salesforce.steps;
 import api.ApiManager;
 import api.ApiResponse;
 import entities.Token;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
@@ -32,7 +33,7 @@ public class TokenSteps {
         token=apiResponse.getBody(Token.class);
     }
 
-    @Then("The new token should be type {string}")
+    @And("The new token should be type {string}")
     public void theResponseTypeShouldBe(String typeToken){
         log.info("I verify type token");
         Assert.assertEquals(token.getToken_type(), typeToken);
@@ -45,7 +46,7 @@ public class TokenSteps {
         apiResponse.getResponse().then().log().body();
     }
 
-    @Then("The response token should be schema {string}")
+    @And("The response token should be schema {string}")
     public void theResponseStatusCodeShouldBeToProduct(String schema) {
         log.info("I verify schema to token");
         apiResponse.validateBodySchema(schema);

@@ -6,12 +6,13 @@ Feature: Endpoint group
     When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
     And I execute the request group
     Then the response status code should be "OK" to group
+    And The schema to group should be equals to "schemas/group.json"
 
   @PostGroup
   Scenario: GET to group schema when is created
     Given I build "POST" request to group
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
-    Then The schema to group should be equals to "schemas/groupresponsecreate.json"
+    And The schema to group should be equals to "schemas/group.json"
 
   @GetGroup
   Scenario Outline: GET to group fail
@@ -19,6 +20,7 @@ Feature: Endpoint group
     When I use endpoint "chatter/groups/{groupId}" request to group with "groupId" and "<wrongId>"
     And I execute the request group
     Then the response status code should be "NOT_FOUND" to group
+    And The schema to group should be equals to "schemas/statusgeneral/notfount.json"
     Examples:
       | wrongId  |
       | 37967387 |
@@ -32,12 +34,14 @@ Feature: Endpoint group
     Given I build "POST" request to group
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
     Then the response status code should be "CREATED" to group
+    And The schema to group should be equals to "schemas/group.json"
 
   @PostGroup
   Scenario: POST to group
     Given I build "POST" request to group
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PrivateAccess"
     Then the response status code should be "CREATED" to group
+    And The schema to group should be equals to "schemas/groupcreateprivate.json"
 
   @DeleteGroup
   Scenario: POST to group
@@ -52,6 +56,7 @@ Feature: Endpoint group
     When I use endpoint "chatter/groups/{groupId}" request to group with "groupId" and "<wrongId>"
     And I execute the request group
     Then the response status code should be "NOT_FOUND" to group
+    And The schema to group should be equals to "schemas/statusgeneral/notfount.json"
     Examples:
       | wrongId  |
       | 8941179  |
@@ -86,6 +91,7 @@ Feature: Endpoint group
     When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
     And I update group the "<parameterToUpdate>" to "<updateDate>"
     Then the response status code should be "BAD_REQUEST" to group
+    And The schema to group should be equals to "schemas/statusgeneral/badrequest.json"
     Examples:
       | parameterToUpdate     | updateDate        |
       |                       | change name group |

@@ -90,7 +90,7 @@ public class ProductGeneralSteps {
         apiResponse.getResponse().then().log().body();
     }
 
-    @Then("The schema to product should be equals to {string}")
+    @And("The schema to product should be equals to {string}")
     public void theSchemaToProductShouldBeEqualsTo(String schema) {
         log.info("I verify schema");
         apiResponse.validateBodySchema(schema);
