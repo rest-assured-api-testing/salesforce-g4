@@ -53,26 +53,6 @@ task executeFeatures(type: Test) {
     ignoreFailures = true
     scanForTestClasses = false
     testLogging.showStandardStreams = true
-    doLast {
-        println("generate report")
-        generateReport("build/cucumber/cucumber.json","build/cucumber")
-    }
 }
 
-def generateReport(String pathCucumber, String pathReport){
-    File jsonFile = new File(pathCucumber)
 
-    if(jsonFile.exists()){
-        println("the json file exists")
-        File reportOutputDirectory = new File(pathReport);
-        List<String> jsonFiles = new ArrayList<>();
-        jsonFiles.add(pathCucumber);
-        String buildNumber = "1";
-        String projectName = "Salesforce";
-        Configuration configuration = new Configuration(reportOutputDirectory, projectName);
-        ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
-        reportBuilder.generateReports();
-    } else {
-        println("the json file does not exists")
-    }
-}
