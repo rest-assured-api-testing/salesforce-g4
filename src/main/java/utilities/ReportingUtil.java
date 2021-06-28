@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Juan Pablo Gonzales Alvarado
+ */
+
 package utilities;
 
 import net.masterthought.cucumber.Configuration;
@@ -10,7 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class ReportingUtil {
+
+    /**
+     * Generates the report file for tests scenarios.
+     */
     public static void generateReport() {
         File reportOutputDirectory = new File("build/cucumber");
         List<String> jsonFiles = new ArrayList<>();
