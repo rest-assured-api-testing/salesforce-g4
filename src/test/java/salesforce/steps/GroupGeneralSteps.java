@@ -45,7 +45,6 @@ public class GroupGeneralSteps {
     @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to group$")
     public void iBuildRequestToGroup(String method) {
         log.info("I build the request");
-        log.info("ParameterEndPoints.URL_BASE" + ParameterEndPoints.URL_BASE);
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
         apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
@@ -68,7 +67,7 @@ public class GroupGeneralSteps {
     public void iUseEndpointRequestToObjectWithName(String endpoint, String name, String visibility)
             throws JsonProcessingException {
         log.info("I execute the request post");
-        Group group = new Group();
+        Group group=new Group();
         group.setName(name);
         group.setVisibility(visibility);
         apiRequest.setEndpoint(endpoint);
@@ -91,7 +90,7 @@ public class GroupGeneralSteps {
         apiResponse.getResponse().then().log().body();
     }
 
-    @Then("The schema to group should be equals to {string}")
+    @And("The schema to group should be equals to {string}")
     public void theSchemaToGroupShouldBeEqualsTo(String schema) {
         log.info("I verify schema of group");
         apiResponse.validateBodySchema(schema);
