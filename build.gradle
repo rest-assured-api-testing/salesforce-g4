@@ -48,5 +48,3 @@ task executeFeatures(type: Test) {
     scanForTestClasses = false
     testLogging.showStandardStreams = true
 }
-
-
