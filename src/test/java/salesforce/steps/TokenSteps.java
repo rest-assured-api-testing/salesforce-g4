@@ -11,7 +11,11 @@
 
 package salesforce.steps;
 
-import api.*;
+import api.ApiManager;
+import api.ApiMethod;
+import api.ApiRequest;
+import api.ApiResponse;
+import api.ApiRequestBuilder;
 import entities.Token;
 import generalsetting.ParameterEndPoints;
 import generalsetting.ParameterUser;
