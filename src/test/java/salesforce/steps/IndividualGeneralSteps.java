@@ -48,7 +48,8 @@ public class IndividualGeneralSteps {
     public void iBuildRequestToxIndividual(String method) {
         log.info("I build the request for individual");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
-        apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
