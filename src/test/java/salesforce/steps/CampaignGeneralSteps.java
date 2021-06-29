@@ -75,6 +75,13 @@ public class CampaignGeneralSteps {
         apiResponse = ApiManager.execute(apiRequest);
     }
 
+    @When("^I use endpoint \"([^\"]*)\" request to campaign with \"([^\"]*)\" and (.+)$")
+    public void iUseEndpointRequestToProductWithFailWrongId(String endpoint,String keyPath,String idCustomer) {
+        log.info("I build account fail endpoint with bad id");
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.addPathParams(keyPath, idCustomer);
+    }
+
     @Then("the response status code should be {string} to campaign")
     public void theResponseStatusCodeShouldBeToCampaign(String statusCode) {
         log.info("I verify status response");
