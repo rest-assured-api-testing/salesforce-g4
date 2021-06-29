@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "url"
+      ]
+    },
+    "Id": {
+      "type": "string"
+    },
+    "IsDeleted": {
+      "type": "boolean"
+    },
+    "Name": {
+      "type": "string"
+    },
+    "ParentId": {
+      "type": "null"
+    },
+    "Type": {
+      "type": "string"
+    },
+    "Status": {
+      "type": "string"
+    },
+    "StartDate": {
+      "type": "null"
+    },
+    "EndDate": {
+      "type": "null"
+    },
+    "ExpectedRevenue": {
+      "type": "null"
+    },
+    "BudgetedCost": {
+      "type": "null"
+    },
+    "ActualCost": {
+      "type": "null"
+    },
+    "ExpectedResponse": {
+      "type": "number"
+    },
+    "NumberSent": {
+      "type": "number"
+    },
+    "IsActive": {
+      "type": "boolean"
+    },
+    "Description": {
+      "type": "null"
+    },
+    "NumberOfLeads": {
+      "type": "integer"
+    },
+    "NumberOfConvertedLeads": {
+      "type": "integer"
+    },
+    "NumberOfContacts": {
+      "type": "integer"
+    },
+    "NumberOfResponses": {
+      "type": "integer"
+    },
+    "NumberOfOpportunities": {
+      "type": "integer"
+    },
+    "NumberOfWonOpportunities": {
+      "type": "integer"
+    },
+    "AmountAllOpportunities": {
+      "type": "number"
+    },
+    "AmountWonOpportunities": {
+      "type": "number"
+    },
+    "OwnerId": {
+      "type": "string"
+    },
+    "CreatedDate": {
+      "type": "string"
+    },
+    "CreatedById": {
+      "type": "string"
+    },
+    "LastModifiedDate": {
+      "type": "string"
+    },
+    "LastModifiedById": {
+      "type": "string"
+    },
+    "SystemModstamp": {
+      "type": "string"
+    },
+    "LastActivityDate": {
+      "type": "null"
+    },
+    "LastViewedDate": {
+      "type": "string"
+    },
+    "LastReferencedDate": {
+      "type": "string"
+    },
+    "CampaignMemberRecordTypeId": {
+      "type": "null"
+    }
+  },
+  "required": [
+    "attributes",
+    "Id",
+    "IsDeleted",
+    "Name",
+    "ParentId",
+    "Type",
+    "Status",
+    "StartDate",
+    "EndDate",
+    "ExpectedRevenue",
+    "BudgetedCost",
+    "ActualCost",
+    "ExpectedResponse",
+    "NumberSent",
+    "IsActive",
+    "Description",
+    "NumberOfLeads",
+    "NumberOfConvertedLeads",
+    "NumberOfContacts",
+    "NumberOfResponses",
+    "NumberOfOpportunities",
+    "NumberOfWonOpportunities",
+    "AmountAllOpportunities",
+    "AmountWonOpportunities",
+    "OwnerId",
+    "CreatedDate",
+    "CreatedById",
+    "LastModifiedDate",
+    "LastModifiedById",
+    "SystemModstamp",
+    "LastActivityDate",
+    "LastViewedDate",
+    "LastReferencedDate",
+    "CampaignMemberRecordTypeId"
+  ]
+}

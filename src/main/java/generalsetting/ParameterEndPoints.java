@@ -31,5 +31,8 @@ public class ParameterEndPoints {
     public static final String OPPORTUNITY =  dotenv.get("OPPORTUNITY");
     public static final String OPPORTUNITY_ID = dotenv.get("OPPORTUNITY_ID");
     public static final String OPPORTUNITY_TO_INTERACT = dotenv.get("OPPORTUNITY_TO_INTERACT");
+    public static final String CAMPAIGN =  dotenv.get("CAMPAIGN");
+    public static final String CAMPAIGN_ID = dotenv.get("CAMPAIGN_ID");
+    public static final String CAMPAIGN_TO_INTERACT = dotenv.get("CAMPAIGN_TO_INTERACT");
     public static final String SOBJECTS = dotenv.get("SOBJECTS");
 }
