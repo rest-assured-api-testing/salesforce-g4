@@ -1,0 +1,470 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "The root schema comprises the entire JSON document.",
+  "default": {},
+  "examples": [
+    {
+      "attributes": {
+        "type": "Individual",
+        "url": "/services/data/v52.0/sobjects/Individual/0PK5e0000008OKzGAM"
+      },
+      "Id": "0PK5e0000008OKzGAM",
+      "OwnerId": "0055e0000041THJAA2",
+      "IsDeleted": false,
+      "LastName": "Individual test",
+      "FirstName": null,
+      "Salutation": null,
+      "Name": "Individual test",
+      "HasOptedOutTracking": false,
+      "HasOptedOutProfiling": false,
+      "HasOptedOutProcessing": false,
+      "HasOptedOutSolicit": false,
+      "ShouldForget": false,
+      "SendIndividualData": false,
+      "CanStorePiiElsewhere": false,
+      "HasOptedOutGeoTracking": false,
+      "BirthDate": null,
+      "DeathDate": null,
+      "ConvictionsCount": null,
+      "ChildrenCount": null,
+      "MilitaryService": null,
+      "IsHomeOwner": false,
+      "Occupation": null,
+      "Website": null,
+      "IndividualsAge": null,
+      "LastViewedDate": null,
+      "MasterRecordId": null,
+      "ConsumerCreditScore": null,
+      "ConsumerCreditScoreProviderName": null,
+      "InfluencerRating": null,
+      "CreatedDate": "2021-06-29T20:22:53.000+0000",
+      "CreatedById": "0055e0000041THJAA2",
+      "LastModifiedDate": "2021-06-29T20:22:53.000+0000",
+      "LastModifiedById": "0055e0000041THJAA2",
+      "SystemModstamp": "2021-06-29T20:22:53.000+0000"
+    }
+  ],
+  "required": [
+    "attributes",
+    "Id",
+    "OwnerId",
+    "IsDeleted",
+    "LastName",
+    "FirstName",
+    "Salutation",
+    "Name",
+    "HasOptedOutTracking",
+    "HasOptedOutProfiling",
+    "HasOptedOutProcessing",
+    "HasOptedOutSolicit",
+    "ShouldForget",
+    "SendIndividualData",
+    "CanStorePiiElsewhere",
+    "HasOptedOutGeoTracking",
+    "BirthDate",
+    "DeathDate",
+    "ConvictionsCount",
+    "ChildrenCount",
+    "MilitaryService",
+    "IsHomeOwner",
+    "Occupation",
+    "Website",
+    "IndividualsAge",
+    "LastViewedDate",
+    "MasterRecordId",
+    "ConsumerCreditScore",
+    "ConsumerCreditScoreProviderName",
+    "InfluencerRating",
+    "CreatedDate",
+    "CreatedById",
+    "LastModifiedDate",
+    "LastModifiedById",
+    "SystemModstamp"
+  ],
+  "properties": {
+    "attributes": {
+      "$id": "#/properties/attributes",
+      "type": "object",
+      "title": "The attributes schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": {},
+      "examples": [
+        {
+          "type": "Individual",
+          "url": "/services/data/v52.0/sobjects/Individual/0PK5e0000008OKzGAM"
+        }
+      ],
+      "required": [
+        "type",
+        "url"
+      ],
+      "properties": {
+        "type": {
+          "$id": "#/properties/attributes/properties/type",
+          "type": "string",
+          "title": "The type schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "Individual"
+          ]
+        },
+        "url": {
+          "$id": "#/properties/attributes/properties/url",
+          "type": "string",
+          "title": "The url schema",
+          "description": "An explanation about the purpose of this instance.",
+          "default": "",
+          "examples": [
+            "/services/data/v52.0/sobjects/Individual/0PK5e0000008OKzGAM"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "Id": {
+      "$id": "#/properties/Id",
+      "type": "string",
+      "title": "The Id schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "0PK5e0000008OKzGAM"
+      ]
+    },
+    "OwnerId": {
+      "$id": "#/properties/OwnerId",
+      "type": "string",
+      "title": "The OwnerId schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "0055e0000041THJAA2"
+      ]
+    },
+    "IsDeleted": {
+      "$id": "#/properties/IsDeleted",
+      "type": "boolean",
+      "title": "The IsDeleted schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "LastName": {
+      "$id": "#/properties/LastName",
+      "type": "string",
+      "title": "The LastName schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "Individual test"
+      ]
+    },
+    "FirstName": {
+      "$id": "#/properties/FirstName",
+      "type": "null",
+      "title": "The FirstName schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "Salutation": {
+      "$id": "#/properties/Salutation",
+      "type": "null",
+      "title": "The Salutation schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "Name": {
+      "$id": "#/properties/Name",
+      "type": "string",
+      "title": "The Name schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "Individual test"
+      ]
+    },
+    "HasOptedOutTracking": {
+      "$id": "#/properties/HasOptedOutTracking",
+      "type": "boolean",
+      "title": "The HasOptedOutTracking schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "HasOptedOutProfiling": {
+      "$id": "#/properties/HasOptedOutProfiling",
+      "type": "boolean",
+      "title": "The HasOptedOutProfiling schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "HasOptedOutProcessing": {
+      "$id": "#/properties/HasOptedOutProcessing",
+      "type": "boolean",
+      "title": "The HasOptedOutProcessing schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "HasOptedOutSolicit": {
+      "$id": "#/properties/HasOptedOutSolicit",
+      "type": "boolean",
+      "title": "The HasOptedOutSolicit schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "ShouldForget": {
+      "$id": "#/properties/ShouldForget",
+      "type": "boolean",
+      "title": "The ShouldForget schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "SendIndividualData": {
+      "$id": "#/properties/SendIndividualData",
+      "type": "boolean",
+      "title": "The SendIndividualData schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "CanStorePiiElsewhere": {
+      "$id": "#/properties/CanStorePiiElsewhere",
+      "type": "boolean",
+      "title": "The CanStorePiiElsewhere schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "HasOptedOutGeoTracking": {
+      "$id": "#/properties/HasOptedOutGeoTracking",
+      "type": "boolean",
+      "title": "The HasOptedOutGeoTracking schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "BirthDate": {
+      "$id": "#/properties/BirthDate",
+      "type": "null",
+      "title": "The BirthDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "DeathDate": {
+      "$id": "#/properties/DeathDate",
+      "type": "null",
+      "title": "The DeathDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "ConvictionsCount": {
+      "$id": "#/properties/ConvictionsCount",
+      "type": "null",
+      "title": "The ConvictionsCount schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "ChildrenCount": {
+      "$id": "#/properties/ChildrenCount",
+      "type": "null",
+      "title": "The ChildrenCount schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "MilitaryService": {
+      "$id": "#/properties/MilitaryService",
+      "type": "null",
+      "title": "The MilitaryService schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "IsHomeOwner": {
+      "$id": "#/properties/IsHomeOwner",
+      "type": "boolean",
+      "title": "The IsHomeOwner schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "Occupation": {
+      "$id": "#/properties/Occupation",
+      "type": "null",
+      "title": "The Occupation schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "Website": {
+      "$id": "#/properties/Website",
+      "type": "null",
+      "title": "The Website schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "IndividualsAge": {
+      "$id": "#/properties/IndividualsAge",
+      "type": "null",
+      "title": "The IndividualsAge schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "LastViewedDate": {
+      "$id": "#/properties/LastViewedDate",
+      "type": "null",
+      "title": "The LastViewedDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "MasterRecordId": {
+      "$id": "#/properties/MasterRecordId",
+      "type": "null",
+      "title": "The MasterRecordId schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "ConsumerCreditScore": {
+      "$id": "#/properties/ConsumerCreditScore",
+      "type": "null",
+      "title": "The ConsumerCreditScore schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "ConsumerCreditScoreProviderName": {
+      "$id": "#/properties/ConsumerCreditScoreProviderName",
+      "type": "null",
+      "title": "The ConsumerCreditScoreProviderName schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "InfluencerRating": {
+      "$id": "#/properties/InfluencerRating",
+      "type": "null",
+      "title": "The InfluencerRating schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": null,
+      "examples": [
+        null
+      ]
+    },
+    "CreatedDate": {
+      "$id": "#/properties/CreatedDate",
+      "type": "string",
+      "title": "The CreatedDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "2021-06-29T20:22:53.000+0000"
+      ]
+    },
+    "CreatedById": {
+      "$id": "#/properties/CreatedById",
+      "type": "string",
+      "title": "The CreatedById schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "0055e0000041THJAA2"
+      ]
+    },
+    "LastModifiedDate": {
+      "$id": "#/properties/LastModifiedDate",
+      "type": "string",
+      "title": "The LastModifiedDate schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "2021-06-29T20:22:53.000+0000"
+      ]
+    },
+    "LastModifiedById": {
+      "$id": "#/properties/LastModifiedById",
+      "type": "string",
+      "title": "The LastModifiedById schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "0055e0000041THJAA2"
+      ]
+    },
+    "SystemModstamp": {
+      "$id": "#/properties/SystemModstamp",
+      "type": "string",
+      "title": "The SystemModstamp schema",
+      "description": "An explanation about the purpose of this instance.",
+      "default": "",
+      "examples": [
+        "2021-06-29T20:22:53.000+0000"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
