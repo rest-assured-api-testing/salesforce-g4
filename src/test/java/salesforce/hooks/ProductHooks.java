@@ -18,6 +18,7 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import generalsetting.ParameterUser;
 import utilities.ObjectInformation;
 import entities.Token;
 import entities.product.Product;
@@ -41,7 +42,17 @@ public class ProductHooks {
     @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
     public void generateToken() {
         log.info("Generate Token");
-        ApiResponse apiResponse = ApiManager.executeToken();
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
+                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
+                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
+                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
+                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+                .headers("Accept", "application/json")
+                .headers("Content-Type", "application/x-www-form-urlencoded")
+                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
         objectInformation.setToken(tokenUser);
     }
