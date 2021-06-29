@@ -46,7 +46,8 @@ public class AccountGeneralSteps {
     public void iBuildRequestToAccount(String method) {
         log.info("I build the request for account");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
-        apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 

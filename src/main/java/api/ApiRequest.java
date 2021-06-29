@@ -27,11 +27,13 @@ public class ApiRequest<T> {
     private List<Header> headers;
     private Map<String, String> queryParams;
     private Map<String, String> pathParams;
+    private Map<String, String> params;
 
     public ApiRequest() {
         headers = new ArrayList<>();
         queryParams = new HashMap<>();
         pathParams = new HashMap<>();
+        params = new HashMap<>();
     }
 
     /*
@@ -58,6 +60,9 @@ public class ApiRequest<T> {
      * @return a String with the resource's endpoint.
      */
     public String getEndpoint() {
+        if (endpoint == null) {
+            return "";
+        }
         return endpoint;
     }
 
@@ -164,5 +169,24 @@ public class ApiRequest<T> {
      */
     public Map<String, String> getPathParams() {
         return pathParams;
+    }
+
+    /**
+     * Sets the values for params.
+     *
+     * @param param String with the params name.
+     * @param value  String with the params value.
+     */
+    public void addParams(final String param, final String value) {
+        params.put(param, value);
+    }
+
+    /*
+     * Gets the request params.
+     *
+     * @return a Map with List of params.
+     */
+    public Map<String, String> getParams() {
+        return params;
     }
 }

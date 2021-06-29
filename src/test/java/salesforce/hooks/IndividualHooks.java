@@ -18,6 +18,7 @@ import entities.Token;
 import entities.individual.Individual;
 import entities.individual.IndividualResponse;
 import generalsetting.ParameterEndPoints;
+import generalsetting.ParameterUser;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -38,7 +39,17 @@ public class IndividualHooks {
     @Before(value = "@GetIndividual or @PostIndividual or @DeleteIndividual or @PatchIndividual ", order = 1)
     public void generateToken() {
         log.info("Generate Token Individual");
-        ApiResponse apiResponse = ApiManager.executeToken();
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
+                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
+                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
+                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
+                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
+                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
         objectInformation.setToken(tokenUser);
     }
@@ -49,7 +60,7 @@ public class IndividualHooks {
         Individual individual = new Individual("Individual test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.INDIVIDUAL)
                 .body(new ObjectMapper().writeValueAsString(individual))
                 .method(ApiMethod.POST).build();
@@ -63,7 +74,7 @@ public class IndividualHooks {
         log.info("Delete Individual Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.INDIVIDUAL_TO_INTERACT)
                 .pathParams(ParameterEndPoints.INDIVIDUAL_ID, individualResponse.getId())
                 .method(ApiMethod.DELETE).build();
@@ -75,7 +86,7 @@ public class IndividualHooks {
         log.info("Delete Individual Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.INDIVIDUAL_TO_INTERACT)
                 .pathParams(ParameterEndPoints.INDIVIDUAL_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();

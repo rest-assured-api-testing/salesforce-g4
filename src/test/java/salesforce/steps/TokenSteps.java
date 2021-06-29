@@ -12,9 +12,15 @@
 package salesforce.steps;
 
 import api.ApiManager;
+import api.ApiMethod;
+import api.ApiRequest;
 import api.ApiResponse;
+import api.ApiRequestBuilder;
 import entities.Token;
+import generalsetting.ParameterEndPoints;
+import generalsetting.ParameterUser;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.log4j.Logger;
@@ -26,15 +32,32 @@ public class TokenSteps {
     private ApiResponse apiResponse;
     private Token token;
 
+    @Given("I build {string} request to token")
+    public void iBuildRequestToToken(String method) {
+        log.info("I build the request");
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
+                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
+                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
+                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
+                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
+                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .method(ApiMethod.valueOf(method))
+                .build();
+        apiResponse = ApiManager.executeParam(apiRequest);
+    }
+
     @When("I execute token request")
-    public void iExecuteRequest(){
+    public void iExecuteRequest() {
         log.info("I execute token request");
         apiResponse = ApiManager.executeToken();
-        token=apiResponse.getBody(Token.class);
+        token = apiResponse.getBody(Token.class);
     }
 
     @And("The new token should be type {string}")
-    public void theResponseTypeShouldBe(String typeToken){
+    public void theResponseTypeShouldBe(String typeToken) {
         log.info("I verify type token");
         Assert.assertEquals(token.getToken_type(), typeToken);
     }

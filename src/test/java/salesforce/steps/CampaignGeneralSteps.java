@@ -48,7 +48,8 @@ public class CampaignGeneralSteps {
     public void iBuildRequestToCampaign(String method) {
         log.info("I build the request");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
-        apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 

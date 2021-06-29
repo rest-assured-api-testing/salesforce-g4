@@ -22,6 +22,7 @@ import entities.campaign.CampaignCreate;
 import entities.Token;
 import entities.campaign.Campaign;
 import generalsetting.ParameterEndPoints;
+import generalsetting.ParameterUser;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -42,7 +43,17 @@ public class CampaignHooks {
     @Before(value = "@GetCampaign or @PostCampaign or @DeleteCampaign or @PatchCampaign", order = 1)
     public void generateToken() {
         log.info("Generate Token");
-        ApiResponse apiResponse = ApiManager.executeToken();
+        ApiRequest apiRequest = new ApiRequestBuilder()
+                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
+                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
+                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
+                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
+                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
+                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
         objectInformation.setToken(tokenUser);
     }
@@ -54,7 +65,7 @@ public class CampaignHooks {
         campaign.setName("Campaign-test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.CAMPAIGN)
                 .body(new ObjectMapper().writeValueAsString(campaign))
                 .method(ApiMethod.POST).build();
@@ -68,7 +79,7 @@ public class CampaignHooks {
         log.info("Delete Campaign");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
                 .pathParams(ParameterEndPoints.CAMPAIGN_ID, campaignCreate.getId())
                 .method(ApiMethod.DELETE).build();
@@ -80,7 +91,7 @@ public class CampaignHooks {
         log.info("Delete Campaign Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
                 .pathParams(ParameterEndPoints.CAMPAIGN_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
