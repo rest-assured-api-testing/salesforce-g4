@@ -39,7 +39,8 @@ public class GetAllTypeObject {
         apiResponse = ApiManager.executeToken();
         apiRequest = apiRequestBuilder
                 .baseUri(ParameterEndPoints.URL_BASE + ParameterEndPoints.SOBJECTS)
-                .headers("Authorization", "Bearer " + apiResponse.getBody(Token.class).getAccess_token())
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER
+                        + apiResponse.getBody(Token.class).getAccess_token())
                 .build();
     }
 

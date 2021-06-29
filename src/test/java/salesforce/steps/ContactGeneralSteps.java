@@ -47,7 +47,8 @@ public class ContactGeneralSteps {
     public void iBuildRequestToContact(String method) {
         log.info("I build the request for contact");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
-        apiRequest.addHeaders("Authorization", "Bearer " + objectInformation.getToken());
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 

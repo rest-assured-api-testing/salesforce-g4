@@ -48,8 +48,8 @@ public class ProductHooks {
                 .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
                 .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
                 .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
-                .headers("Accept", "application/json")
-                .headers("Content-Type", "application/x-www-form-urlencoded")
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
                 .baseUri(ParameterEndPoints.URL_TOKEN)
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
@@ -64,7 +64,7 @@ public class ProductHooks {
         product.setName("Product-test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.PRODUCT)
                 .body(new ObjectMapper().writeValueAsString(product))
                 .method(ApiMethod.POST).build();
@@ -78,7 +78,7 @@ public class ProductHooks {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
                 .method(ApiMethod.DELETE).build();

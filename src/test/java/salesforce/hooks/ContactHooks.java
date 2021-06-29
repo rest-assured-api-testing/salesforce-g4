@@ -49,8 +49,8 @@ public class ContactHooks {
                 .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
                 .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
                 .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
-                .headers("Accept", "application/json")
-                .headers("Content-Type", "application/x-www-form-urlencoded")
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
                 .baseUri(ParameterEndPoints.URL_TOKEN)
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
@@ -64,7 +64,7 @@ public class ContactHooks {
         Contact contact = new Contact("contact test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.CONTACT)
                 .body(new ObjectMapper().writeValueAsString(contact))
                 .method(ApiMethod.POST).build();
@@ -78,7 +78,7 @@ public class ContactHooks {
         log.info("Delete Contact Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.CONTACT_ID, contactResponse.getId())
                 .method(ApiMethod.DELETE).build();
@@ -90,7 +90,7 @@ public class ContactHooks {
         log.info("Delete Contact Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
                 .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.CONTACT_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();

@@ -41,8 +41,8 @@ public class TokenSteps {
                 .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
                 .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
                 .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
-                .headers("Accept", "application/json")
-                .headers("Content-Type", "application/x-www-form-urlencoded")
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
                 .baseUri(ParameterEndPoints.URL_TOKEN)
                 .method(ApiMethod.valueOf(method))
                 .build();
