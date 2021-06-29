@@ -1,3 +1,14 @@
+/**
+ * Copyright (c) 2021 Fundacion Jala.
+ *
+ * This software is the confidential and proprietary information of Fundacion Jala
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with Fundacion Jala
+ *
+ * @author Gustavo Zacarias Huanca Alconz
+ */
+
 package salesforce.steps;
 
 import api.ApiManager;
@@ -6,10 +17,8 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entities.Campaign.Campaign;
-import entities.Campaign.CampaignCreate;
-import entities.product.Product;
-import entities.product.ProductCreate;
+import entities.campaign.Campaign;
+import entities.campaign.CampaignCreate;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -58,7 +67,7 @@ public class CampaignGeneralSteps {
         apiRequest.setEndpoint(endpoint);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(campaignPost));
         apiResponse = ApiManager.execute(apiRequest);
-        campaignCreate=apiResponse.getBody(CampaignCreate.class);
+        campaignCreate = apiResponse.getBody(CampaignCreate.class);
         objectInformation.setIdDelete(campaignCreate.getId());
     }
 
@@ -71,12 +80,12 @@ public class CampaignGeneralSteps {
     @And("^I update to campaign the (.+) to (.+)$")
     public void iUpdateTheTo(String parameterToUpdate, String updateDate) {
         log.info("I update the product");
-        apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
+        apiRequest.setBody(jsonConvert(parameterToUpdate, updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
     @When("^I use endpoint \"([^\"]*)\" request to campaign with \"([^\"]*)\" and (.+)$")
-    public void iUseEndpointRequestToProductWithFailWrongId(String endpoint,String keyPath,String idCustomer) {
+    public void iUseEndpointRequestToProductWithFailWrongId(String endpoint, String keyPath, String idCustomer) {
         log.info("I build account fail endpoint with bad id");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, idCustomer);
