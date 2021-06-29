@@ -44,7 +44,7 @@ public class IndividualHooks {
     }
 
     @Before(value = "@GetIndividual or @DeleteIndividual or @PatchIndividual", order = 2)
-    public void createAccountHooks() throws JsonProcessingException {
+    public void createIndividualHooks() throws JsonProcessingException {
         log.info("Create Individual");
         Individual individual = new Individual("Individual test");
         ApiRequest apiRequest = new ApiRequestBuilder()

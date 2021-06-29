@@ -79,6 +79,7 @@ Feature: Endpoint Individual
       | badId    | status |
       | 12341415 | 404    |
       | null     | 404    |
+      | null     | 404    |
 
   @PatchIndividual
   Scenario Outline: PATCH to individual fail body

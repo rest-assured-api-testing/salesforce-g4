@@ -92,7 +92,7 @@ public class IndividualGeneralSteps {
     }
 
     @Then("^The schema to individual should be equals to \"([^\"]*)\"$")
-    public void theSchemaToContactShouldBeEqualsTo(String schema) {
+    public void theSchemaToIndividualShouldBeEqualsTo(String schema) {
         log.info("I verify schema Individual");
         apiResponse.validateBodySchema(schema);
     }
@@ -118,7 +118,7 @@ public class IndividualGeneralSteps {
     }
 
     @When("^I use endpoint \"([^\"]*)\" request to individual with (.+) and (.+)$")
-    public void iUseEndpointRequestToContactWithApiNameAndValue(String endpoint,String apiName, String value) {
+    public void iUseEndpointRequestToIndividualWithApiNameAndValue(String endpoint,String apiName, String value) {
         log.info("I create fail individual");
         apiRequest.setBody(jsonConvert(apiName,value));
         apiRequest.setEndpoint(endpoint);
@@ -126,8 +126,8 @@ public class IndividualGeneralSteps {
     }
 
     @And("^I update individual the (.+) to (.+)$")
-    public void iUpdateContactTheApiNameToValue(String apiname, String value) {
-        log.info("I update the account fail");
+    public void iUpdateIndividualTheApiNameToValue(String apiname, String value) {
+        log.info("I update the individual fail");
         apiRequest.setBody(jsonConvert(apiname,value));
         apiResponse = ApiManager.execute(apiRequest);
     }
