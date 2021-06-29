@@ -52,6 +52,24 @@ public class ApiManager {
     }
 
     /**
+     * Executes the Api request and assignment to response using param.
+     *
+     * @param apiRequest contains all the parameters for the execution to request.
+     * @return a new instance to response.
+     */
+    public static ApiResponse executeParam(final ApiRequest apiRequest) {
+        Response response = given().headers(apiRequest.getHeaders())
+                .queryParams(apiRequest.getQueryParams())
+                .pathParams(apiRequest.getPathParams())
+                .baseUri(apiRequest.getBaseUri())
+                .params(apiRequest.getParams())
+                .log().all()
+                .request(apiRequest.getMethod().name(),
+                        apiRequest.getEndpoint());
+        return new ApiResponse(response);
+    }
+
+    /**
      * Executes the request to get a token.
      *
      * @return the token for our account.

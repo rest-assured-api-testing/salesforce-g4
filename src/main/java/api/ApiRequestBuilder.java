@@ -87,6 +87,18 @@ public class ApiRequestBuilder implements IBuilderApiRequest {
     }
 
     /**
+     * Sets params to request.
+     *
+     * @param param is the key of param
+     * @param value is a value of param
+     * @return ApiRequest in order to build request
+     */
+    public ApiRequestBuilder params(final String param, final String value) {
+        this.apiRequest.addParams(param, value);
+        return this;
+    }
+
+    /**
      * Finishes the build to object.
      *
      * @return ApiRequest in order to build request
