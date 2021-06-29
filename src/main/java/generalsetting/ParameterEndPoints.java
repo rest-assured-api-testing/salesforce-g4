@@ -34,6 +34,9 @@ public class ParameterEndPoints {
     public static final String CAMPAIGN =  dotenv.get("CAMPAIGN");
     public static final String CAMPAIGN_ID = dotenv.get("CAMPAIGN_ID");
     public static final String CAMPAIGN_TO_INTERACT = dotenv.get("CAMPAIGN_TO_INTERACT");
+    public static final String INDIVIDUAL = dotenv.get("INDIVIDUAL");
+    public static final String INDIVIDUAL_ID = dotenv.get("INDIVIDUAL_ID");
+    public static final String INDIVIDUAL_TO_INTERACT = dotenv.get("INDIVIDUAL_TO_INTERACT");
     public static final String SOBJECTS = dotenv.get("SOBJECTS");
     public static final String AUTHORIZATION = dotenv.get("AUTHORIZATION");
     public static final String BEARER = dotenv.get("BEARER");
