@@ -20,6 +20,8 @@ import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import utilities.ObjectInformation;
 
+import static utilities.JsonFormat.jsonConvert;
+
 public class CampaignGeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
@@ -57,12 +59,19 @@ public class CampaignGeneralSteps {
         apiRequest.setBody(new ObjectMapper().writeValueAsString(campaignPost));
         apiResponse = ApiManager.execute(apiRequest);
         campaignCreate=apiResponse.getBody(CampaignCreate.class);
-        objectInformation.setIdDelete(campaignPost.getId());
+        objectInformation.setIdDelete(campaignCreate.getId());
     }
 
     @And("I execute the request to campaign")
     public void iExecuteTheRequest() {
         log.info("I execute the request");
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @And("^I update to campaign the (.+) to (.+)$")
+    public void iUpdateTheTo(String parameterToUpdate, String updateDate) {
+        log.info("I update the product");
+        apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
