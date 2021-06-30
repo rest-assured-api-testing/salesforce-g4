@@ -43,7 +43,7 @@ import entities.product.Product;
 import static utilities.JsonFormat.mapFormat;
 import static utilities.JsonFormat.jsonConvert;
 
-public class ProductGeneralSteps {
+public class GeneralEndPointSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiRequest apiRequestPatch = new ApiRequest();
@@ -57,7 +57,7 @@ public class ProductGeneralSteps {
     private OpportunityResponse opportunityResponse;
     private String objectBody;
 
-    public ProductGeneralSteps(ObjectInformation objectInformation) {
+    public GeneralEndPointSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }

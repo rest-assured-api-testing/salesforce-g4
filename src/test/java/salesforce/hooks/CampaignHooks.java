@@ -18,28 +18,29 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import generalsetting.ParameterUser;
-import utilities.ObjectInformation;
+import entities.campaign.CampaignCreate;
 import entities.Token;
-import entities.product.Product;
-import entities.product.ProductCreate;
+import entities.campaign.Campaign;
 import generalsetting.ParameterEndPoints;
+import generalsetting.ParameterUser;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
+import utilities.ObjectInformation;
 
-public class ProductHooks {
+public class CampaignHooks {
+
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
-    private ProductCreate productCreate;
+    private CampaignCreate campaignCreate;
     private ObjectInformation objectInformation = new ObjectInformation();
 
-    public ProductHooks(ObjectInformation objectInformation) {
+    public CampaignHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
         this.objectInformation = objectInformation;
     }
 
-    @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
+    @Before(value = "@GetCampaign or @PostCampaign or @DeleteCampaign or @PatchCampaign", order = 1)
     public void generateToken() {
         log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
@@ -57,43 +58,44 @@ public class ProductHooks {
         objectInformation.setToken(tokenUser);
     }
 
-    @Before(value = "@GetProduct or @DeleteProduct or @PatchProduct", order = 2)
+    @Before(value = "@GetCampaign or @DeleteCampaign or @PatchCampaign", order = 2)
     public void createProduct() throws JsonProcessingException {
-        log.info("Create Product");
-        Product product = new Product();
-        product.setName("Product-test");
+        log.info("Create Campaign");
+        Campaign campaign = new Campaign();
+        campaign.setName("Campaign-test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT)
-                .body(new ObjectMapper().writeValueAsString(product))
+                .endpoint(ParameterEndPoints.CAMPAIGN)
+                .body(new ObjectMapper().writeValueAsString(campaign))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
-        productCreate = apiResponse.getBody(ProductCreate.class);
-        objectInformation.setId(productCreate.getId());
+        campaignCreate = apiResponse.getBody(CampaignCreate.class);
+        objectInformation.setId(campaignCreate.getId());
     }
 
-    @After(value = "@GetProduct or @PatchProduct or @DeleteProduct")
+    @After(value = "@GetCampaign or @PatchCampaign or @DeleteCampaign")
     public void cleanRepository() {
-        log.info("Delete Product");
+        log.info("Delete Campaign");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
+                .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CAMPAIGN_ID, campaignCreate.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @After(value = "@PostProduct")
+    @After(value = "@PostCampaign")
     public void cleanRepositoryPost() {
-        log.info("Delete Product Post");
+        log.info("Delete Campaign Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, objectInformation.getIdDelete())
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CAMPAIGN_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 }
+

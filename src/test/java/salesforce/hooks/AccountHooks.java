@@ -6,7 +6,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with Fundacion Jala
  *
- * @author Gustavo Zacarias Huanca Alconz
+ * @author Juan Pablo Gonzales Alvarado
  */
 
 package salesforce.hooks;
@@ -21,25 +21,25 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import generalsetting.ParameterUser;
 import utilities.ObjectInformation;
 import entities.Token;
-import entities.product.Product;
-import entities.product.ProductCreate;
+import entities.account.Account;
+import entities.account.AccountResponse;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
 
-public class ProductHooks {
+public class AccountHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
-    private ProductCreate productCreate;
-    private ObjectInformation objectInformation = new ObjectInformation();
+    private AccountResponse accountResponse;
+    private ObjectInformation objectInformation =new ObjectInformation();
 
-    public ProductHooks(ObjectInformation objectInformation) {
-        log.info("ScenariosHooks constructor");
-        this.objectInformation = objectInformation;
+    public AccountHooks(ObjectInformation objectInformation) {
+        log.info("AccountHooks constructor");
+        this.objectInformation=objectInformation;
     }
 
-    @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
+    @Before(value = "@GetAccount or @PostAccount or @DeleteAccount or @PatchAccount ", order = 1)
     public void generateToken() {
         log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
@@ -57,42 +57,41 @@ public class ProductHooks {
         objectInformation.setToken(tokenUser);
     }
 
-    @Before(value = "@GetProduct or @DeleteProduct or @PatchProduct", order = 2)
-    public void createProduct() throws JsonProcessingException {
-        log.info("Create Product");
-        Product product = new Product();
-        product.setName("Product-test");
+    @Before(value = "@GetAccount or @DeleteAccount or @PatchAccount", order = 2)
+    public void createAccountHooks() throws JsonProcessingException {
+        log.info("Create Account hooks");
+        Account account = new Account("account test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT)
-                .body(new ObjectMapper().writeValueAsString(product))
+                .endpoint(ParameterEndPoints.ACCOUNT)
+                .body(new ObjectMapper().writeValueAsString(account))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
-        productCreate = apiResponse.getBody(ProductCreate.class);
-        objectInformation.setId(productCreate.getId());
+        accountResponse = apiResponse.getBody(AccountResponse.class);
+        objectInformation.setId(accountResponse.getId());
     }
 
-    @After(value = "@GetProduct or @PatchProduct or @DeleteProduct")
-    public void cleanRepository() {
-        log.info("Delete Product");
+    @After(value = "@GetAccount or @PatchAccount")
+    public void deleteAccountHooks() {
+        log.info("Delete Account hooks");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
+                .endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.ACCOUNT_ID, accountResponse.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @After(value = "@PostProduct")
+    @After(value = "@PostAccount")
     public void cleanRepositoryPost() {
         log.info("Delete Product Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, objectInformation.getIdDelete())
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.ACCOUNT_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
