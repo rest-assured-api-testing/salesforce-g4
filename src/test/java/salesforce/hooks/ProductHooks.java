@@ -18,6 +18,8 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.account.Account;
+import entities.account.AccountResponse;
 import entities.campaign.Campaign;
 import entities.campaign.CampaignCreate;
 import entities.group.Group;
@@ -38,6 +40,7 @@ public class ProductHooks {
     private Group groupCreate;
     private ObjectInformation objectInformation = new ObjectInformation();
     private CampaignCreate campaignCreate;
+    private AccountResponse accountResponse;
 
     public ProductHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
@@ -167,6 +170,39 @@ public class ProductHooks {
         ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
                 .pathParams(ParameterEndPoints.CAMPAIGN_ID, objectInformation.getIdDelete())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Before(value = "@GetAccount or @DeleteAccount or @PatchAccount", order = 2)
+    public void createAccountHooks() throws JsonProcessingException {
+        log.info("Create Account hooks");
+        Account account = new Account("account test");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.ACCOUNT)
+                .body(new ObjectMapper().writeValueAsString(account))
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        accountResponse = apiResponse.getBody(AccountResponse.class);
+        objectInformation.setId(accountResponse.getId());
+    }
+
+    @After(value = "@GetAccount or @PatchAccount")
+    public void deleteAccountHooks() {
+        log.info("Delete Account hooks");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.ACCOUNT_ID, accountResponse.getId())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @After(value = "@PostAccount")
+    public void cleanRepositoryPostAccount() {
+        log.info("Delete Product Post");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.ACCOUNT_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

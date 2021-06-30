@@ -17,6 +17,8 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.account.Account;
+import entities.account.AccountResponse;
 import entities.campaign.Campaign;
 import entities.campaign.CampaignCreate;
 import entities.group.Group;
@@ -41,6 +43,7 @@ public class ProductGeneralSteps {
     private ObjectInformation objectInformation;
     private ProductCreate productCreate;
     private CampaignCreate campaignCreate;
+    private AccountResponse accountResponse;
 
     public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
@@ -131,5 +134,40 @@ public class ProductGeneralSteps {
         apiResponse = ApiManager.execute(apiRequest);
         campaignCreate = apiResponse.getBody(CampaignCreate.class);
         objectInformation.setIdDelete(campaignCreate.getId());
+    }
+
+    @When("I use endpoint {string} request to account with name {string}")
+    public void iUseEndpointRequestToAccountWithName(String endpoint, String name) throws JsonProcessingException {
+        log.info("I execute the request Account post");
+        Account accountCreate = new Account(name);
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(accountCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+        accountResponse=apiResponse.getBody(AccountResponse.class);
+        objectInformation.setIdDelete(accountResponse.getId());
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to account with (.+) and (.+)$")
+    public void iUseEndpointRequestToAccountWithApiName(String endpoint,String apiName, String value) {
+        log.info("I create fail account");
+        apiRequest.setBody(jsonConvert(apiName,value));
+        apiRequest.setEndpoint(endpoint);
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @And("I update account {string} to {string}")
+    public void iUpdateTheToAccount(String parameterToUpdate, String updateDate) throws JsonProcessingException {
+        log.info("I update the Account");
+        Account accountCreate = new Account();
+        accountCreate.setDescription(updateDate);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(accountCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Then("^the response status code fail should be (.+)$")
+    public void theResponseStatusCodeShouldBeStatusToAccount(String status) {
+        log.info("I verify status Account fail response");
+        Assert.assertEquals(apiResponse.getStatusCode(), Integer.parseInt(status));
+        apiResponse.getResponse().then().log().body();
     }
 }
