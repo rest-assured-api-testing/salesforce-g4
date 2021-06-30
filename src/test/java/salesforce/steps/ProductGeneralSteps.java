@@ -159,7 +159,7 @@ public class ProductGeneralSteps {
     }
 
     @When("^I use endpoint \"([^\"]*)\" request with (.+) and (.+) to fail$")
-    public void iUseEndpointRequestToAccountWithApiName(String endpoint, String apiName, String value) {
+    public void iUseEndpointRequestWithApiName(String endpoint, String apiName, String value) {
         log.info("I create fail account");
         apiRequest.setBody(jsonConvert(apiName, value));
         apiRequest.setEndpoint(endpoint);
