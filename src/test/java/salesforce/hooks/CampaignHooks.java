@@ -21,10 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.campaign.CampaignCreate;
 import entities.Token;
 import entities.campaign.Campaign;
-import generalsetting.EndPoint;
-import generalsetting.Param;
-import generalsetting.ParameterEndPoints;
-import generalsetting.ParameterUser;
+import generalsetting.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -67,7 +64,7 @@ public class CampaignHooks {
         campaign.setName("Campaign-test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CAMPAIGN.getEndPoint())
                 .body(new ObjectMapper().writeValueAsString(campaign))
                 .method(ApiMethod.POST).build();
@@ -81,7 +78,7 @@ public class CampaignHooks {
         log.info("Delete Campaign");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CAMPAIGN.getEndPointInteract())
                 .pathParams(EndPoint.CAMPAIGN.toSetId(), campaignCreate.getId())
                 .method(ApiMethod.DELETE).build();
@@ -93,7 +90,7 @@ public class CampaignHooks {
         log.info("Delete Campaign Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CAMPAIGN.getEndPointInteract())
                 .pathParams(EndPoint.CAMPAIGN.toSetId(), objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();

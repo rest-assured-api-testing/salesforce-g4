@@ -29,6 +29,7 @@ import entities.individual.IndividualResponse;
 import entities.opportunity.Opportunity;
 import entities.opportunity.OpportunityResponse;
 import generalsetting.EndPoint;
+import generalsetting.Header;
 import io.cucumber.datatable.DataTable;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
@@ -67,7 +68,7 @@ public class GeneralEndPointSteps {
     public void iBuildRequestToProduct(String method) {
         log.info("I build the request");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
-        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER
+        apiRequest.addHeaders(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue()
                 + objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
@@ -254,7 +255,7 @@ public class GeneralEndPointSteps {
         log.info("I set the pathParams and body to request");
         objectBody = new ObjectMapper().writeValueAsString(jsonData.asMap(String.class, String.class));
         apiRequest.setBaseUri(EndPoint.URL_BASE.getEndPoint());
-        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+        apiRequest.addHeaders(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() +
                 objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }

@@ -18,14 +18,11 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import generalsetting.EndPoint;
-import generalsetting.Param;
-import generalsetting.ParameterUser;
+import generalsetting.*;
 import utilities.ObjectInformation;
 import entities.Token;
 import entities.product.Product;
 import entities.product.ProductCreate;
-import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -66,7 +63,7 @@ public class ProductHooks {
         product.setName("Product-test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.PRODUCT.getEndPoint())
                 .body(new ObjectMapper().writeValueAsString(product))
                 .method(ApiMethod.POST).build();
@@ -80,7 +77,7 @@ public class ProductHooks {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.PRODUCT.getEndPointInteract())
                 .pathParams(EndPoint.PRODUCT.toSetId(), productCreate.getId())
                 .method(ApiMethod.DELETE).build();
@@ -92,7 +89,7 @@ public class ProductHooks {
         log.info("Delete Product Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers("Authorization", "Bearer " + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.PRODUCT.getEndPointInteract())
                 .pathParams(EndPoint.PRODUCT.toSetId(), objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();

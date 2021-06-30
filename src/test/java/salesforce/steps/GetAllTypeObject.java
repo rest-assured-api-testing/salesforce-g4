@@ -18,6 +18,7 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import entities.Token;
 import generalsetting.EndPoint;
+import generalsetting.Header;
 import generalsetting.Param;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.Before;
@@ -50,7 +51,7 @@ public class GetAllTypeObject {
                 .method(ApiMethod.POST).build());
         apiRequest = apiRequestBuilder
                 .baseUri(EndPoint.URL_BASE.getEndPoint() + ParameterEndPoints.SOBJECTS)
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue()
                         + apiResponse.getBody(Token.class).getAccess_token())
                 .build();
     }
