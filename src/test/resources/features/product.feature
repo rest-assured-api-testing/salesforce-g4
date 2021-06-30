@@ -45,7 +45,7 @@ Feature: Endpoint Product
     Then The response status code should be "NO_CONTENT"
 
   @DeleteProduct
-  Scenario Outline: Delete to product
+  Scenario Outline: Delete to product fail
     Given I build "DELETE" request
     When I use endpoint "sobjects/Product2/{productId}" request with "productId" and "<wrongId>"
     And I execute the request
