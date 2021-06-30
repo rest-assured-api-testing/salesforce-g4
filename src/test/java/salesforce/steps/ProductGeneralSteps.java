@@ -26,6 +26,8 @@ import entities.contact.ContactResponse;
 import entities.group.Group;
 import entities.individual.Individual;
 import entities.individual.IndividualResponse;
+import entities.opportunity.Opportunity;
+import entities.opportunity.OpportunityResponse;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
@@ -37,7 +39,7 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import entities.product.Product;
-
+import static utilities.JsonFormat.mapFormat;
 import static utilities.JsonFormat.jsonConvert;
 
 public class ProductGeneralSteps {
@@ -51,6 +53,7 @@ public class ProductGeneralSteps {
     private AccountResponse accountResponse;
     private ContactResponse contactResponse;
     private IndividualResponse individualResponse;
+    private OpportunityResponse opportunityResponse;
 
     public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
@@ -204,7 +207,7 @@ public class ProductGeneralSteps {
         apiRequest.setEndpoint(endpoint);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(individualCreate));
         apiResponse = ApiManager.execute(apiRequest);
-        individualResponse=apiResponse.getBody(IndividualResponse.class);
+        individualResponse = apiResponse.getBody(IndividualResponse.class);
         objectInformation.setIdDelete(individualResponse.getId());
     }
 
@@ -213,6 +216,33 @@ public class ProductGeneralSteps {
         log.info("I update the Individual");
         Individual individualCreate = new Individual(updateLastNme);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(individualCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @When("I use endpoint {string} request to opportunity with name {string}")
+    public void iUseEndpointRequestToOpportunityWithName(String endpoint, String name) throws JsonProcessingException {
+        log.info("I execute the request Opportunity post");
+        Opportunity opportunityCreate = new Opportunity("Opportunity30", "2021-06-21", "CloseDate");
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(opportunityCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+        opportunityResponse = apiResponse.getBody(OpportunityResponse.class);
+        objectInformation.setIdDelete(opportunityResponse.getId());
+    }
+
+    @And("I update opportunity {string} to {string}")
+    public void iUpdateOpportunityTheTo(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
+        log.info("I update the Opportunity");
+        Opportunity opportunityCreate = new Opportunity("New Opportunity30", "2021-06-21", "CloseDate");
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(opportunityCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to opportunity with (.+) (.+) (.+) and (.+) (.+) (.+)$")
+    public void iUseEndpointRequestToOpportunityWithApiNameApiNameApiNameAndValueValueValue(String endpoint, String apiName1, String apiName2, String apiName3, String value1, String value2, String value3) {
+        log.info("I create fail opportunity");
+        apiRequest.setBody(mapFormat(apiName1, value1, apiName2, value2, apiName3, value3));
+        apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
     }
 }
