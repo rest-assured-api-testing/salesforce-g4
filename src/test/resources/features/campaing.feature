@@ -2,32 +2,32 @@ Feature: Endpoint Campaign
 
   @GetCampaign
   Scenario: GET to campaign
-    Given I build "GET" request to campaign
-    When I use endpoint "sobjects/Campaign/{campaignId}" request to campaign with "campaignId"
-    And I execute the request to campaign
-    Then the response status code should be "OK" to campaign
-    And The schema to campaign should be equals to "schemas/campaign.json"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Campaign/{campaignId}" request with "campaignId"
+    And I execute the request
+    Then The response status code should be "OK"
+    And The schema should be equals to "schemas/campaign.json"
 
   @PostCampaign
   Scenario: POST to campaign
-    Given I build "POST" request to campaign
+    Given I build "POST" request
     When I use endpoint "sobjects/Campaign/" to campaign request to with name "campaign-test"
-    Then the response status code should be "CREATED" to campaign
-    Then The schema to campaign should be equals to "schemas/campaigncreate.json"
+    Then The response status code should be "CREATED"
+    Then The schema should be equals to "schemas/campaigncreate.json"
 
   @DeleteCampaign
   Scenario: Delete to campaign
-    Given I build "DELETE" request to campaign
-    When I use endpoint "sobjects/Campaign/{campaignId}" request to campaign with "campaignId"
-    And I execute the request to campaign
-    Then the response status code should be "NO_CONTENT" to campaign
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Campaign/{campaignId}" request with "campaignId"
+    And I execute the request
+    Then The response status code should be "NO_CONTENT"
 
   @DeleteCampaign
-  Scenario Outline: Delete to campaign
-    Given I build "DELETE" request to campaign
-    When I use endpoint "sobjects/Campaign/{campaignId}" request to campaign with "campaignId" and "<wrongId>"
-    And I execute the request to campaign
-    Then the response status code should be "NOT_FOUND" to campaign
+  Scenario Outline: Delete to campaign fail
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Campaign/{campaignId}" request with "campaignId" and "<wrongId>"
+    And I execute the request
+    Then The response status code should be "NOT_FOUND"
     Examples:
       | wrongId |
       | 749100  |
@@ -37,10 +37,10 @@ Feature: Endpoint Campaign
 
   @PatchCampaign
   Scenario Outline: PATCH to campaign
-    Given I build "PATCH" request to campaign
-    When I use endpoint "sobjects/Campaign/{campaignId}" request to campaign with "campaignId"
-    And I update to campaign the <parameterToUpdate> to <updateDate>
-    Then the response status code should be "NO_CONTENT" to campaign
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Campaign/{campaignId}" request with "campaignId"
+    And I update the <parameterToUpdate> to <updateDate>
+    Then The response status code should be "NO_CONTENT"
     Examples:
       | parameterToUpdate | updateDate  |
       | name              | 你好，世界       |
@@ -57,11 +57,11 @@ Feature: Endpoint Campaign
       | isActive          | false       |
 
   @PatchCampaign
-  Scenario Outline: PATCH to campaign
-    Given I build "PATCH" request to campaign
-    When I use endpoint "sobjects/Campaign/{campaignId}" request to campaign with "campaignId"
-    And I update to campaign the "<parameterToUpdate>" to "<updateDate>"
-    Then the response status code should be "BAD_REQUEST" to campaign
+  Scenario Outline: PATCH to campaign fail
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Campaign/{campaignId}" request with "campaignId"
+    And I update the "<parameterToUpdate>" to "<updateDate>"
+    Then The response status code should be "BAD_REQUEST"
     Examples:
       | parameterToUpdate | updateDate  |
       | names             | Rene, Camen |

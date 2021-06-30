@@ -2,24 +2,24 @@ Feature: Endpoint Individual
 
   @GetIndividual
   Scenario: GET to individual
-    Given I build "GET" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId"
-    And I execute the request individual
-    Then the response status code should be "OK" to individual
+    Given I build "GET" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId"
+    And I execute the request
+    Then The response status code should be "OK"
 
   @GetIndividual
   Scenario: GET to individual with schema
-    Given I build "GET" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId"
-    And I execute the request individual
-    Then The schema to individual should be equals to "schemas/individual.json"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId"
+    And I execute the request
+    Then The schema should be equals to "schemas/individual.json"
 
   @GetIndividual
   Scenario Outline: GET to individual fail
-    Given I build "GET" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId" fail <badId>
-    And I execute the request individual fail
-    Then the response status code fail should be <status> to individual
+    Given I build "GET" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId" and <badId>
+    And I execute the request
+    Then the response status code fail should be <status>
     Examples:
       | badId    | status |
       | 12341415 | 404    |
@@ -27,15 +27,15 @@ Feature: Endpoint Individual
 
   @PostIndividual
   Scenario: POST to individual
-    Given I build "POST" request to individual
+    Given I build "POST" request
     When I use endpoint "sobjects/Individual/" request to individual with name "individual-test"
-    Then the response status code should be "CREATED" to individual
+    Then The response status code should be "CREATED"
 
   @PostIndividual
   Scenario Outline: POST to individual fail
-    Given I build "POST" request to individual
-    When I use endpoint "sobjects/Individual/" request to individual with <apiName> and <value>
-    Then the response status code fail should be <status> to individual
+    Given I build "POST" request
+    When I use endpoint "sobjects/Individual/" request with <apiName> and <value> to fail
+    Then the response status code fail should be <status>
     Examples:
       | apiName     | value       | status |
       | Name        | Individual1 | 400    |
@@ -46,13 +46,13 @@ Feature: Endpoint Individual
 
   @PostIndividual
   Scenario Outline: POST to individual test
-    Given I build to "POST" request to individual object
+    Given I build to "POST" request to object
       | firstName  | <firsName>   |
       | lastName   | <lastName>   |
       | Salutation | <salutation> |
       | BirthDate  | <birthdate>  |
     When I set the "sobjects/Individual" endpoint and send the request with body
-    Then the response status code fail should be <status> to individual
+    Then the response status code fail should be <status>
     Examples:
       | firsName | lastName | salutation | birthdate  | status |
       |          |          |            |            | 400    |
@@ -68,17 +68,17 @@ Feature: Endpoint Individual
 
   @DeleteIndividual
   Scenario: POST to individual
-    Given I build "DELETE" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId"
-    And I execute the request individual
-    Then the response status code should be "NO_CONTENT" to individual
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId"
+    And I execute the request
+    Then The response status code should be "NO_CONTENT"
 
   @DeleteIndividual
   Scenario Outline: DELETE to individual fail
-    Given I build "DELETE" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId" fail <badId>
-    And I execute the request individual
-    Then the response status code fail should be <status> to individual
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId" and <badId>
+    And I execute the request
+    Then the response status code fail should be <status>
     Examples:
       | badId    | status |
       | 12341415 | 404    |
@@ -86,17 +86,17 @@ Feature: Endpoint Individual
 
   @PatchIndividual
   Scenario: POST to individual
-    Given I build "PATCH" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId"
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId"
     And I update individual "lastName" to "change lastname"
-    Then the response status code should be "NO_CONTENT" to individual
+    Then The response status code should be "NO_CONTENT"
 
   @PatchIndividual
   Scenario Outline: PATCH to individual fail id
-    Given I build "PATCH" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId" fail <badId>
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId" and <badId>
     And I update individual "name" to "change name"
-    Then the response status code fail should be <status> to individual
+    Then the response status code fail should be <status>
     Examples:
       | badId    | status |
       | 12341415 | 404    |
@@ -105,10 +105,10 @@ Feature: Endpoint Individual
 
   @PatchIndividual
   Scenario Outline: PATCH to individual fail body
-    Given I build "PATCH" request to individual
-    When I use endpoint "sobjects/Individual/{individualId}" request to individual with "individualId"
-    And I update individual the <apiName> to <value>
-    Then the response status code fail should be <status> to individual
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Individual/{individualId}" request with "individualId"
+    And I update the <apiName> to <value>
+    Then the response status code fail should be <status>
     Examples:
       | apiName   | value    | status |
       | Nameeee   | Account1 | 400    |

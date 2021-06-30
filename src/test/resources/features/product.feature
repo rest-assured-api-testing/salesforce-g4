@@ -2,26 +2,26 @@ Feature: Endpoint Product
 
   @GetProduct
   Scenario: GET to product
-    Given I build "GET" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId"
     And I execute the request
-    Then the response status code should be "OK" to product
-    And The schema to product should be equals to "schemas/product.json"
+    Then The response status code should be "OK"
+    And The schema should be equals to "schemas/product.json"
 
   @GetProduct
   Scenario: GET to product
-    Given I build "GET" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId"
     And I execute the request
-    And The schema to product should be equals to "schemas/product.json"
+    And The schema should be equals to "schemas/product.json"
 
   @GetProduct
   Scenario Outline: GET to product fail
-    Given I build "GET" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId" and "<wrongId>"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId" and "<wrongId>"
     And I execute the request
-    Then the response status code should be "NOT_FOUND" to product
-    And The schema to product should be equals to "schemas/statusgeneral/notfount.json"
+    Then The response status code should be "NOT_FOUND"
+    And The schema should be equals to "schemas/statusgeneral/notfount.json"
     Examples:
       | wrongId  |
       | 12341415 |
@@ -32,25 +32,25 @@ Feature: Endpoint Product
 
   @PostProduct
   Scenario: POST to product
-    Given I build "POST" request to product
-    When I use endpoint "sobjects/Product2/" request to with name "product-test"
-    Then the response status code should be "CREATED" to product
-    Then The schema to product should be equals to "schemas/productcreate.json"
+    Given I build "POST" request
+    When I use endpoint "sobjects/Product2/" request to with name "product-test" to product
+    Then The response status code should be "CREATED"
+    Then The schema should be equals to "schemas/productcreate.json"
 
   @DeleteProduct
   Scenario: Delete to product
-    Given I build "DELETE" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId"
     And I execute the request
-    Then the response status code should be "NO_CONTENT" to product
+    Then The response status code should be "NO_CONTENT"
 
   @DeleteProduct
-  Scenario Outline: Delete to product
-    Given I build "DELETE" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId" and "<wrongId>"
+  Scenario Outline: Delete to product fail
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId" and "<wrongId>"
     And I execute the request
-    Then the response status code should be "NOT_FOUND" to product
-    And The schema to product should be equals to "schemas/statusgeneral/notfount.json"
+    Then The response status code should be "NOT_FOUND"
+    And The schema should be equals to "schemas/statusgeneral/notfount.json"
     Examples:
       | wrongId  |
       | 8941179  |
@@ -60,10 +60,10 @@ Feature: Endpoint Product
 
   @PatchProduct
   Scenario Outline: PATCH to product
-    Given I build "PATCH" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId"
     And I update the <parameterToUpdate> to <updateDate>
-    Then the response status code should be "NO_CONTENT" to product
+    Then The response status code should be "NO_CONTENT"
     Examples:
       | parameterToUpdate | updateDate         |
       | description       | change description |
@@ -76,11 +76,11 @@ Feature: Endpoint Product
 
   @PatchProduct
   Scenario Outline: PATCH to product fail
-    Given I build "PATCH" request to product
-    When I use endpoint "sobjects/Product2/{productId}" request to product with "productId"
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Product2/{productId}" request with "productId"
     And I update the <parameterToUpdate> to "<updateDate>"
-    Then the response status code should be "BAD_REQUEST" to product
-    And The schema to product should be equals to "schemas/statusgeneral/badrequest.json"
+    Then The response status code should be "BAD_REQUEST"
+    And The schema should be equals to "schemas/statusgeneral/badrequest.json"
     Examples:
       | parameterToUpdate | updateDate    |
       | names             | Pedro, Teresa |

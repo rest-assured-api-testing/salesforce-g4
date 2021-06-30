@@ -2,24 +2,24 @@ Feature: Endpoint Account
 
   @GetAccount
   Scenario: GET to account
-    Given I build "GET" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
-    And I execute the request account
-    Then the response status code should be "OK" to account
+    Given I build "GET" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId"
+    And I execute the request
+    Then The response status code should be "OK"
 
   @GetAccount
   Scenario: GET to account with schema
-    Given I build "GET" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
-    And I execute the request account
-    Then The schema to account should be equals to "schemas/account.json"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId"
+    And I execute the request
+    Then The schema should be equals to "schemas/account.json"
 
   @GetAccount
   Scenario Outline: GET to account fail
-    Given I build "GET" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId" fail <badId>
-    And I execute the request account fail
-    Then the response status code fail should be <status> to account
+    Given I build "GET" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId" and <badId>
+    And I execute the request
+    Then the response status code fail should be <status>
     Examples:
       | badId |status|
       | 12341415 | 404 |
@@ -27,15 +27,15 @@ Feature: Endpoint Account
 
   @PostAccount
   Scenario: POST to account
-    Given I build "POST" request to account
+    Given I build "POST" request
     When I use endpoint "sobjects/Account/" request to account with name "account-test"
-    Then the response status code should be "CREATED" to account
+    Then The response status code should be "CREATED"
 
   @PostAccount
   Scenario Outline: POST to account fail
-    Given I build "POST" request to account
-    When I use endpoint "sobjects/Account/" request to account with <apiName> and <value>
-    Then the response status code fail should be <status> to account
+    Given I build "POST" request
+    When I use endpoint "sobjects/Account/" request with <apiName> and <value> to fail
+    Then the response status code fail should be <status>
     Examples:
       | apiName      | value    | status|
       | Nameeee      | Account1 | 400 |
@@ -44,17 +44,17 @@ Feature: Endpoint Account
 
   @DeleteAccount
   Scenario: DELETE to account
-    Given I build "DELETE" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
-    And I execute the request account
-    Then the response status code should be "NO_CONTENT" to account
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId"
+    And I execute the request
+    Then The response status code should be "NO_CONTENT"
 
   @DeleteAccount
   Scenario Outline: DELETE to account fail
-    Given I build "DELETE" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId" fail <badId>
-    And I execute the request account
-    Then the response status code fail should be <status> to account
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId" and <badId>
+    And I execute the request
+    Then the response status code fail should be <status>
     Examples:
       | badId |status|
       | 12341415 | 404 |
@@ -62,17 +62,17 @@ Feature: Endpoint Account
 
   @PatchAccount
   Scenario: PATCH to account
-    Given I build "PATCH" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId"
     And I update account "name" to "change name"
-    Then the response status code should be "NO_CONTENT" to account
+    Then The response status code should be "NO_CONTENT"
 
   @PatchAccount
   Scenario Outline: PATCH to account fail id
-    Given I build "PATCH" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId" fail <badId>
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId" and <badId>
     And I update account "name" to "change name"
-    Then the response status code fail should be <status> to account
+    Then the response status code fail should be <status>
     Examples:
       | badId |status|
       | 12341415 | 404 |
@@ -80,10 +80,10 @@ Feature: Endpoint Account
 
   @PatchAccount
   Scenario Outline: PATCH to account fail body
-    Given I build "PATCH" request to account
-    When I use endpoint "sobjects/Account/{accountId}" request to account with "accountId"
-    And I update account the <apiName> to <value>
-    Then the response status code fail should be <status> to account
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Account/{accountId}" request with "accountId"
+    And I update the <apiName> to <value>
+    Then the response status code fail should be <status>
     Examples:
       | apiName      | value    | status|
       | Nameeee      | Account1 | 400 |

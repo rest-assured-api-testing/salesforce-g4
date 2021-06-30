@@ -2,41 +2,40 @@ Feature: Endpoint Contact
 
   @GetContact
   Scenario: GET to contact
-    Given I build "GET" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId"
-    And I execute the request contact
-    Then the response status code should be "OK" to contact
+    Given I build "GET" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId"
+    And I execute the request
+    Then The response status code should be "OK"
 
   @GetContact
   Scenario: GET to contact with schema
-    Given I build "GET" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId"
-    And I execute the request contact
-    Then The schema to contact should be equals to "schemas/contact.json"
+    Given I build "GET" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId"
+    And I execute the request
+    Then The schema should be equals to "schemas/contact.json"
 
   @GetContact
   Scenario Outline: GET to contact fail
-    Given I build "GET" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId" fail <badId>
-    And I execute the request contact fail
-    Then the response status code fail should be <status> to contact
+    Given I build "GET" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId" and <badId>
+    And I execute the request
+    Then the response status code fail should be <status>
     Examples:
       | badId    | status |
       | 12341415 | 404    |
       | null     | 404    |
 
-
   @PostContact
   Scenario: POST to contact
-    Given I build "POST" request to contact
+    Given I build "POST" request
     When I use endpoint "sobjects/Contact/" request to contact with name "contact-test"
-    Then the response status code should be "CREATED" to contact
+    Then The response status code should be "CREATED"
 
   @PostContact
   Scenario Outline: POST to contact fail
-    Given I build "POST" request to contact
-    When I use endpoint "sobjects/Contact/" request to contact with <apiName> and <value>
-    Then the response status code fail should be <status> to contact
+    Given I build "POST" request
+    When I use endpoint "sobjects/Contact/" request with <apiName> and <value> to fail
+    Then the response status code fail should be <status>
     Examples:
       | apiName     | value    | status |
       | Name        | Contact1 | 400    |
@@ -47,13 +46,13 @@ Feature: Endpoint Contact
 
   @PostContact
   Scenario Outline: POST to contact test
-    Given I build to "POST" request to contact object
+    Given I build to "POST" request to object
       | firstName  | <firsName>   |
       | lastName   | <lastName>   |
       | Salutation | <salutation> |
       | BirthDate  | <birthdate>  |
-    When I set the "sobjects/Individual" endpoint and send the request with contact body
-    Then the response status code fail should be <status> to contact
+    When I set the "sobjects/Individual" endpoint and send the request with body
+    Then the response status code fail should be <status>
     Examples:
       | firsName | lastName | salutation | birthdate  | status |
       |          |          |            |            | 400    |
@@ -69,17 +68,17 @@ Feature: Endpoint Contact
 
   @DeleteContact
   Scenario: POST to contact
-    Given I build "DELETE" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId"
-    And I execute the request contact
-    Then the response status code should be "NO_CONTENT" to contact
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId"
+    And I execute the request
+    Then The response status code should be "NO_CONTENT"
 
   @DeleteContact
   Scenario Outline: DELETE to contact fail
-    Given I build "DELETE" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId" fail <badId>
-    And I execute the request contact
-    Then the response status code fail should be <status> to contact
+    Given I build "DELETE" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId" and <badId>
+    And I execute the request
+    Then the response status code fail should be <status>
     Examples:
       | badId    | status |
       | 12341415 | 404    |
@@ -87,17 +86,17 @@ Feature: Endpoint Contact
 
   @PatchContact
   Scenario: POST to contact
-    Given I build "PATCH" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId"
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId"
     And I update contact "lastName" to "change lastname"
-    Then the response status code should be "NO_CONTENT" to contact
+    Then The response status code should be "NO_CONTENT"
 
   @PatchContact
   Scenario Outline: PATCH to contact fail id
-    Given I build "PATCH" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId" fail <badId>
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId" and <badId>
     And I update contact "name" to "change name"
-    Then the response status code fail should be <status> to contact
+    Then the response status code fail should be <status>
     Examples:
       | badId    | status |
       | 12341415 | 404    |
@@ -105,10 +104,10 @@ Feature: Endpoint Contact
 
   @PatchContact
   Scenario Outline: PATCH to contact fail body
-    Given I build "PATCH" request to contact
-    When I use endpoint "sobjects/Contact/{contactId}" request to contact with "contactId"
-    And I update contact the <apiName> to <value>
-    Then the response status code fail should be <status> to contact
+    Given I build "PATCH" request
+    When I use endpoint "sobjects/Contact/{contactId}" request with "contactId"
+    And I update the <apiName> to <value>
+    Then the response status code fail should be <status>
     Examples:
       | apiName   | value    | status |
       | Nameeee   | Account1 | 400    |
