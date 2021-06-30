@@ -17,6 +17,7 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.cucumber.datatable.DataTable;
 import utilities.ObjectInformation;
 import entities.contact.Contact;
 import entities.contact.ContactResponse;
@@ -37,6 +38,7 @@ public class ContactGeneralSteps {
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
     private ContactResponse contactResponse;
+    private String objectBody;
 
     public ContactGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
@@ -129,6 +131,24 @@ public class ContactGeneralSteps {
     public void iUpdateContactTheApiNameToValue(String apiname, String value) {
         log.info("I update the account fail");
         apiRequest.setBody(jsonConvert(apiname,value));
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Given("^I build to \"([^\"]*)\" request to contact object$")
+    public void iSetThePathParamsAndBodyToRequest(String method, final DataTable jsonData) throws JsonProcessingException {
+        log.info("I set the pathParams and body to request");
+        objectBody = new ObjectMapper().writeValueAsString(jsonData.asMap(String.class, String.class));
+        apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
+        apiRequest.setMethod(ApiMethod.valueOf(method));
+    }
+
+    @When("I set the {string} endpoint and send the request with contact body")
+    public void iSetTheEndpointAndSendTheRequestWithBody(final String endpoint) throws JsonProcessingException {
+        log.info("I set the pathParams and body to request");
+        apiRequest.setBody(objectBody);
+        apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
     }
 }
