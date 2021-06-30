@@ -18,6 +18,7 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.group.Group;
 import generalsetting.ParameterUser;
 import utilities.ObjectInformation;
 import entities.Token;
@@ -32,6 +33,7 @@ public class ProductHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
     private ProductCreate productCreate;
+    private Group groupCreate;
     private ObjectInformation objectInformation = new ObjectInformation();
 
     public ProductHooks(ObjectInformation objectInformation) {
@@ -45,7 +47,7 @@ public class ProductHooks {
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser);
     }
 
-    @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
+    @Before(order = 1)
     public void generateToken() {
         log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
@@ -93,6 +95,41 @@ public class ProductHooks {
         ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, objectInformation.getIdDelete())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Before(value = "@GetGroup or @DeleteGroup or @PatchGroup", order = 2)
+    public void createGroup() throws JsonProcessingException {
+        log.info("Create Group");
+        Group group=new Group();
+        group.setName("group-test-created");
+        group.setVisibility("PublicAccess");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.GROUP)
+                .body(new ObjectMapper().writeValueAsString(group))
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        groupCreate = apiResponse.getBody(Group.class);
+        objectInformation.setId(groupCreate.getId());
+    }
+
+    @After(value = "@GetGroup or @PatchGroup or @DeleteGroup")
+    public void cleanRepositoryGroup() {
+        log.info("Delete Product");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
+                .pathParams(ParameterEndPoints.GROUP_ID, groupCreate.getId())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @After(value = "@PostGroup")
+    public void cleanRepositoryPostGroup() {
+        log.info("Delete Product Post");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
+                .pathParams(ParameterEndPoints.GROUP_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

@@ -2,25 +2,25 @@ Feature: Endpoint group
 
   @GetGroup
   Scenario: GET to group
-    Given I build "GET" request to group
-    When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
-    And I execute the request group
-    Then the response status code should be "OK" to group
-    And The schema to group should be equals to "schemas/group.json"
+    Given I build "GET" request
+    When I use endpoint "chatter/groups/{groupId}" request with "groupId"
+    And I execute the request
+    Then The response status code should be "OK"
+    And The schema should be equals to "schemas/group.json"
 
   @PostGroup
   Scenario: GET to group schema when is created
-    Given I build "POST" request to group
+    Given I build "POST" request
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
-    And The schema to group should be equals to "schemas/group.json"
+    And The schema should be equals to "schemas/group.json"
 
   @GetGroup
   Scenario Outline: GET to group fail
-    Given I build "GET" request to group
-    When I use endpoint "chatter/groups/{groupId}" request to group with "groupId" and "<wrongId>"
-    And I execute the request group
-    Then the response status code should be "NOT_FOUND" to group
-    And The schema to group should be equals to "schemas/statusgeneral/notfount.json"
+    Given I build "GET" request
+    When I use endpoint "chatter/groups/{groupId}" request with "groupId" and "<wrongId>"
+    And I execute the request
+    Then The response status code should be "NOT_FOUND"
+    And The schema should be equals to "schemas/statusgeneral/notfount.json"
     Examples:
       | wrongId  |
       | 37967387 |
@@ -31,32 +31,32 @@ Feature: Endpoint group
 
   @PostGroup
   Scenario: POST to group
-    Given I build "POST" request to group
+    Given I build "POST" request
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
-    Then the response status code should be "CREATED" to group
-    And The schema to group should be equals to "schemas/group.json"
+    Then The response status code should be "CREATED"
+    And The schema should be equals to "schemas/group.json"
 
   @PostGroup
   Scenario: POST to group
-    Given I build "POST" request to group
+    Given I build "POST" request
     When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PrivateAccess"
-    Then the response status code should be "CREATED" to group
-    And The schema to group should be equals to "schemas/groupcreateprivate.json"
+    Then The response status code should be "CREATED"
+    And The schema should be equals to "schemas/groupcreateprivate.json"
 
   @DeleteGroup
   Scenario: POST to group
-    Given I build "DELETE" request to group
-    When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
-    And I execute the request group
-    Then the response status code should be "NO_CONTENT" to group
+    Given I build "DELETE" request
+    When I use endpoint "chatter/groups/{groupId}" request with "groupId"
+    And I execute the request
+    Then The response status code should be "NO_CONTENT"
 
   @DeleteGroup
   Scenario Outline: Delete to group fail
-    Given I build "DELETE" request to group
-    When I use endpoint "chatter/groups/{groupId}" request to group with "groupId" and "<wrongId>"
-    And I execute the request group
-    Then the response status code should be "NOT_FOUND" to group
-    And The schema to group should be equals to "schemas/statusgeneral/notfount.json"
+    Given I build "DELETE" request
+    When I use endpoint "chatter/groups/{groupId}" request with "groupId" and "<wrongId>"
+    And I execute the request
+    Then The response status code should be "NOT_FOUND"
+    And The schema should be equals to "schemas/statusgeneral/notfount.json"
     Examples:
       | wrongId  |
       | 8941179  |
@@ -66,10 +66,10 @@ Feature: Endpoint group
 
   @PatchGroup
   Scenario Outline: PATCH to group
-    Given I build "PATCH" request to group
-    When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
-    And I update group the <parameterToUpdate> to <updateDate>
-    Then the response status code should be "OK" to group
+    Given I build "PATCH" request
+    When I use endpoint "chatter/groups/{groupId}" request with "groupId"
+    And I update the <parameterToUpdate> to <updateDate>
+    Then The response status code should be "OK"
     Examples:
       | parameterToUpdate     | updateDate         |
       | description           | change description |
@@ -87,11 +87,11 @@ Feature: Endpoint group
 
   @PatchGroup
   Scenario Outline: PATCH to group fail
-    Given I build "PATCH" request to group
-    When I use endpoint "chatter/groups/{groupId}" request to group with "groupId"
-    And I update group the "<parameterToUpdate>" to "<updateDate>"
-    Then the response status code should be "BAD_REQUEST" to group
-    And The schema to group should be equals to "schemas/statusgeneral/badrequest.json"
+    Given I build "PATCH" request
+    When I use endpoint "chatter/groups/{groupId}" request with "groupId"
+    And I update the "<parameterToUpdate>" to "<updateDate>"
+    Then The response status code should be "BAD_REQUEST"
+    And The schema should be equals to "schemas/statusgeneral/badrequest.json"
     Examples:
       | parameterToUpdate     | updateDate        |
       |                       | change name group |

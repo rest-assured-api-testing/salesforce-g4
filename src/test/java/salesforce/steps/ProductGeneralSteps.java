@@ -17,6 +17,7 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.group.Group;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
@@ -102,5 +103,18 @@ public class ProductGeneralSteps {
         log.info("I build account fail endpoint with bad id");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, idCustomer);
+    }
+
+    @When("I use endpoint {string} request to with name {string} and visibility {string}")
+    public void iUseEndpointRequestToObjectWithName(String endpoint, String name, String visibility)
+            throws JsonProcessingException {
+        log.info("I execute the request post");
+        Group group=new Group();
+        group.setName(name);
+        group.setVisibility(visibility);
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(group));
+        apiResponse = ApiManager.execute(apiRequest);
+        objectInformation.setIdDelete(apiResponse.getBody(Group.class).getId());
     }
 }
