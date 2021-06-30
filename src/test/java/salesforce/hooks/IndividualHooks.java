@@ -17,6 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
 import entities.individual.Individual;
 import entities.individual.IndividualResponse;
+import generalsetting.EndPoint;
+import generalsetting.Param;
 import generalsetting.ParameterEndPoints;
 import generalsetting.ParameterUser;
 import io.cucumber.java.After;
@@ -40,14 +42,14 @@ public class IndividualHooks {
     public void generateToken() {
         log.info("Generate Token Individual");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
-                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
-                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
-                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
-                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+                .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
+                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
+                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
                 .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
-                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .baseUri(EndPoint.TOKEN.getEndPoint())
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
@@ -59,9 +61,9 @@ public class IndividualHooks {
         log.info("Create Individual");
         Individual individual = new Individual("Individual test");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.INDIVIDUAL)
+                .endpoint(EndPoint.INDIVIDUAL.getEndPoint())
                 .body(new ObjectMapper().writeValueAsString(individual))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
@@ -73,10 +75,10 @@ public class IndividualHooks {
     public void deleteIndividualHooks() {
         log.info("Delete Individual Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.INDIVIDUAL_TO_INTERACT)
-                .pathParams(ParameterEndPoints.INDIVIDUAL_ID, individualResponse.getId())
+                .endpoint(EndPoint.INDIVIDUAL.getEndPointInteract())
+                .pathParams(EndPoint.INDIVIDUAL.toSetId(), individualResponse.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
@@ -85,10 +87,10 @@ public class IndividualHooks {
     public void cleanRepositoryPost() {
         log.info("Delete Individual Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.INDIVIDUAL_TO_INTERACT)
-                .pathParams(ParameterEndPoints.INDIVIDUAL_ID, objectInformation.getIdDelete())
+                .endpoint(EndPoint.INDIVIDUAL.getEndPointInteract())
+                .pathParams(EndPoint.INDIVIDUAL.toSetId(), objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

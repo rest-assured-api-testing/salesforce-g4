@@ -28,6 +28,7 @@ import entities.individual.Individual;
 import entities.individual.IndividualResponse;
 import entities.opportunity.Opportunity;
 import entities.opportunity.OpportunityResponse;
+import generalsetting.EndPoint;
 import io.cucumber.datatable.DataTable;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
@@ -252,7 +253,7 @@ public class GeneralEndPointSteps {
     public void iSetThePathParamsAndBodyToRequest(String method, final DataTable jsonData) throws JsonProcessingException {
         log.info("I set the pathParams and body to request");
         objectBody = new ObjectMapper().writeValueAsString(jsonData.asMap(String.class, String.class));
-        apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
+        apiRequest.setBaseUri(EndPoint.URL_BASE.getEndPoint());
         apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
                 objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
