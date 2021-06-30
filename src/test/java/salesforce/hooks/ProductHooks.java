@@ -18,6 +18,8 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.campaign.Campaign;
+import entities.campaign.CampaignCreate;
 import entities.group.Group;
 import generalsetting.ParameterUser;
 import utilities.ObjectInformation;
@@ -35,6 +37,7 @@ public class ProductHooks {
     private ProductCreate productCreate;
     private Group groupCreate;
     private ObjectInformation objectInformation = new ObjectInformation();
+    private CampaignCreate campaignCreate;
 
     public ProductHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
@@ -130,6 +133,40 @@ public class ProductHooks {
         ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.GROUP_TO_INTERACT)
                 .pathParams(ParameterEndPoints.GROUP_ID, objectInformation.getIdDelete())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Before(value = "@GetCampaign or @DeleteCampaign or @PatchCampaign", order = 2)
+    public void createCampaign() throws JsonProcessingException {
+        log.info("Create Campaign");
+        Campaign campaign = new Campaign();
+        campaign.setName("Campaign-test");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.CAMPAIGN)
+                .body(new ObjectMapper().writeValueAsString(campaign))
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        campaignCreate = apiResponse.getBody(CampaignCreate.class);
+        objectInformation.setId(campaignCreate.getId());
+    }
+
+    @After(value = "@GetCampaign or @PatchCampaign or @DeleteCampaign")
+    public void cleanRepositoryCampaign() {
+        log.info("Delete Campaign");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CAMPAIGN_ID, campaignCreate.getId())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @After(value = "@PostCampaign")
+    public void cleanRepositoryPostCampaign() {
+        log.info("Delete Campaign Post");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.CAMPAIGN_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CAMPAIGN_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

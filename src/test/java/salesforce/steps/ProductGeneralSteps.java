@@ -17,6 +17,8 @@ import api.ApiRequest;
 import api.ApiResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.campaign.Campaign;
+import entities.campaign.CampaignCreate;
 import entities.group.Group;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
@@ -38,6 +40,7 @@ public class ProductGeneralSteps {
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
     private ProductCreate productCreate;
+    private CampaignCreate campaignCreate;
 
     public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
@@ -116,5 +119,17 @@ public class ProductGeneralSteps {
         apiRequest.setBody(new ObjectMapper().writeValueAsString(group));
         apiResponse = ApiManager.execute(apiRequest);
         objectInformation.setIdDelete(apiResponse.getBody(Group.class).getId());
+    }
+
+    @When("I use endpoint {string} to campaign request to with name {string}")
+    public void iUseEndpointRequestToCampaignWithName(String endpoint, String name) throws JsonProcessingException {
+        log.info("I execute the request post");
+        Campaign campaignPost = new Campaign();
+        campaignPost.setName(name);
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(campaignPost));
+        apiResponse = ApiManager.execute(apiRequest);
+        campaignCreate = apiResponse.getBody(CampaignCreate.class);
+        objectInformation.setIdDelete(campaignCreate.getId());
     }
 }
