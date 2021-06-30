@@ -28,6 +28,7 @@ import entities.individual.Individual;
 import entities.individual.IndividualResponse;
 import entities.opportunity.Opportunity;
 import entities.opportunity.OpportunityResponse;
+import io.cucumber.datatable.DataTable;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
@@ -54,6 +55,7 @@ public class ProductGeneralSteps {
     private ContactResponse contactResponse;
     private IndividualResponse individualResponse;
     private OpportunityResponse opportunityResponse;
+    private String objectBody;
 
     public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
@@ -242,6 +244,24 @@ public class ProductGeneralSteps {
     public void iUseEndpointRequestToOpportunityWithApiNameApiNameApiNameAndValueValueValue(String endpoint, String apiName1, String apiName2, String apiName3, String value1, String value2, String value3) {
         log.info("I create fail opportunity");
         apiRequest.setBody(mapFormat(apiName1, value1, apiName2, value2, apiName3, value3));
+        apiRequest.setEndpoint(endpoint);
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Given("^I build to \"([^\"]*)\" request to object$")
+    public void iSetThePathParamsAndBodyToRequest(String method, final DataTable jsonData) throws JsonProcessingException {
+        log.info("I set the pathParams and body to request");
+        objectBody = new ObjectMapper().writeValueAsString(jsonData.asMap(String.class, String.class));
+        apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
+        apiRequest.setMethod(ApiMethod.valueOf(method));
+    }
+
+    @When("I set the {string} endpoint and send the request with body")
+    public void iSetTheEndpointAndSendTheRequestWithBody(final String endpoint) {
+        log.info("I set the pathParams and body to request");
+        apiRequest.setBody(objectBody);
         apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
     }

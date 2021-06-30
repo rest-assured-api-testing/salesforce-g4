@@ -46,13 +46,13 @@ Feature: Endpoint Individual
 
   @PostIndividual
   Scenario Outline: POST to individual test
-    Given I build to "POST" request to individual object
+    Given I build to "POST" request to object
       | firstName  | <firsName>   |
       | lastName   | <lastName>   |
       | Salutation | <salutation> |
       | BirthDate  | <birthdate>  |
     When I set the "sobjects/Individual" endpoint and send the request with body
-    Then the response status code fail should be <status> to individual
+    Then the response status code fail should be <status>
     Examples:
       | firsName | lastName | salutation | birthdate  | status |
       |          |          |            |            | 400    |
