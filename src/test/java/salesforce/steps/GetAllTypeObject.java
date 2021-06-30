@@ -17,6 +17,8 @@ import api.ApiRequest;
 import api.ApiResponse;
 import api.ApiRequestBuilder;
 import entities.Token;
+import generalsetting.EndPoint;
+import generalsetting.Param;
 import generalsetting.ParameterEndPoints;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -36,9 +38,19 @@ public class GetAllTypeObject {
     @Before(value = "@GetAll")
     public void setup() {
         log.info("I setup the token nad base URL");
-        apiResponse = ApiManager.executeToken();
+        apiResponse = ApiManager.executeParam(new ApiRequestBuilder()
+                .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
+                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
+                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
+                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
+                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
+                .baseUri(EndPoint.TOKEN.getEndPoint())
+                .method(ApiMethod.POST).build());
+
         apiRequest = apiRequestBuilder
-                .baseUri(ParameterEndPoints.URL_BASE + ParameterEndPoints.SOBJECTS)
+                .baseUri(EndPoint.URL_BASE.getEndPoint() + ParameterEndPoints.SOBJECTS)
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER
                         + apiResponse.getBody(Token.class).getAccess_token())
                 .build();

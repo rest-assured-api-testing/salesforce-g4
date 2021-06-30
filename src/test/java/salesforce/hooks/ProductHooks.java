@@ -18,6 +18,8 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import generalsetting.EndPoint;
+import generalsetting.Param;
 import generalsetting.ParameterUser;
 import utilities.ObjectInformation;
 import entities.Token;
@@ -43,14 +45,14 @@ public class ProductHooks {
     public void generateToken() {
         log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
-                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
-                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
-                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
-                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+                .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
+                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
+                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
                 .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
-                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .baseUri(EndPoint.TOKEN.getEndPoint())
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
         tokenUser = apiResponse.getBody(Token.class).getAccess_token();
@@ -63,9 +65,9 @@ public class ProductHooks {
         Product product = new Product();
         product.setName("Product-test");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT)
+                .endpoint(EndPoint.PRODUCT.getEndPoint())
                 .body(new ObjectMapper().writeValueAsString(product))
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
@@ -77,10 +79,10 @@ public class ProductHooks {
     public void cleanRepository() {
         log.info("Delete Product");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
+                .endpoint(EndPoint.PRODUCT.getEndPointInteract())
+                .pathParams(EndPoint.PRODUCT.toSetId(), productCreate.getId())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
@@ -89,10 +91,10 @@ public class ProductHooks {
     public void cleanRepositoryPost() {
         log.info("Delete Product Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers("Authorization", "Bearer " + tokenUser)
-                .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
-                .pathParams(ParameterEndPoints.PRODUCT_ID, objectInformation.getIdDelete())
+                .endpoint(EndPoint.PRODUCT.getEndPointInteract())
+                .pathParams(EndPoint.PRODUCT.toSetId(), objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }

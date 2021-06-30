@@ -11,7 +11,7 @@ public enum EndPoint {
     CONTACT("sobjects/Contact",  "sobjects/Contact/{contactId}","contactId"),
     OPPORTUNITY("sobjects/Opportunity",  "sobjects/Opportunity/{opportunityId}","opportunityId"),
     CAMPAIGN("/sobjects/Campaign/",  "sobjects/Campaign/{campaignId}","campaignId"),
-    INDIVIDUAL("sobjects/Product2/",  "sobjects/Product2/{productId}","productId");
+    INDIVIDUAL("sobjects/Individual",  "sobjects/Individual/{individualId}","individualId");
 
 
     private final String endPoint;

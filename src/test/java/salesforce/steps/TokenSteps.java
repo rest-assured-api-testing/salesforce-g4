@@ -17,6 +17,8 @@ import api.ApiRequest;
 import api.ApiResponse;
 import api.ApiRequestBuilder;
 import entities.Token;
+import generalsetting.EndPoint;
+import generalsetting.Param;
 import generalsetting.ParameterEndPoints;
 import generalsetting.ParameterUser;
 import io.cucumber.java.en.And;
@@ -30,29 +32,30 @@ import org.testng.Assert;
 public class TokenSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiResponse apiResponse;
+    private ApiRequest apiRequest;
     private Token token;
 
     @Given("I build {string} request to token")
     public void iBuildRequestToToken(String method) {
         log.info("I build the request");
-        ApiRequest apiRequest = new ApiRequestBuilder()
-                .params(ParameterUser.USERNAME_KEY, ParameterUser.USERNAME_VALUE)
-                .params(ParameterUser.PASSWORD_KEY, ParameterUser.PASSWORD_VALUE + ParameterUser.TOKEN_SECURITY)
-                .params(ParameterUser.CLIENT_ID_KEY, ParameterUser.CLIENT_ID_VALUE)
-                .params(ParameterUser.CLIENT_SECRET_KEY, ParameterUser.CLIENT_SECRET_VALUE)
-                .params(ParameterUser.GRANT_TYPE_KEY, ParameterUser.GRANT_TYPE_VALUE)
+        apiRequest = new ApiRequestBuilder()
+                .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
+                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
+                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
                 .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
-                .baseUri(ParameterEndPoints.URL_TOKEN)
+                .baseUri(EndPoint.TOKEN.getEndPoint())
                 .method(ApiMethod.valueOf(method))
                 .build();
-        apiResponse = ApiManager.executeParam(apiRequest);
+
     }
 
     @When("I execute token request")
     public void iExecuteRequest() {
         log.info("I execute token request");
-        apiResponse = ApiManager.executeToken();
+        apiResponse = ApiManager.executeParam(apiRequest);
         token = apiResponse.getBody(Token.class);
     }
 
