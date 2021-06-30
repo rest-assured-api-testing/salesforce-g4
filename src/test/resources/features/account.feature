@@ -34,7 +34,7 @@ Feature: Endpoint Account
   @PostAccount
   Scenario Outline: POST to account fail
     Given I build "POST" request
-    When I use endpoint "sobjects/Account/" request to account with <apiName> and <value>
+    When I use endpoint "sobjects/Account/" request with <apiName> and <value> to fail
     Then the response status code fail should be <status>
     Examples:
       | apiName      | value    | status|

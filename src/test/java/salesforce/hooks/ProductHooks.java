@@ -22,6 +22,8 @@ import entities.account.Account;
 import entities.account.AccountResponse;
 import entities.campaign.Campaign;
 import entities.campaign.CampaignCreate;
+import entities.contact.Contact;
+import entities.contact.ContactResponse;
 import entities.group.Group;
 import generalsetting.ParameterUser;
 import utilities.ObjectInformation;
@@ -41,6 +43,7 @@ public class ProductHooks {
     private ObjectInformation objectInformation = new ObjectInformation();
     private CampaignCreate campaignCreate;
     private AccountResponse accountResponse;
+    private ContactResponse contactResponse;
 
     public ProductHooks(ObjectInformation objectInformation) {
         log.info("ScenariosHooks constructor");
@@ -203,6 +206,39 @@ public class ProductHooks {
         ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.ACCOUNT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.ACCOUNT_ID, objectInformation.getIdDelete())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Before(value = "@GetContact or @DeleteContact or @PatchContact", order = 2)
+    public void createContactHooks() throws JsonProcessingException {
+        log.info("Create Contact");
+        Contact contact = new Contact("contact test");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.CONTACT)
+                .body(new ObjectMapper().writeValueAsString(contact))
+                .method(ApiMethod.POST).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+        contactResponse = apiResponse.getBody(ContactResponse.class);
+        objectInformation.setId(contactResponse.getId());
+    }
+
+    @After(value = "@GetContact or @PatchContact")
+    public void deleteContactHooks() {
+        log.info("Delete Contact Post");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CONTACT_ID, contactResponse.getId())
+                .method(ApiMethod.DELETE).build();
+        ApiResponse apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @After(value = "@PostContact")
+    public void cleanRepositoryPostContact() {
+        log.info("Delete Contact Post");
+        ApiRequest apiRequest = baseRequest()
+                .endpoint(ParameterEndPoints.CONTACT_TO_INTERACT)
+                .pathParams(ParameterEndPoints.CONTACT_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
         ApiResponse apiResponse = ApiManager.execute(apiRequest);
     }
