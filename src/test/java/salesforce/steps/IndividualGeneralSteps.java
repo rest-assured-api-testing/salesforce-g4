@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.individual.Individual;
 import entities.individual.IndividualResponse;
 import generalsetting.ParameterEndPoints;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -38,6 +39,7 @@ public class IndividualGeneralSteps {
     private ApiResponse apiResponse;
     private ObjectInformation objectInformation;
     private IndividualResponse individualResponse;
+    private String objectBody;
 
     public IndividualGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetIndividual constructor");
@@ -130,6 +132,24 @@ public class IndividualGeneralSteps {
     public void iUpdateIndividualTheApiNameToValue(String apiname, String value) {
         log.info("I update the individual fail");
         apiRequest.setBody(jsonConvert(apiname,value));
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @Given("^I build to \"([^\"]*)\" request to individual object$")
+    public void iSetThePathParamsAndBodyToRequest(String method, final DataTable jsonData) throws JsonProcessingException {
+        log.info("I set the pathParams and body to request");
+        objectBody = new ObjectMapper().writeValueAsString(jsonData.asMap(String.class, String.class));
+        apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
+        apiRequest.addHeaders(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER +
+                objectInformation.getToken());
+        apiRequest.setMethod(ApiMethod.valueOf(method));
+    }
+
+    @When("I set the {string} endpoint and send the request with body")
+    public void iSetTheEndpointAndSendTheRequestWithBody(final String endpoint) throws JsonProcessingException {
+        log.info("I set the pathParams and body to request");
+        apiRequest.setBody(objectBody);
+        apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
     }
 }

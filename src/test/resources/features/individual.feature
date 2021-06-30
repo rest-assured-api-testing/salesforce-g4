@@ -44,6 +44,28 @@ Feature: Endpoint Individual
       | LastName    | null        | 201    |
       | null        | Individual4 | 400    |
 
+  @PostIndividual
+  Scenario Outline: POST to individual test
+    Given I build to "POST" request to individual object
+      | firstName  | <firsName>   |
+      | lastName   | <lastName>   |
+      | Salutation | <salutation> |
+      | BirthDate  | <birthdate>  |
+    When I set the "sobjects/Individual" endpoint and send the request with body
+    Then the response status code fail should be <status> to individual
+    Examples:
+      | firsName | lastName | salutation | birthdate  | status |
+      |          |          |            |            | 400    |
+      | null     | null     |            |            | 201    |
+      |          | gomez    |            | 2021-01-21 | 201    |
+      | jose     | andrade  | Dr.        | 2021-01-21 | 201    |
+      | ana      | choque   | Ms.        | 2021-01-21 | 201    |
+      |          | lopez    |            |            | 201    |
+      |          | perales  |            |            | 201    |
+      | maria    | roman    |            | 0000-00-00 | 400    |
+      |          | Aranjuez |            | 1999-04-23 | 201    |
+      | pablo    | Ramirez  | Mr.        | 1999-06-09 | 201    |
+
   @DeleteIndividual
   Scenario: POST to individual
     Given I build "DELETE" request to individual
