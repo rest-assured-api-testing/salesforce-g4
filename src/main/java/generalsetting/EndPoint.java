@@ -1,0 +1,38 @@
+package generalsetting;
+
+import static generalsetting.GetEnv.dotenv;
+
+public enum EndPoint {
+    TOKEN("https://login.salesforce.com/services/oauth2/token","",""),
+    URL_BASE(dotenv.get("URL_BASE"),  "",""),
+    PRODUCT("sobjects/Product2/",  "sobjects/Product2/{productId}","productId"),
+    GROUP("chatter/groups",       "chatter/groups/{groupId}",   "groupId"),
+    ACCOUNT("sobjects/Account",  "sobjects/Account/{accountId}","accountId"),
+    CONTACT("sobjects/Contact",  "sobjects/Contact/{contactId}","contactId"),
+    OPPORTUNITY("sobjects/Opportunity",  "sobjects/Opportunity/{opportunityId}","opportunityId"),
+    CAMPAIGN("/sobjects/Campaign/",  "sobjects/Campaign/{campaignId}","campaignId"),
+    INDIVIDUAL("sobjects/Product2/",  "sobjects/Product2/{productId}","productId");
+
+
+    private final String endPoint;
+    private final String id;
+    private final String endPointInteract;
+
+    private EndPoint(String endPoint, String endPointInteract, String id) {
+        this.endPoint = endPoint;
+        this.id = id;
+        this.endPointInteract = endPointInteract;
+    }
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public String toSetId() {
+        return id;
+    }
+
+    public String getEndPointInteract() {
+        return endPointInteract;
+    }
+}
