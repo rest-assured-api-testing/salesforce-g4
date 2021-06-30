@@ -47,8 +47,8 @@ public class AccountHooks {
                 .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
                 .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
                 .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
-                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
-                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
+                .headers(Header.ACCEPT.getValue(), Header.APPLICATION_JSON.getValue())
+                .headers(Header.CONTENT_TYPE.getValue(), Header.X_WWW_FORM_URLENCODED.getValue())
                 .baseUri(EndPoint.TOKEN.getEndPoint())
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.executeParam(apiRequest);

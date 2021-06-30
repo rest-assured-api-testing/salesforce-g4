@@ -40,8 +40,8 @@ public class ParameterEndPoints {
     public static final String SOBJECTS = dotenv.get("SOBJECTS");
 //    public static final String AUTHORIZATION = dotenv.get("AUTHORIZATION");
 //    public static final String BEARER = dotenv.get("BEARER");
-    public static final String APPLICATION_JSON = dotenv.get("APPLICATION/JSON");
-    public static final String CONTENT_TYPE = dotenv.get("CONTENT_TYPE");
+//    public static final String APPLICATION_JSON = dotenv.get("APPLICATION/JSON");
+//    public static final String CONTENT_TYPE = dotenv.get("CONTENT_TYPE");
     public static final String X_WWW_FORM_URLENCODED = dotenv.get("X_WWW_FORM_URLENCODED");
     public static final String ACCEPT = dotenv.get("ACCEPT");
 
