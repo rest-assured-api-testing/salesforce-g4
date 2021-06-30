@@ -48,7 +48,6 @@ public class GetAllTypeObject {
                 .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
                 .baseUri(EndPoint.TOKEN.getEndPoint())
                 .method(ApiMethod.POST).build());
-
         apiRequest = apiRequestBuilder
                 .baseUri(EndPoint.URL_BASE.getEndPoint() + ParameterEndPoints.SOBJECTS)
                 .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER

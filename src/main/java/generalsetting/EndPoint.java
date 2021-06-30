@@ -24,7 +24,6 @@ public enum EndPoint {
     CAMPAIGN("/sobjects/Campaign/",  "sobjects/Campaign/{campaignId}","campaignId"),
     INDIVIDUAL("sobjects/Individual",  "sobjects/Individual/{individualId}","individualId");
 
-
     private final String endPoint;
     private final String id;
     private final String endPointInteract;
