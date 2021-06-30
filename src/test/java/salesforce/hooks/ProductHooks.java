@@ -39,6 +39,12 @@ public class ProductHooks {
         this.objectInformation = objectInformation;
     }
 
+    public ApiRequestBuilder baseRequest() {
+        return new ApiRequestBuilder()
+                .baseUri(ParameterEndPoints.URL_BASE)
+                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser);
+    }
+
     @Before(value = "@GetProduct or @PostProduct or @DeleteProduct or @PatchProduct", order = 1)
     public void generateToken() {
         log.info("Generate Token");
@@ -62,9 +68,7 @@ public class ProductHooks {
         log.info("Create Product");
         Product product = new Product();
         product.setName("Product-test");
-        ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+        ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.PRODUCT)
                 .body(new ObjectMapper().writeValueAsString(product))
                 .method(ApiMethod.POST).build();
@@ -76,9 +80,7 @@ public class ProductHooks {
     @After(value = "@GetProduct or @PatchProduct or @DeleteProduct")
     public void cleanRepository() {
         log.info("Delete Product");
-        ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+        ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, productCreate.getId())
                 .method(ApiMethod.DELETE).build();
@@ -88,9 +90,7 @@ public class ProductHooks {
     @After(value = "@PostProduct")
     public void cleanRepositoryPost() {
         log.info("Delete Product Post");
-        ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
-                .headers("Authorization", "Bearer " + tokenUser)
+        ApiRequest apiRequest = baseRequest()
                 .endpoint(ParameterEndPoints.PRODUCT_TO_INTERACT)
                 .pathParams(ParameterEndPoints.PRODUCT_ID, objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();

@@ -43,7 +43,7 @@ public class ProductGeneralSteps {
         this.objectInformation = objectInformation;
     }
 
-    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request to product$")
+    @Given("^I build \"(POST|GET|DELETE|PATCH)\" request")
     public void iBuildRequestToProduct(String method) {
         log.info("I build the request");
         apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
@@ -52,7 +52,7 @@ public class ProductGeneralSteps {
         apiRequest.setMethod(ApiMethod.valueOf(method));
     }
 
-    @When("I use endpoint {string} request to product with {string}")
+    @When("I use endpoint {string} request with {string}")
     public void iUseEndpointRequestToObjectWith(String endpoint, String keyPath) {
         log.info("I build endpoint the request");
         apiRequest.setEndpoint(endpoint);
@@ -65,7 +65,7 @@ public class ProductGeneralSteps {
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @When("I use endpoint {string} request to with name {string}")
+    @When("I use endpoint {string} request to with name {string} to product")
     public void iUseEndpointRequestToObjectWithName(String endpoint, String name) throws JsonProcessingException {
         log.info("I execute the request post");
         Product projectCreate = new Product();
@@ -78,33 +78,26 @@ public class ProductGeneralSteps {
     }
 
     @And("^I update the (.+) to (.+)$")
-    public void iUpdateTheTo(String parameterToUpdate, String updateDate) throws JsonProcessingException {
+    public void iUpdateTheTo(String parameterToUpdate, String updateDate) {
         log.info("I update the product");
         apiRequest.setBody(jsonConvert(parameterToUpdate,updateDate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @Then("the response status code should be {string} to product")
+    @Then("The response status code should be {string}")
     public void theResponseStatusCodeShouldBeToProduct(String statusCode) {
         log.info("I verify status response");
         Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
         apiResponse.getResponse().then().log().body();
     }
 
-    @And("The schema to product should be equals to {string}")
+    @And("The schema should be equals to {string}")
     public void theSchemaToProductShouldBeEqualsTo(String schema) {
         log.info("I verify schema");
         apiResponse.validateBodySchema(schema);
     }
 
-    @Then("^The response status code should be (.+) to product$")
-    public void theResponseStatusCodeShouldBeToProductFail(String statusCode) {
-        log.info("I verify status response");
-        Assert.assertEquals(apiResponse.getStatusCode(), HttpStatus.valueOf(statusCode).value());
-        apiResponse.getResponse().then().log().body();
-    }
-
-    @When("^I use endpoint \"([^\"]*)\" request to product with \"([^\"]*)\" and (.+)$")
+    @When("^I use endpoint \"([^\"]*)\" request with \"([^\"]*)\" and (.+)$")
     public void iUseEndpointRequestToProductWithFailWrongId(String endpoint,String keyPath,String idCustomer) {
         log.info("I build account fail endpoint with bad id");
         apiRequest.setEndpoint(endpoint);
