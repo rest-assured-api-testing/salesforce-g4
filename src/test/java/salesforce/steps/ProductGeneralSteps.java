@@ -24,6 +24,8 @@ import entities.campaign.CampaignCreate;
 import entities.contact.Contact;
 import entities.contact.ContactResponse;
 import entities.group.Group;
+import entities.individual.Individual;
+import entities.individual.IndividualResponse;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
 import generalsetting.ParameterEndPoints;
@@ -48,6 +50,7 @@ public class ProductGeneralSteps {
     private CampaignCreate campaignCreate;
     private AccountResponse accountResponse;
     private ContactResponse contactResponse;
+    private IndividualResponse individualResponse;
 
     public ProductGeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
@@ -110,7 +113,7 @@ public class ProductGeneralSteps {
 
     @When("^I use endpoint \"([^\"]*)\" request with \"([^\"]*)\" and (.+)$")
     public void iUseEndpointRequestToProductWithFailWrongId(String endpoint, String keyPath, String idCustomer) {
-        log.info("I build account fail endpoint with bad id");
+        log.info("I build request fail endpoint with bad id");
         apiRequest.setEndpoint(endpoint);
         apiRequest.addPathParams(keyPath, idCustomer);
     }
@@ -160,7 +163,7 @@ public class ProductGeneralSteps {
 
     @When("^I use endpoint \"([^\"]*)\" request with (.+) and (.+) to fail$")
     public void iUseEndpointRequestWithApiName(String endpoint, String apiName, String value) {
-        log.info("I create fail account");
+        log.info("I create request fail");
         apiRequest.setBody(jsonConvert(apiName, value));
         apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
@@ -187,10 +190,29 @@ public class ProductGeneralSteps {
     }
 
     @And("I update contact {string} to {string}")
-    public void iUpdateContactTheTo(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
+    public void iUpdateTheToContact(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
         log.info("I update the Contact");
         Contact contactCreate = new Contact(updateLastNme);
         apiRequest.setBody(new ObjectMapper().writeValueAsString(contactCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @When("I use endpoint {string} request to individual with name {string}")
+    public void iUseEndpointRequestToIndividuaWithName(String endpoint, String name) throws JsonProcessingException {
+        log.info("I execute the request Individual post");
+        Individual individualCreate = new Individual(name);
+        apiRequest.setEndpoint(endpoint);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(individualCreate));
+        apiResponse = ApiManager.execute(apiRequest);
+        individualResponse=apiResponse.getBody(IndividualResponse.class);
+        objectInformation.setIdDelete(individualResponse.getId());
+    }
+
+    @And("I update individual {string} to {string}")
+    public void iUpdateIndividuaTheTo(String parameterToUpdate, String updateLastNme) throws JsonProcessingException {
+        log.info("I update the Individual");
+        Individual individualCreate = new Individual(updateLastNme);
+        apiRequest.setBody(new ObjectMapper().writeValueAsString(individualCreate));
         apiResponse = ApiManager.execute(apiRequest);
     }
 }
