@@ -21,7 +21,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.campaign.CampaignCreate;
 import entities.Token;
 import entities.campaign.Campaign;
-import generalsetting.*;
+import generalsetting.EndPoint;
+import generalsetting.Param;
+import generalsetting.Header;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -44,9 +46,9 @@ public class CampaignHooks {
         log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
-                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.PASSWORD.getKey(), Param.PASSWORD.getValue())
                 .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
-                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.CLIENT_SECRET.getKey(), Param.CLIENT_SECRET.getValue())
                 .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(Header.ACCEPT.getValue(), Header.APPLICATION_JSON.getValue())
                 .headers(Header.CONTENT_TYPE.getValue(), Header.X_WWW_FORM_URLENCODED.getValue())

@@ -18,7 +18,9 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import generalsetting.*;
+import generalsetting.EndPoint;
+import generalsetting.Param;
+import generalsetting.Header;
 import utilities.ObjectInformation;
 import entities.Token;
 import entities.contact.Contact;
@@ -76,7 +78,7 @@ public class ContactHooks {
     public void deleteContactHooks() {
         log.info("Delete Contact Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CONTACT.getEndPointInteract())
                 .pathParams(EndPoint.CONTACT.toSetId(), contactResponse.getId())
@@ -88,7 +90,7 @@ public class ContactHooks {
     public void cleanRepositoryPost() {
         log.info("Delete Contact Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
-                .baseUri(ParameterEndPoints.URL_BASE)
+                .baseUri(EndPoint.URL_BASE.getEndPoint())
                 .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CONTACT.getEndPointInteract())
                 .pathParams(EndPoint.CONTACT.toSetId(), objectInformation.getIdDelete())

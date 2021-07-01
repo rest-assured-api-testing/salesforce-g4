@@ -20,7 +20,6 @@ import entities.Token;
 import generalsetting.EndPoint;
 import generalsetting.Header;
 import generalsetting.Param;
-import generalsetting.ParameterEndPoints;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -41,9 +40,9 @@ public class GetAllTypeObject {
         log.info("I setup the token nad base URL");
         apiResponse = ApiManager.executeParam(new ApiRequestBuilder()
                 .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
-                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.PASSWORD.getKey(), Param.PASSWORD.getValue())
                 .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
-                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.CLIENT_SECRET.getKey(), Param.CLIENT_SECRET.getValue())
                 .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(Header.ACCEPT.getValue(), Header.APPLICATION_JSON.getValue())
                 .headers(Header.CONTENT_TYPE.getValue(), Header.X_WWW_FORM_URLENCODED.getValue())
@@ -72,7 +71,7 @@ public class GetAllTypeObject {
 
     @Then("^the status response should be (.+)$")
     public void theStatusResponseShouldBeResult(String result) {
-        log.info("The status code is "+result);
+        log.info("The status code is " + result);
         Assert.assertEquals(apiResponse.getStatusCode(), Integer.parseInt(result));
     }
 }

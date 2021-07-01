@@ -18,7 +18,9 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import generalsetting.*;
+import generalsetting.EndPoint;
+import generalsetting.Param;
+import generalsetting.Header;
 import utilities.ObjectInformation;
 import entities.Token;
 import entities.group.Group;
@@ -42,9 +44,9 @@ public class GroupHooks {
         log.info("Generate Token");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
-                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.PASSWORD.getKey(), Param.PASSWORD.getValue())
                 .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
-                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.CLIENT_SECRET.getKey(), Param.CLIENT_SECRET.getValue())
                 .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(Header.ACCEPT.getValue(), Header.APPLICATION_JSON.getValue())
                 .headers(Header.CONTENT_TYPE.getValue(), Header.X_WWW_FORM_URLENCODED.getValue())
@@ -58,7 +60,7 @@ public class GroupHooks {
     @Before(value = "@GetGroup or @DeleteGroup or @PatchGroup", order = 2)
     public void createProduct() throws JsonProcessingException {
         log.info("Create Group");
-        Group group=new Group();
+        Group group = new Group();
         group.setName("group-test-created");
         group.setVisibility("PublicAccess");
         ApiRequest apiRequest = new ApiRequestBuilder()

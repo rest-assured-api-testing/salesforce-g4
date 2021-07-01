@@ -13,7 +13,6 @@ package api;
 
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,7 @@ public class ApiRequest<T> {
         params = new HashMap<>();
     }
 
-    /*
+    /**
      * Gets the base Uri.
      *
      * @return a String with the base Uri.
@@ -45,7 +44,7 @@ public class ApiRequest<T> {
         return baseUri;
     }
 
-    /*
+    /**
      * Sets the value for the base Uri.
      *
      * @param baseUri String with value for the base Uri.
@@ -54,7 +53,7 @@ public class ApiRequest<T> {
         this.baseUri = baseUri;
     }
 
-    /*
+    /**
      * Gets the endpoint.
      *
      * @return a String with the resource's endpoint.
@@ -66,7 +65,7 @@ public class ApiRequest<T> {
         return endpoint;
     }
 
-    /*
+    /**
      * Sets the value for the endpoint.
      *
      * @param endpoint String with value for the base Uri.
@@ -75,7 +74,7 @@ public class ApiRequest<T> {
         this.endpoint = endpoint;
     }
 
-    /*
+    /**
      * Gets the request's body.
      *
      * @return a String with the body request.
@@ -87,7 +86,7 @@ public class ApiRequest<T> {
         return body;
     }
 
-    /*
+    /**
      * Sets the value for the body request.
      *
      * @param body String with body for the request.
@@ -96,7 +95,7 @@ public class ApiRequest<T> {
         this.body = body;
     }
 
-    /*
+    /**
      * Gets the request's method.
      *
      * @return a String with request method for the request.
@@ -105,7 +104,7 @@ public class ApiRequest<T> {
         return method;
     }
 
-    /*
+    /**
      * Sets the value request's type.
      *
      * @param method enum with type for the request.
@@ -124,7 +123,7 @@ public class ApiRequest<T> {
         headers.add(new Header(header, value));
     }
 
-    /*
+    /**
      * Gets the headers' request.
      *
      * @return a Object List of headers.
@@ -143,7 +142,7 @@ public class ApiRequest<T> {
         queryParams.put(param, value);
     }
 
-    /*
+    /**
      * Gets the request query params.
      *
      * @return a Map with List of query params.
@@ -162,7 +161,7 @@ public class ApiRequest<T> {
         pathParams.put(param, value);
     }
 
-    /*
+    /**
      * Gets the request path params.
      *
      * @return a Map with List of path params.
@@ -181,7 +180,7 @@ public class ApiRequest<T> {
         params.put(param, value);
     }
 
-    /*
+    /**
      * Gets the request params.
      *
      * @return a Map with List of params.
