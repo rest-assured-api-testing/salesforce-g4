@@ -18,14 +18,11 @@ import api.ApiResponse;
 import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import generalsetting.EndPoint;
-import generalsetting.Param;
-import generalsetting.ParameterUser;
+import generalsetting.*;
 import utilities.ObjectInformation;
 import entities.Token;
 import entities.contact.Contact;
 import entities.contact.ContactResponse;
-import generalsetting.ParameterEndPoints;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -51,8 +48,8 @@ public class ContactHooks {
                 .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
                 .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
                 .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
-                .headers(ParameterEndPoints.ACCEPT, ParameterEndPoints.APPLICATION_JSON)
-                .headers(ParameterEndPoints.CONTENT_TYPE, ParameterEndPoints.X_WWW_FORM_URLENCODED)
+                .headers(Header.ACCEPT.getValue(), Header.APPLICATION_JSON.getValue())
+                .headers(Header.CONTENT_TYPE.getValue(), Header.X_WWW_FORM_URLENCODED.getValue())
                 .baseUri(EndPoint.TOKEN.getEndPoint())
                 .method(ApiMethod.POST).build();
         ApiResponse apiResponse = ApiManager.executeParam(apiRequest);
@@ -66,7 +63,7 @@ public class ContactHooks {
         Contact contact = new Contact("contact test");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(EndPoint.URL_BASE.getEndPoint())
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CONTACT.getEndPoint())
                 .body(new ObjectMapper().writeValueAsString(contact))
                 .method(ApiMethod.POST).build();
@@ -80,7 +77,7 @@ public class ContactHooks {
         log.info("Delete Contact Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CONTACT.getEndPointInteract())
                 .pathParams(EndPoint.CONTACT.toSetId(), contactResponse.getId())
                 .method(ApiMethod.DELETE).build();
@@ -92,7 +89,7 @@ public class ContactHooks {
         log.info("Delete Contact Post");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .baseUri(ParameterEndPoints.URL_BASE)
-                .headers(ParameterEndPoints.AUTHORIZATION, ParameterEndPoints.BEARER + tokenUser)
+                .headers(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue() + tokenUser)
                 .endpoint(EndPoint.CONTACT.getEndPointInteract())
                 .pathParams(EndPoint.CONTACT.toSetId(), objectInformation.getIdDelete())
                 .method(ApiMethod.DELETE).build();
