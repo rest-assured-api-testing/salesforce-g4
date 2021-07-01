@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- *
+ * <p>
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -11,13 +11,19 @@
 
 package salesforce.hooks;
 
-import api.*;
+import api.ApiManager;
+import api.ApiMethod;
+import api.ApiRequest;
+import api.ApiResponse;
+import api.ApiRequestBuilder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.Token;
 import entities.individual.Individual;
 import entities.individual.IndividualResponse;
-import generalsetting.*;
+import generalsetting.EndPoint;
+import generalsetting.Param;
+import generalsetting.Header;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.apache.log4j.Logger;
@@ -28,11 +34,11 @@ public class IndividualHooks {
     private Logger log = Logger.getLogger(getClass());
     private String tokenUser;
     private IndividualResponse individualResponse;
-    private ObjectInformation objectInformation =new ObjectInformation();
+    private ObjectInformation objectInformation = new ObjectInformation();
 
     public IndividualHooks(ObjectInformation objectInformation) {
         log.info("IndividualHooks constructor");
-        this.objectInformation=objectInformation;
+        this.objectInformation = objectInformation;
     }
 
     @Before(value = "@GetIndividual or @PostIndividual or @DeleteIndividual or @PatchIndividual ", order = 1)
@@ -40,9 +46,9 @@ public class IndividualHooks {
         log.info("Generate Token Individual");
         ApiRequest apiRequest = new ApiRequestBuilder()
                 .params(Param.USERNAME.getKey(), Param.USERNAME.getValue())
-                .params(Param.PASSWORD.getKey(),Param.PASSWORD.getValue())
+                .params(Param.PASSWORD.getKey(), Param.PASSWORD.getValue())
                 .params(Param.CLIENT_ID.getKey(), Param.CLIENT_ID.getValue())
-                .params(Param.CLIENT_SECRET.getKey(),Param.CLIENT_SECRET.getValue())
+                .params(Param.CLIENT_SECRET.getKey(), Param.CLIENT_SECRET.getValue())
                 .params(Param.GRANT_TYPE.getKey(), Param.GRANT_TYPE.getValue())
                 .headers(Header.ACCEPT.getValue(), Header.APPLICATION_JSON.getValue())
                 .headers(Header.CONTENT_TYPE.getValue(), Header.X_WWW_FORM_URLENCODED.getValue())

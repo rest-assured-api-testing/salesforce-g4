@@ -1,6 +1,6 @@
 /**
  * Copyright (c) 2021 Fundacion Jala.
- * <p>
+ *
  * This software is the confidential and proprietary information of Fundacion Jala
  * ("Confidential Information"). You shall not disclose such Confidential
  * Information and shall use it only in accordance with the terms of the
@@ -33,7 +33,6 @@ import generalsetting.Header;
 import io.cucumber.datatable.DataTable;
 import utilities.ObjectInformation;
 import entities.product.ProductCreate;
-import generalsetting.ParameterEndPoints;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -42,6 +41,7 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import entities.product.Product;
+
 import static utilities.JsonFormat.mapFormat;
 import static utilities.JsonFormat.jsonConvert;
 
@@ -67,7 +67,7 @@ public class GeneralEndPointSteps {
     @Given("^I build \"(POST|GET|DELETE|PATCH)\" request")
     public void iBuildRequestToProduct(String method) {
         log.info("I build the request");
-        apiRequest.setBaseUri(ParameterEndPoints.URL_BASE);
+        apiRequest.setBaseUri(EndPoint.URL_BASE.getEndPoint());
         apiRequest.addHeaders(Header.AUTHORIZATION.getValue(), Header.BEARER.getValue()
                 + objectInformation.getToken());
         apiRequest.setMethod(ApiMethod.valueOf(method));
