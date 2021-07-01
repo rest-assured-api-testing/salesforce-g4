@@ -27,7 +27,7 @@ import io.cucumber.java.en.When;
 import org.testng.Assert;
 import org.testng.log4testng.Logger;
 
-public class GetAllTypeObject {
+public class GeneralsAllObjectSteps {
     private Logger log = Logger.getLogger(getClass());
 
     private ApiResponse apiResponse;

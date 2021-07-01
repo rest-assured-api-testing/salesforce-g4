@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 
-public class TokenSteps {
+public class AuthorizationSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiResponse apiResponse;
     private ApiRequest apiRequest;

@@ -11,7 +11,7 @@ Feature: Endpoint group
   @PostGroup
   Scenario: GET to group schema when is created
     Given I build "POST" request
-    When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
+    When I use endpoint "chatter/groups/" request to with "group-test" name and "PublicAccess" visibility
     And The schema should be equals to "schemas/group.json"
 
   @GetGroup
@@ -32,14 +32,14 @@ Feature: Endpoint group
   @PostGroup
   Scenario: POST to group
     Given I build "POST" request
-    When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PublicAccess"
+    When I use endpoint "chatter/groups/" request to with "group-test" name and "PublicAccess" visibility
     Then The response status code should be "CREATED"
     And The schema should be equals to "schemas/group.json"
 
   @PostGroup
   Scenario: POST to group
     Given I build "POST" request
-    When I use endpoint "chatter/groups/" request to with name "group-test" and visibility "PrivateAccess"
+    When I use endpoint "chatter/groups/" request to with "group-test" name and "PrivateAccess" visibility
     Then The response status code should be "CREATED"
     And The schema should be equals to "schemas/groupcreateprivate.json"
 
