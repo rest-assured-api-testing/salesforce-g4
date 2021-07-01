@@ -33,21 +33,24 @@ Feature: Endpoint Opportunity
 
   @PostOpportunity
   Scenario Outline: POST to opportunity fail
-    Given I build "POST" request
-    When I use endpoint "sobjects/Contact/" request to opportunity with <apiName1> <apiName2> <apiName3> and <value1> <value2> <value3>
+    Given I build to "POST" request to object
+      | Name      | <Name>      |
+      | CloseDate | <CloseDate> |
+      | StageName | <StageName> |
+    When I use endpoint "sobjects/Contact/" request to opportunity with body
     Then the response status code fail should be <status>
     Examples:
-      | apiName1 | apiName2  | apiName3  | value1       | value2       | value3       | status |
-      | Name     | CloseDate | null      | opportunity1 | 2021-06-21   | null         | 400    |
-      | Name     | null      | StageName | opportunity1 | null         | CloseDate    | 400    |
-      | null     | CloseDate | StageName | null         | opportunity1 | CloseDate    | 400    |
-      | Name     | null      | null      | opportunity1 | null         | null         | 400    |
-      | Name     | queryable | StageName | opportunity1 | true         | CloseDate    | 400    |
-      | null     | CloseDate | StageName | null         | opportunity1 | CloseDate    | 400    |
-      | Name     | CloseDate | StageName | opportunity1 | 2021/06/21   | CloseDate    | 400    |
-      | Name     | CloseDate | StageName | opportunity1 | 2021-06-21   | opportunity1 | 400    |
-      | null     | null      | null      | opportunity1 | 2021-06-21   | opportunity1 | 400    |
-      | Name     | CloseDate | StageName | null         | null         | null         | 400    |
+      | Name | CloseDate | StageName       | status |
+      | Name | CloseDate | 2021-06-21   | 400    |
+      | Name | null      | null         | 400    |
+      | null | CloseDate | opportunity1 | 400    |
+      | Name | null      | null         | 400    |
+      | Name | queryable | true         | 400    |
+      | null | CloseDate | opportunity1 | 400    |
+      | Name | CloseDate | 2021/06/21   | 400    |
+      | Name | CloseDate | 2021-06-21   | 400    |
+      | null | null      | 2021-06-21   | 400    |
+      | Name | CloseDate | null         | 400    |
 
 
   @DeleteOpportunity

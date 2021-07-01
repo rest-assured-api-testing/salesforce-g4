@@ -42,7 +42,6 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import entities.product.Product;
-import static utilities.JsonFormat.mapFormat;
 import static utilities.JsonFormat.jsonConvert;
 
 public class GeneralEndPointSteps {
@@ -242,14 +241,6 @@ public class GeneralEndPointSteps {
         apiResponse = ApiManager.execute(apiRequest);
     }
 
-    @When("^I use endpoint \"([^\"]*)\" request to opportunity with (.+) (.+) (.+) and (.+) (.+) (.+)$")
-    public void iUseEndpointRequestToOpportunityWithApiNameApiNameApiNameAndValueValueValue(String endpoint, String apiName1, String apiName2, String apiName3, String value1, String value2, String value3) {
-        log.info("I create fail opportunity");
-        apiRequest.setBody(mapFormat(apiName1, value1, apiName2, value2, apiName3, value3));
-        apiRequest.setEndpoint(endpoint);
-        apiResponse = ApiManager.execute(apiRequest);
-    }
-
     @Given("^I build to \"([^\"]*)\" request to object$")
     public void iSetThePathParamsAndBodyToRequest(String method, final DataTable jsonData) throws JsonProcessingException {
         log.info("I set the pathParams and body to request");
@@ -262,6 +253,14 @@ public class GeneralEndPointSteps {
 
     @When("I set the {string} endpoint and send the request with body")
     public void iSetTheEndpointAndSendTheRequestWithBody(final String endpoint) {
+        log.info("I set the pathParams and body to request");
+        apiRequest.setBody(objectBody);
+        apiRequest.setEndpoint(endpoint);
+        apiResponse = ApiManager.execute(apiRequest);
+    }
+
+    @When("^I use endpoint \"([^\"]*)\" request to opportunity with body$")
+    public void iUseEndpointRequestToOpportunityWithBody(final String endpoint) {
         log.info("I set the pathParams and body to request");
         apiRequest.setBody(objectBody);
         apiRequest.setEndpoint(endpoint);
