@@ -43,7 +43,7 @@ import org.testng.Assert;
 import salesforce.entities.product.Product;
 import static utilities.JsonFormat.jsonConvert;
 
-public class GeneralEndPointSteps {
+public class GeneralSteps {
     private Logger log = Logger.getLogger(getClass());
     private ApiRequest apiRequest = new ApiRequest();
     private ApiRequest apiRequestPatch = new ApiRequest();
@@ -57,7 +57,7 @@ public class GeneralEndPointSteps {
     private OpportunityResponse opportunityResponse;
     private String objectBody;
 
-    public GeneralEndPointSteps(ObjectInformation objectInformation) {
+    public GeneralSteps(ObjectInformation objectInformation) {
         log.info("GetObject constructor");
         this.objectInformation = objectInformation;
     }
@@ -130,7 +130,7 @@ public class GeneralEndPointSteps {
         apiResponse.getResponse().then().log().body();
     }
 
-    @When("I use endpoint {string} request to with name {string} and visibility {string}")
+    @When("I use endpoint {string} request to with {string} name and {string} visibility")
     public void iUseEndpointRequestToObjectWithName(String endpoint, String name, String visibility)
             throws JsonProcessingException {
         log.info("I execute the request post");
