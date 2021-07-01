@@ -41,8 +41,6 @@ import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.testng.Assert;
 import entities.product.Product;
-
-import static utilities.JsonFormat.mapFormat;
 import static utilities.JsonFormat.jsonConvert;
 
 public class GeneralEndPointSteps {
@@ -239,14 +237,6 @@ public class GeneralEndPointSteps {
         log.info("I update the Opportunity");
         Opportunity opportunityCreate = new Opportunity("New Opportunity30", "2021-06-21", "CloseDate");
         apiRequest.setBody(new ObjectMapper().writeValueAsString(opportunityCreate));
-        apiResponse = ApiManager.execute(apiRequest);
-    }
-
-    @When("^I use endpoint \"([^\"]*)\" request to opportunity with (.+) (.+) (.+) and (.+) (.+) (.+)$")
-    public void iUseEndpointRequestToOpportunityWithApiNameApiNameApiNameAndValueValueValue(String endpoint, String apiName1, String apiName2, String apiName3, String value1, String value2, String value3) {
-        log.info("I create fail opportunity");
-        apiRequest.setBody(mapFormat(apiName1, value1, apiName2, value2, apiName3, value3));
-        apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
     }
 
