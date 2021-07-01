@@ -258,12 +258,4 @@ public class GeneralEndPointSteps {
         apiRequest.setEndpoint(endpoint);
         apiResponse = ApiManager.execute(apiRequest);
     }
-
-    @When("^I use endpoint \"([^\"]*)\" request to opportunity with body$")
-    public void iUseEndpointRequestToOpportunityWithBody(final String endpoint) {
-        log.info("I set the pathParams and body to request");
-        apiRequest.setBody(objectBody);
-        apiRequest.setEndpoint(endpoint);
-        apiResponse = ApiManager.execute(apiRequest);
-    }
 }

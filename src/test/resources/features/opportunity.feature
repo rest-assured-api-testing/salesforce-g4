@@ -37,7 +37,7 @@ Feature: Endpoint Opportunity
       | Name      | <Name>      |
       | CloseDate | <CloseDate> |
       | StageName | <StageName> |
-    When I use endpoint "sobjects/Contact/" request to opportunity with body
+    When I set the "sobjects/Opportunity" endpoint and send the request with body
     Then the response status code fail should be <status>
     Examples:
       | Name | CloseDate | StageName       | status |
